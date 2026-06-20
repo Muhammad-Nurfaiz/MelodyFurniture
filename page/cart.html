@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Melody Furniture | Keranjang Belanja</title>
+    
+    <!-- Google Fonts & Icons (Disamakan dengan detail_produk.html) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Token Warna Navigasi & Footer Utama
+                        primary: '#1A458B',   
+                        secondary: '#E14D2A', 
+                        bgLight: '#F8F9FA',
+                        textDark: '#212529',
+                        textMuted: '#6C757D',
+                        borderColor: '#E9ECEF',
+
+                        // Token Warna Khusus Area Konten Keranjang
+                        "surface-dim": "#ccdbf4",
+                        "outline-variant": "#c4c6d0",
+                        "on-primary-fixed": "#001a41",
+                        "error-container": "#ffdad6",
+                        "on-background": "#0d1c2f",
+                        "background": "#f8f9ff",
+                        "surface-tint": "#465e8e",
+                        "bg-main": "#FFFFFF",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "surface": "#f8f9ff",
+                        "primary-container": "#0f2c59",
+                        "tertiary": "#2c1100",
+                        "secondary-fixed": "#ffdbcd",
+                        "surface-container": "#e6eeff",
+                        "bg-alt": "#F8FAFC",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#aec7fd",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "on-tertiary-fixed": "#301400",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-surface-variant": "#44474f",
+                        "inverse-surface": "#233144",
+                        "outline": "#747780",
+                        "on-surface": "#0d1c2f",
+                        "on-tertiary-container": "#c5875a",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#4b2200",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdcc6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#d5e3fd",
+                        "secondary-fixed-dim": "#ffb597",
+                        "primary-fixed": "#d8e2ff",
+                        "on-secondary-container": "#591d00",
+                        "surface-container-highest": "#d5e3fd",
+                        "surface-container-high": "#dde9ff",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "surface-container-low": "#eff4ff",
+                        "border-subtle": "#E2E8F0",
+                        "brand-blue-dark": "#0A1E3D",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#360f00",
+                        "secondary-container": "#fd6c22",
+                        "on-primary-container": "#7c94c8",
+                        "inverse-on-surface": "#ebf1ff",
+                        "inverse-primary": "#aec7fd"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Standarisasi Tipografi Sesuai detail_produk.html */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8f9ff; 
+        }
+        h1, h2, h3, h4, th { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #E2E8F0; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1A458B; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#f8f9ff] text-on-surface antialiased">
+
+    <!-- TopNavBar (Sesuai Halaman Utama) -->
+    <header class="bg-white border-b border-borderColor sticky top-0 z-40 shadow-sm">
+        <!-- Top Bar (Desktop Only) -->
+        <div class="hidden md:block bg-primary text-white text-xs py-2">
+            <div class="max-w-[1200px] mx-auto px-4 flex justify-between">
+                <div>Melody Furniture Resmi - Standar Internasional</div>
+                <div>Lacak Pesanan | Hubungi Kami | Pengiriman Seluruh Indonesia</div>
+            </div>
+        </div>
+        
+        <!-- Main Header Container -->
+        <div class="max-w-[1200px] mx-auto px-4 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-4">
+            <!-- Logo -->
+            <a href="../index.html" class="shrink-0">
+                <img src="../assets/img/download.png" alt="logo" class="w-28 sm:w-36 md:w-44 h-auto">
+            </a>
+            
+            <!-- Search bar hanya muncul di desktop (md ke atas) -->
+            <div class="hidden md:flex flex-1 mx-8">
+                <input type="text" placeholder="Cari furnitur impian Anda (misal: Meja Belajar, Rak TV, Lemari)..." class="w-full px-4 py-2 border-2 border-primary rounded-l focus:outline-none text-base">
+                <button class="bg-primary text-white px-5 rounded-r hover:bg-opacity-90 transition font-medium">Cari</button>
+            </div>
+
+            <!-- Area Navigasi Kanan (Keranjang & Profil) -->
+            <div class="flex items-center gap-4 shrink-0">
+                <!-- IKON KERANJANG GLOBAL -->
+                <a href="cart.html" class="relative p-2 text-textDark hover:text-primary transition-colors group" aria-label="Keranjang Belanja">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span id="cartBadge" class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-secondary rounded-full transform translate-x-1 -translate-y-0.5 min-w-[18px]">
+                        3
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama Keranjang Belanja -->
+    <main class="max-w-[1280px] mx-auto px-6 py-12">
+        <!-- Judul Halaman (Menggunakan Font Display Semibold) -->
+        <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-primary mb-8">Keranjang Belanja</h1>
+        
+        <!-- Grid Layout Fix untuk Desktop (10 Kolom Lebih Proporsional) -->
+        <div class="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start">
+            
+            <!-- Kolom Kiri: Daftar Produk Di Keranjang (7/10 bagian) -->
+            <div class="lg:col-span-7 space-y-4">
+                <!-- Kontrol Atas (Pilih Semua) -->
+                <!-- <div class="bg-white px-6 py-4 rounded-xl border border-border-subtle flex items-center justify-between shadow-sm">
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer transition-colors" type="checkbox"/>
+                        <span class="text-sm md:text-base font-semibold text-textDark">Pilih Semua</span>
+                    </label>
+                    <button class="text-secondary text-sm md:text-base font-semibold hover:text-opacity-80 transition-colors">Hapus</button>
+                </div> -->
+                
+                <!-- List Item Produk -->
+                <div class="bg-white rounded-xl border border-border-subtle divide-y divide-border-subtle shadow-sm overflow-hidden">
+                    <!-- Barang 1 -->
+                    <div class="p-6 flex items-start gap-4 md:gap-6">
+                        <div class="pt-10">
+                            <input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer transition-colors" type="checkbox"/>
+                        </div>
+                        <div class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 bg-surface-container-low rounded-lg overflow-hidden border border-border-subtle">
+                            <img alt="Scandinavian wooden chair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://i.pinimg.com/1200x/1a/97/45/1a9745cfbb35556da1c080e2ca7699b2.jpg"/>
+                        </div>
+                        <div class="flex-grow flex flex-col md:flex-row justify-between gap-2">
+                            <div class="space-y-1">
+                                <h3 class="text-base md:text-lg font-bold text-textDark leading-snug">Kursi Makan Oak Ljus</h3>
+                                <p class="text-xs md:text-sm text-textMuted font-medium">Warna: Natural Oak</p>
+                                <div class="mt-2 md:hidden">
+                                    <p class="text-base font-bold text-secondary">Rp 1.250.000</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end justify-between md:min-h-[128px] mt-2 md:mt-0">
+                                <p class="hidden md:block text-lg font-bold text-secondary">Rp 1.250.000</p>
+                                <div class="flex items-center gap-4 mt-auto w-full md:w-auto justify-between md:justify-end">
+                                    <button class="text-textMuted hover:text-error transition-colors p-1" aria-label="Hapus Item">
+                                        <span class="material-symbols-outlined text-xl">delete</span>
+                                    </button>
+                                    <div class="flex items-center border border-border-subtle rounded-lg overflow-hidden bg-bgLight">
+                                        <button class="px-3 py-1.5 hover:bg-neutral-200 transition-colors text-textDark font-semibold">-</button>
+                                        <span class="px-4 py-1.5 text-sm text-textDark font-bold min-w-[40px] text-center">1</span>
+                                        <button class="px-3 py-1.5 hover:bg-neutral-200 transition-colors text-textDark font-semibold">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Barang 2 -->
+                    <div class="p-6 flex items-start gap-4 md:gap-6">
+                        <div class="pt-10">
+                            <input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer transition-colors" type="checkbox"/>
+                        </div>
+                        <div class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 bg-surface-container-low rounded-lg overflow-hidden border border-border-subtle">
+                            <img alt="Modern bookshelf" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://i.pinimg.com/736x/ac/6f/e2/ac6fe2ec59544aef7da3f499af1e0160.jpg"/>
+                        </div>
+                        <div class="flex-grow flex flex-col md:flex-row justify-between gap-2">
+                            <div class="space-y-1">
+                                <h3 class="text-base md:text-lg font-bold text-textDark leading-snug">Rak Buku Oak Nöjes</h3>
+                                <p class="text-xs md:text-sm text-textMuted font-medium">Warna: Natural Oak</p>
+                                <div class="mt-2 md:hidden">
+                                    <p class="text-base font-bold text-secondary">Rp 3.450.000</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end justify-between md:min-h-[128px] mt-2 md:mt-0">
+                                <p class="hidden md:block text-lg font-bold text-secondary">Rp 3.450.000</p>
+                                <div class="flex items-center gap-4 mt-auto w-full md:w-auto justify-between md:justify-end">
+                                    <button class="text-textMuted hover:text-error transition-colors p-1" aria-label="Hapus Item">
+                                        <span class="material-symbols-outlined text-xl">delete</span>
+                                    </button>
+                                    <div class="flex items-center border border-border-subtle rounded-lg overflow-hidden bg-bgLight">
+                                        <button class="px-3 py-1.5 hover:bg-neutral-200 transition-colors text-textDark font-semibold">-</button>
+                                        <span class="px-4 py-1.5 text-sm text-textDark font-bold min-w-[40px] text-center">1</span>
+                                        <button class="px-3 py-1.5 hover:bg-neutral-200 transition-colors text-textDark font-semibold">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kolom Kanan: Ringkasan Belanja Sticky (3/10 bagian) -->
+            <div class="lg:col-span-3 w-full">
+                <div class="bg-white p-6 rounded-xl border border-border-subtle lg:sticky lg:top-28 shadow-sm">
+                    <h2 class="text-base md:text-lg font-bold text-textDark mb-4">Ringkasan Belanja</h2>
+                    
+                    <div class="space-y-3 mb-4 border-b border-border-subtle pb-4 text-sm font-medium">
+                        <div class="flex justify-between items-center text-textMuted">
+                            <span>Total Harga (2 barang)</span>
+                            <span class="text-textDark font-semibold">Rp 4.700.000</span>
+                        </div>
+                        <div class="flex justify-between items-center text-textMuted">
+                            <span>Total Diskon</span>
+                            <span class="text-secondary font-semibold">- Rp 0</span>
+                        </div>
+                    </div>
+
+                    <!-- PERBAIKAN: Input Voucher / Promo (Fix Elemen Offset di Semua Screen) -->
+                    <div class="mb-6 space-y-2">
+                        <label class="block text-xs font-semibold text-textMuted uppercase tracking-wider">Gunakan promo</label>
+                        <div class="flex items-stretch gap-2 h-10 w-full">
+                            <input class="flex-grow min-w-0 bg-bgLight border border-border-subtle focus:border-primary focus:ring-1 focus:ring-primary rounded-lg text-sm px-3 py-0 font-medium h-full placeholder-textMuted/60" placeholder="Masukkan kode" type="text"/>
+                            <button class="bg-primary text-white px-4 rounded-lg font-bold text-xs hover:bg-opacity-90 transition-opacity uppercase tracking-wider shrink-0 flex items-center justify-center h-full">
+                                Terapkan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Total Harga & Tombol Checkout -->
+                    <div class="pt-2 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-bold text-textDark">Total Harga</span>
+                            <span class="text-lg md:text-xl font-extrabold text-secondary">Rp 4.700.000</span>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <a href="checkout.html" class="flex w-full justify-center items-center bg-secondary text-white py-3.5 rounded-xl font-bold text-base hover:bg-opacity-95 transition-all shadow-md hover:shadow-lg transform active:scale-[0.99]">
+                            Lanjut ke Pembayaran
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Produk Rekomendasi -->
+        <section class="mt-20">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-xl md:text-2xl font-bold tracking-tight text-primary">Rekomendasi untuk Anda</h2>
+                <div class="flex gap-2">
+                    <button class="w-9 h-9 rounded-full border border-border-subtle flex items-center justify-center bg-white hover:bg-bgLight transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-sm">chevron_left</span>
+                    </button>
+                    <button class="w-9 h-9 rounded-full border border-border-subtle flex items-center justify-center bg-white hover:bg-bgLight transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex gap-gutter overflow-x-auto custom-scrollbar pb-6 snap-x snap-mandatory gap-5">
+                <!-- Produk Rekomendasi 1 -->
+                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
+                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
+                        <img alt="Industrial coffee table" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://i.pinimg.com/1200x/9d/65/64/9d656494b53c260e5d859f9549e4e0e2.jpg"/>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Meja Kopi Loft Industrial</h4>
+                        <p class="text-base font-extrabold text-secondary">Rp 2.100.000</p>
+                    </div>
+                </div>
+                
+                <!-- Produk Rekomendasi 2 -->
+                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
+                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
+                        <img alt="Minimalist bedside table" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://i.pinimg.com/736x/05/5b/ac/055bac653602fa76fbf5113212bdf4e4.jpg"/>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Nakhas Minimalis Sömn</h4>
+                        <p class="text-base font-extrabold text-secondary">Rp 850.000</p>
+                    </div>
+                </div>
+                
+                <!-- Produk Rekomendasi 3 -->
+                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
+                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
+                        <img class="w-full h-full object-cover transition-all group-hover:scale-105" alt="Lemari Buffet Skandinavia" src="https://i.pinimg.com/1200x/df/54/bf/df54bf3e9a69b92a50b53bf54799e88d.jpg"/>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Lemari Buffet Skandinavia</h4>
+                        <p class="text-base font-extrabold text-secondary">Rp 4.200.000</p>
+                    </div>
+                </div>
+                
+                <!-- Produk Rekomendasi 4 -->
+                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
+                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
+                        <img alt="Minimalist chair" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://i.pinimg.com/736x/f9/c3/fa/f9c3fad7822d2e0fa83c93f9348ed3dd.jpg"/>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Kursi Kerja Aero</h4>
+                        <p class="text-base font-extrabold text-secondary">Rp 1.850.000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (Sesuai Halaman Utama) -->
+    <footer class="bg-white border-t-4 border-primary pt-10 pb-5 mt-12 text-sm text-[#4a4a4a]">
+        <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Layanan Pelanggan</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Bantuan & Kontak</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Metode Pembayaran</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Lacak Pengiriman</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Tentang Melody</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Tentang Kami</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Sertifikasi Pabrik</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Metode Pembayaran</h4>
+                <div class="flex flex-wrap gap-2.5 mt-2.5">
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/american.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bca.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bni.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/cimb-niaga.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/gopay.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/jcb.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/kredivo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mandiri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mastercard.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/ovo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/permata.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/visa.webp" alt=""></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Lokasi & Kontak</h4>
+                <p class="text-xs text-textMuted mb-2.5">
+                    <strong>PT. Melody Furniture Indonesia</strong><br>
+                    Jl. Industri Raya No. 12, Kawasan Industri, Jakarta, Indonesia.
+                </p>
+                <div class="w-full h-32 bg-tertiary-container rounded-lg overflow-hidden relative group cursor-pointer border border-tertiary-fixed/10">
+                    <img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" data-alt="A highly stylized, minimalist map showing the location of Jakarta in a premium, dark-mode aesthetic. The map uses subtle, monochromatic tones (deep charcoals and muted greys) with a single, elegant warm-oak colored pin marking the showroom location. The style is abstract and sophisticated, fitting a high-end brand footer." data-location="Jakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOBXzFJ42OrYBBgsqZJdhgFFZSz4n0kaM01t6Ug3agOXWBVnJ-oZ3TXSz351AXQJ7Lx0t6ZmqxvqMJq2M9ZgKIlUWPAv8VjHk1gOHo4-GnkuWaFUGeCVY8En4ibUcCp-U73g-lx9xwNduXAYFAz0toqCyKU-XWv__ok19B1q1KqlmjHCPXBaq1RhGqDPtz1LAhfUy-wTdGCCC5FLRLvsS2Mpau_g499qHCS-36mRePnhahYZgj-lsYgwAPTHO58KVnHAu7oTUUAIg"/>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="font-label-sm text-label-sm text-tertiary-fixed bg-tertiary/80 backdrop-blur-sm px-3 py-1 rounded-full group-hover:bg-warm-oak transition-colors">Lihat Peta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-borderColor pt-5 text-center text-textMuted text-xs">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <p>&copy; 2026 Melody Furniture. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-['Inter']">
+        <!-- Kotak Chat Panel -->
+        <div id="chatWindow" class="hidden w-[330px] sm:w-[360px] h-[480px] bg-[#F8F9FA] rounded-2xl shadow-2xl border border-borderColor flex flex-col overflow-hidden mb-4 transition-all duration-300 transform translate-y-4 opacity-0">
+            
+            <!-- Header Chat (Sesuai Desain Ungu/Biru Admin Yukti) -->
+            <div class="bg-primary text-white p-4 flex items-center justify-between shadow-sm relative">
+                <div class="flex items-center space-x-3">
+                    <!-- Avatar dengan Checkmark & Status Hijau -->
+                    <div class="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10 shrink-0">
+                        <span class="material-symbols-outlined text-white !text-2xl">account_circle</span>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#4E46E5] rounded-full"></span>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <span class="font-bold text-sm tracking-wide">Admin Melody Furniture</span>
+                            <span class="material-symbols-outlined !text-xs text-blue-200" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                        <p class="text-[11px] text-white/80 font-light">Online & Siap Membantu</p>
+                    </div>
+                </div>
+                <!-- Tombol X di Header -->
+                <button id="closeChatHeader" class="text-white/70 hover:text-white transition focus:outline-none">
+                    <span class="material-symbols-outlined !text-xl">close</span>
+                </button>
+            </div>
+
+            <!-- Area Isi Chat / Pesan -->
+            <div id="chatBody" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col text-xs sm:text-sm">
+                <!-- Bubble Default Pertama (Sesuai Gambar Masukan) -->
+                <div class="flex flex-col items-start max-w-[85%] space-y-1 shrink-0">
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-textDark border border-borderColor/60 leading-relaxed">
+                        Halo! 👋 Ada yang bisa kami bantu? Silakan pilih salah satu opsi di bawah ini untuk respon kilat dari sistem kami.
+                    </div>
+                    <span class="text-[10px] text-textMuted ml-1">Baru saja</span>
+                </div>
+
+                <!-- Wadah Tempat Pesan Dinamis Akan Ditambahkan -->
+                <div id="dynamicMessages" class="space-y-3 flex flex-col"></div>
+
+                <!-- Indikator Sedang Mengetik (Hidden secara default) -->
+                <div id="typingIndicator" class="hidden flex flex-col items-start max-w-[85%] space-y-1">
+                    <div class="bg-white px-3 py-2 rounded-2xl rounded-tl-none shadow-sm text-textMuted border border-borderColor/60 flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                    </div>
+                </div>
+
+                <!-- 5 Pilihan Template Pertanyaan -->
+                <div id="chatTemplates" class="space-y-1.5 pt-2 shrink-0">
+                    <p class="text-[11px] font-semibold text-textMuted uppercase tracking-wider mb-1">Pilih Pertanyaan:</p>
+                    <button onclick="triggerTemplateChat(1, '📦 Apakah kursi Nordic Oak ready stok?', 'Tentu saja! Kursi Nordic Oak Chair saat ini berstatus ready siap kirim dari gudang kami. Silakan klik tombol \'Beli Sekarang\' untuk langsung memesan sebelum kehabisan kuota diskon bulanan!')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        📦 Apakah kursi Nordic Oak ready stok?
+                    </button>
+                    <button onclick="triggerTemplateChat(2, '🚚 Berapa ongkos kirim ke kota saya?', 'Untuk wilayah Malang Kota, pengiriman gratis atau bisa ambil langsung di showroom kami. Di luar itu, kami bekerja sama dengan kargo terpercaya untuk memastikan tarif termurah yang akan dihitung otomatis saat pengisian checkout.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🚚 Berapa ongkos kirim ke kota saya?
+                    </button>
+                    <button onclick="triggerTemplateChat(3, '🛡️ Apakah ada jaminan garansi produk?', 'Setiap pembelian produk premium di Melody Furniture dilengkapi garansi konstruksi & rangka kayu selama 1 tahun penuh. Kepuasan serta rasa aman Anda adalah prioritas utama kami.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🛡️ Apakah ada jaminan garansi produk?
+                    </button>
+                    <button onclick="triggerTemplateChat(4, '🔧 Bagaimana sistem perakitan kursinya?', 'Sangat mudah! Kursi ini dikirim dengan modul semi-knockdown yang presisi. Di dalam paket sudah tersedia kunci L dan buku panduan lengkap. Anda juga bisa menonton video panduan praktis yang disematkan di halaman produk ini.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🔧 Bagaimana sistem perakitan kursinya?
+                    </button>
+                    <button onclick="triggerTemplateChat(5, '🎨 Bisa kustomisasi warna kain atau kayu?', 'Untuk koleksi mass-production seperti ini, warna kayu oak natural dan stainless steel adalah standar paten terbaik kami. Namun jika Anda membutuhkan kuantitas proyek besar (min. 10 pcs), opsi kustomisasi warna khusus dapat dibuka.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🎨 Bisa kustomisasi warna kain atau kayu?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Chat / Input Lapisan Bawah (Sesuai image_210ad4.png) -->
+            <!-- <div class="bg-white p-3 border-t border-borderColor flex items-center space-x-2">
+                <input id="chatInput" type="text" placeholder="Ketik pesan disini..." class="flex-1 bg-gray-100 text-xs sm:text-sm px-4 py-2.5 rounded-full focus:outline-none text-textDark border border-transparent focus:border-gray-300">
+                <button id="sendChatBtn" class="w-9 h-9 rounded-full bg-gray-100 text-textMuted hover:bg-[#4E46E5] hover:text-white transition flex items-center justify-center shrink-0 focus:outline-none">
+                    <span class="material-symbols-outlined !text-lg">send</span>
+                </button>
+            </div> -->
+        </div>
+
+        <!-- Tombol Utama Balon Mengambang (Sesuai Bulatan Gelap Berisi Silang/Pesan di Kanan Bawah) -->
+        <button id="chatToggleBtn" class="w-14 h-14 bg-[#2C3E50] text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-opacity-95 transition transform hover:scale-105 active:scale-95 focus:outline-none" aria-label="Buka Obrolan">
+            <span id="chatToggleIcon" class="material-symbols-outlined !text-2xl">chat</span>
+        </button>
+    </div>
+
+    <!-- Interaksi Kuantitas Barang -->
+    <script>
+        document.querySelectorAll('.flex.items-center.border-border-subtle button').forEach(button => {
+            button.addEventListener('click', function() {
+                const span = this.parentElement.querySelector('span');
+                let count = parseInt(span.textContent);
+                if (this.textContent === '+') {
+                    span.textContent = count + 1;
+                } else if (this.textContent === '-' && count > 1) {
+                    span.textContent = count - 1;
+                }
+            });
+        });
+
+        // ==========================================
+        // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
+        // ==========================================
+        const chatWindow = document.getElementById('chatWindow');
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const chatToggleIcon = document.getElementById('chatToggleIcon');
+        const closeChatHeader = document.getElementById('closeChatHeader');
+        const chatBody = document.getElementById('chatBody');
+        const dynamicMessages = document.getElementById('dynamicMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatTemplates = document.getElementById('chatTemplates');
+
+        // Toggle Buka/Tutup Jendela Chat
+        function toggleChatPanel() {
+            const isHidden = chatWindow.classList.contains('hidden');
+            if (isHidden) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWindow.classList.replace('opacity-0', 'opacity-100');
+                    chatWindow.classList.replace('translate-y-4', 'translate-y-0');
+                }, 10);
+                chatToggleIcon.innerText = 'close'; // Ubah balon menjadi icon silang (X) sesuai mockup
+            } else {
+                chatWindow.classList.replace('opacity-100', 'opacity-0');
+                chatWindow.classList.replace('translate-y-0', 'translate-y-4');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+                chatToggleIcon.innerText = 'chat'; // Kembalikan ke icon chat biasa
+            }
+        }
+
+        chatToggleBtn.addEventListener('click', toggleChatPanel);
+        closeChatHeader.addEventListener('click', toggleChatPanel);
+
+        // Fungsi Memproses Template Klik Otomatis
+        function triggerTemplateChat(id, userQuestion, systemAnswer) {
+            // 1. Tambah Pesan User ke Layar Obrolan
+            appendMessage(userQuestion, 'user');
+            
+            // Sembunyikan daftar template pilihan sementara agar obrolan rapi
+            chatTemplates.classList.add('hidden');
+
+            // 2. Munculkan Animasi Mengetik Sistem
+            showTyping(true);
+            scrollToBottom();
+
+            // 3. Keluarkan Jawaban Sistem Setelah Delay 1 Detik
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage(systemAnswer, 'system');
+                
+                // Tampilkan kembali daftar template di bagian paling bawah
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                
+                scrollToBottom();
+            }, 1000);
+        }
+
+        // Fungsi Memasukkan Bubble Chat baru ke DOM
+        function appendMessage(text, sender) {
+            const msgWrapper = document.createElement('div');
+            msgWrapper.className = `flex flex-col space-y-1 max-w-[85%] ${sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`;
+
+            const bubble = document.createElement('div');
+            if (sender === 'user') {
+                bubble.className = "bg-[#4E46E5] text-white p-3 rounded-2xl rounded-tr-none shadow-sm leading-relaxed";
+            } else {
+                bubble.className = "bg-white text-textDark p-3 rounded-2xl rounded-tl-none shadow-sm border border-borderColor/60 leading-relaxed";
+            }
+            bubble.innerText = text;
+
+            const timestamp = document.createElement('span');
+            timestamp.className = "text-[10px] text-textMuted px-1";
+            timestamp.innerText = "Baru saja";
+
+            msgWrapper.appendChild(bubble);
+            msgWrapper.appendChild(timestamp);
+            dynamicMessages.appendChild(msgWrapper);
+            
+            scrollToBottom();
+        }
+
+        // Kontrol Indikator Mengetik
+        function showTyping(visible) {
+            if (visible) {
+                typingIndicator.classList.remove('hidden');
+                // Selalu pindahkan posisi mengetik ke paling bawah sebelum muncul
+                chatBody.appendChild(typingIndicator);
+            } else {
+                typingIndicator.classList.add('hidden');
+            }
+        }
+
+        // Otomatis Gulir Chat Ke Bawah
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Fitur Pelengkap: Izinkan User Mengirim Pesan Manual Lewat Input Lapisan Bawah
+        function handleManualSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            chatTemplates.classList.add('hidden');
+
+            showTyping(true);
+            scrollToBottom();
+
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage("Terima kasih telah menghubungi kami! Pesan Anda telah kami simpan dalam antrean sistem. Admin fisik kami akan memvalidasi pesan Anda segera.", 'system');
+                
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                scrollToBottom();
+            }, 1200);
+        }
+
+        sendChatBtn.addEventListener('click', handleManualSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleManualSend();
+        });
+    </script>
+</body>
+</html>

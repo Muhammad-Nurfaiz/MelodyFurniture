@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Notifikasi WhatsApp - Melody Furniture</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Desain background khas WhatsApp Web */
+        .wa-bg {
+            background-color: #efeae2;
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+            background-blend-mode: overlay;
+            background-opacity: 0.06;
+        }
+        /* Custom scrollbar ala WA */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(11, 20, 26, 0.2);
+            border-radius: 3px;
+        }
+        /* Efek ekor balon chat kiri WhatsApp */
+        .bubble-left::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 8px 10px 0;
+            border-color: transparent #ffffff transparent transparent;
+            shadow: 0 1px 0.5px rgba(11,20,26,.13);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans h-screen overflow-hidden flex flex-col">
+
+    <!-- Header Panel Simulasi -->
+    <!-- <div class="bg-white p-4 shadow-md flex justify-between items-center z-10 border-b border-gray-200">
+        <div>
+            <h1 class="text-lg font-bold text-[#0F2C59]">Simulasi Alur Sistem Notifikasi</h1>
+            <p class="text-xs text-gray-500">Kapasitas: Berjeda otomatis untuk menghindari deteksi spam Meta</p>
+        </div>
+        <button onclick="startSimulation()" class="bg-[#F26419] hover:bg-orange-600 text-white font-medium text-sm px-4 py-2 rounded-lg transition-all shadow-sm">
+            🔄 Mulai Ulang Simulasi
+        </button>
+    </div> -->
+
+    <!-- Container Utama Antarmuka WA -->
+    <div class="flex flex-1 overflow-hidden h-full">
+        
+        <!-- ================= SISI KIRI: RIWAYAT CHAT (Hanya Desktop & Tablet) ================= -->
+        <div class="hidden md:flex flex-col w-1/3 max-w-[400px] bg-white border-r border-gray-300">
+            <!-- Search Bar Mockup -->
+            <div class="p-3 bg-gray-50 border-b border-gray-200">
+                <div class="bg-gray-200 rounded-lg p-2 text-xs text-gray-500 pl-4">Cari atau mulai chat baru</div>
+            </div>
+            <!-- List Chat -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Active Chat Melody Furniture -->
+                <div class="flex items-center gap-3 p-3 bg-gray-100 border-b border-gray-100 cursor-pointer">
+                    <div class="w-12 h-12 rounded-full bg-[#0F2C59] flex items-center justify-center text-white font-bold text-sm">MF</div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-baseline">
+                            <h2 class="text-sm font-semibold text-gray-900 truncate">Melody Furniture Official</h2>
+                            <span class="text-xs text-[#00a884]">Online</span>
+                        </div>
+                        <p class="text-xs text-gray-500 truncate mt-0.5">Klaim garansi dengan mengirimkan...</p>
+                    </div>
+                </div>
+                <!-- Mockup Kontak Lainnya -->
+                <div class="flex items-center gap-3 p-3 border-b border-gray-100 opacity-60">
+                    <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">B</div>
+                    <div class="flex-1"><h2 class="text-sm font-medium text-gray-900">Budi (Anda)</h2><p class="text-xs text-gray-500">P</p></div>
+                </div>
+                <div class="flex items-center gap-3 p-3 border-b border-gray-100 opacity-60">
+                    <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 font-bold text-sm">K1</div>
+                    <div class="flex-1"><h2 class="text-sm font-medium text-gray-900">Kurir JNE Cargo</h2><p class="text-xs text-gray-500">Siap paket otw bro...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SISI KANAN: RUANG OBROLAN CHAT (Responsif) ================= -->
+        <div class="flex-1 flex flex-col bg-gray-600 wa-bg relative h-full">
+            
+            <!-- Header Chat Room -->
+            <div class="bg-[#008069] text-white p-3 flex items-center gap-3 shadow-sm z-10 shrink-0">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#008069] font-bold">MF</div>
+                <div>
+                    <h3 class="text-sm font-semibold">Melody Furniture Official</h3>
+                    <p class="text-[11px] text-teal-100">Akun Bisnis Resmi</p>
+                </div>
+            </div>
+
+            <!-- Area Isi Obrolan (Scrollable) -->
+            <div id="chat-container" class="flex-1 p-4 md:p-6 overflow-y-auto space-y-4">
+                
+                <!-- Balon Chat 1 -->
+                <div id="bubble-1" class="hidden flex flex-col max-w-[85%] md:max-w-[65%] bg-white rounded-lg p-3 text-gray-800 text-sm shadow-sm relative bubble-left transition-all duration-300">
+                    <p class="whitespace-pre-line">Halo Budi, Berhasil melakukan pembayaran
+
+No. Invoice: #[INV-202606001]
+
+No. Resi : 65123712478
+
+Produk: [Meja Belajar Minimalis Melody]
+
+Harga : 1.270.000
+
+metode pembayaran : transfer
+
+pesanan anda akan segera dikemas
+
+Selengkapnya, Anda tetap bisa melihat tracking kargo secara live di sini: <a href="track.html" class="text-blue-600 underline cursor-pointer break-all">melodyfurniture.co.id/track/token-xyz</a></p>
+                    <span class="text-[10px] text-gray-400 text-right block mt-1">11:53</span>
+                </div>
+
+                <!-- Balon Chat 2 -->
+                <div id="bubble-2" class="hidden flex flex-col max-w-[85%] md:max-w-[65%] bg-white rounded-lg p-3 text-gray-800 text-sm shadow-sm relative bubble-left transition-all duration-300">
+                    <p>Pesanan anda sudah dijemput oleh ekspedisi 🚚</p>
+                    <span class="text-[10px] text-gray-400 text-right block mt-1">11:53</span>
+                </div>
+
+                <!-- Balon Chat 3 -->
+                <div id="bubble-3" class="hidden flex flex-col max-w-[85%] md:max-w-[65%] bg-white rounded-lg p-3 text-gray-800 text-sm shadow-sm relative bubble-left transition-all duration-300">
+                    <p>Pesanan anda sudah dikota tujuan 🌆</p>
+                    <span class="text-[10px] text-gray-400 text-right block mt-1">11:53</span>
+                </div>
+
+                <!-- Balon Chat 4 -->
+                <div id="bubble-4" class="hidden flex flex-col max-w-[85%] md:max-w-[65%] bg-white rounded-lg p-3 text-gray-800 text-sm shadow-sm relative bubble-left transition-all duration-300">
+                    <p>Pesanan anda sedang menuju alamat anda 🛵</p>
+                    <span class="text-[10px] text-gray-400 text-right block mt-1">11:53</span>
+                </div>
+
+                <!-- Balon Chat 5 -->
+                <div id="bubble-5" class="hidden flex flex-col max-w-[85%] md:max-w-[65%] bg-white rounded-lg p-3 text-gray-800 text-sm shadow-sm relative bubble-left transition-all duration-300">
+                    <p>Pesanan anda sudah sampai dengan selamat 🎉✅</p>
+                    <span class="text-[10px] text-gray-400 text-right block mt-1">11:53</span>
+                </div>
+
+                <!-- Balon Chat 6 -->
+                <div id="bubble-6" class="hidden flex flex-col max-w-[85%] md:max-w-[65%] bg-white rounded-lg p-3 text-gray-800 text-sm shadow-sm relative bubble-left transition-all duration-300">
+                    <p class="font-medium text-amber-700">⚠️ Info Garansi:</p>
+                    <p>Klaim garansi dengan mengirimkan video unboxing tanpa potong dan edit</p>
+                    <span class="text-[10px] text-gray-400 text-right block mt-1">11:53</span>
+                </div>
+
+            </div>
+
+            <!-- Footer Input Mockup WhatsApp -->
+            <div class="sticky bottom-0
+         bg-gray-100 p-3
+         flex items-center gap-3
+         border-t border-gray-200">
+                <div class="text-gray-500 cursor-not-allowed">😀</div>
+                <div class="text-gray-500 cursor-not-allowed">📎</div>
+                <div class="flex-1 bg-white rounded-lg p-2 text-xs text-gray-400 select-none">Ketik pesan (Simulasi Otomatis Berjalan...)</div>
+                <div class="text-gray-400 cursor-not-allowed">🎙️</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Logika JavaScript Antrean & Auto-Scroll -->
+    <script>
+        // Ambil semua element DOM balon chat
+        const bubbles = [
+            document.getElementById('bubble-1'),
+            document.getElementById('bubble-2'),
+            document.getElementById('bubble-3'),
+            document.getElementById('bubble-4'),
+            document.getElementById('bubble-5'),
+            document.getElementById('bubble-6')
+        ];
+        const container = document.getElementById('chat-container');
+        let timeouts = [];
+
+        function clearAllTimeouts() {
+            timeouts.forEach(t => clearTimeout(t));
+            timeouts = [];
+        }
+
+        function scrollToBottom() {
+            container.scrollTo({
+                top: container.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function startSimulation() {
+            // 1. Reset semua balon menjadi hidden
+            bubbles.forEach(b => {
+                b.classList.add('hidden');
+                b.classList.remove('animate-fade-in');
+            });
+
+            clearAllTimeouts();
+
+            // 2. Jalankan antrean staggered delay masing-masing 2 detik bertahap
+            // Bubble 1 muncul di detik ke-2
+            timeouts.push(setTimeout(() => {
+                bubbles[0].classList.remove('hidden');
+                scrollToBottom();
+            }, 2000));
+
+            // Bubble 2 muncul di detik ke-4
+            timeouts.push(setTimeout(() => {
+                bubbles[1].classList.remove('hidden');
+                scrollToBottom();
+            }, 4000));
+
+            // Bubble 3 muncul di detik ke-6
+            timeouts.push(setTimeout(() => {
+                bubbles[2].classList.remove('hidden');
+                scrollToBottom();
+            }, 6000));
+
+            // Bubble 4 muncul di detik ke-8
+            timeouts.push(setTimeout(() => {
+                bubbles[3].classList.remove('hidden');
+                scrollToBottom();
+            }, 8000));
+
+            // Bubble 5 muncul di detik ke-10
+            timeouts.push(setTimeout(() => {
+                bubbles[4].classList.remove('hidden');
+                scrollToBottom();
+            }, 10000));
+
+            // Bubble 6 muncul di detik ke-12
+            timeouts.push(setTimeout(() => {
+                bubbles[5].classList.remove('hidden');
+                scrollToBottom();
+            }, 12000));
+        }
+
+        // Jalankan otomatis saat halaman pertama kali dimuat
+        window.onload = startSimulation;
+    </script>
+</body>
+</html>

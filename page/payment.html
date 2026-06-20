@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Awaiting Payment | Melody Furniture</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Token Warna Navigasi & Footer Utama (Sesuai detail_produk.html)
+                        primary: '#1A458B',   
+                        secondary: '#E14D2A', 
+                        bgLight: '#F8F9FA',
+                        textDark: '#212529',
+                        textMuted: '#6C757D',
+                        borderColor: '#E9ECEF',
+
+                        // Token Warna Internal Halaman Utama Konten
+                        "outline": "#747780",
+                        "tertiary-container": "#4b2200",
+                        "secondary-fixed": "#ffdbcd",
+                        "primary-fixed-dim": "#aec7fd",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-container": "#fd6c22",
+                        "primary-container": "#0f2c59",
+                        "on-surface-variant": "#44474f",
+                        "surface": "#f8f9ff",
+                        "surface-container": "#e6eeff",
+                        "surface-bright": "#f8f9ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#2c1100",
+                        "surface-tint": "#465e8e",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "surface-container-highest": "#d5e3fd",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "surface-variant": "#d5e3fd",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#360f00",
+                        "on-tertiary-fixed": "#301400",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#0d1c2f",
+                        "inverse-surface": "#233144",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#001a41",
+                        "bg-main": "#FFFFFF",
+                        "border-subtle": "#E2E8F0",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdcc6",
+                        "secondary-fixed-dim": "#ffb597",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#ebf1ff",
+                        "brand-blue-dark": "#0A1E3D",
+                        "bg-alt": "#F8FAFC",
+                        "surface-dim": "#ccdbf4",
+                        "primary-fixed": "#d8e2ff",
+                        "background": "#f8f9ff",
+                        "on-tertiary-container": "#c5875a",
+                        "outline-variant": "#c4c6d0",
+                        "inverse-primary": "#aec7fd",
+                        "on-background": "#0d1c2f"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F8FAFC; 
+        }
+        h1, h2, h3, h4 { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1A458B;
+            border-radius: 10px;
+        }
+        .tab-active {
+            border-bottom: 2px solid #1A458B;
+            color: #1A458B;
+            font-weight: 600;
+        }
+        .minimal-shadow {
+            box-shadow: 0 4px 12px -2px rgba(15, 44, 89, 0.08);
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased min-h-screen flex flex-col">
+    <main class="flex-grow py-12 px-4 md:px-6 max-w-[1280px] mx-auto w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <div class="lg:col-span-7 space-y-6">
+                <div class="flex flex-col items-center text-center space-y-4 mb-8">
+                    <div id="icon-container" class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center transition-colors duration-300">
+                        <span id="status-icon" class="material-symbols-outlined text-secondary text-[40px] transition-all" style="font-variation-settings: 'FILL' 1;">error</span>
+                    </div>
+                    <h1 id="status-heading" class="text-2xl md:text-3xl font-bold text-primary tracking-tight transition-all">Menunggu Pembayaran</h1>
+                    <p id="status-desc" class="text-sm md:text-base text-textMuted max-w-md font-medium leading-relaxed transition-all">Silakan selesaikan pembayaran Anda sebelum batas waktu berakhir agar pesanan dapat segera kami proses.</p>
+                </div>
+
+                <div id="countdown-card" class="bg-white border border-border-subtle rounded-xl p-6 md:p-8 minimal-shadow transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <p class="text-xs font-semibold text-textMuted uppercase tracking-wider mb-1">Selesaikan Pembayaran Dalam</p>
+                            <div class="text-3xl md:text-4xl font-extrabold text-secondary tracking-tight" id="countdown">09:59</div>
+                        </div>
+                        <div class="md:text-right">
+                            <p class="text-xs font-semibold text-textMuted uppercase tracking-wider mb-1">Batas Akhir Pembayaran</p>
+                            <p class="text-sm md:text-base font-bold text-primary">Kamis, 24 Okt 2024 - 14:30 WIB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-border-subtle rounded-xl p-6 md:p-8 minimal-shadow space-y-6">
+                    <div class="flex items-center justify-between border-b border-borderColor pb-4">
+                        <h2 class="text-base md:text-lg font-bold text-primary">Metode Pembayaran</h2>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-extrabold text-primary-container text-lg md:text-xl">BCA</span>
+                            <span class="text-xs md:text-sm font-medium text-textMuted">Virtual Account</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <p class="text-xs font-semibold text-textMuted uppercase tracking-wider">Nomor Virtual Account</p>
+                            <div class="flex items-center justify-between bg-bg-alt p-4 rounded-lg border border-border-subtle group hover:border-primary transition-colors">
+                                <span class="text-sm md:text-base font-bold text-primary tracking-widest" id="va-number">8000 8123 4567 8901</span>
+                                <button class="flex items-center text-secondary text-xs md:text-sm font-bold hover:underline shrink-0 ml-2" onclick="copyText('8000812345678901')">
+                                    <span class="material-symbols-outlined text-base mr-1">content_copy</span> Salin
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <p class="text-xs font-semibold text-textMuted uppercase tracking-wider">Total Pembayaran</p>
+                            <div class="flex items-center justify-between bg-bg-alt p-4 rounded-lg border border-border-subtle group hover:border-primary transition-colors">
+                                <span class="text-base md:text-lg font-bold text-secondary" id="total-payment">Rp 2.450.123</span>
+                                <button class="flex items-center text-secondary text-xs md:text-sm font-bold hover:underline shrink-0 ml-2" onclick="copyText('2450123')">
+                                    <span class="material-symbols-outlined text-base mr-1">content_copy</span> Salin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <button onclick="checkPaymentStatus()" class="flex bg-secondary text-white h-12 md:h-14 sm:h-13 px-5 rounded-xl font-bold hover:bg-opacity-95 shadow-sm transition-all flex items-center justify-center text-sm md:text-base tracking-wide">
+                        Cek Status Pembayaran
+                    </button>
+                    <a href="../index.html" class="flex bg-transparent border-2 border-primary text-primary h-12 md:h-14 sm:h-13 px-5 rounded-xl font-bold hover:bg-primary/5 transition-all flex items-center justify-center text-sm md:text-base tracking-wide">
+                        Kembali ke Beranda
+                    </a>
+                    <a href="simulation.html" class="flex bg-transparent border-2 border-primary text-primary h-12 md:h-14 sm:h-13 px-5 rounded-xl font-bold hover:bg-primary/5 transition-all flex items-center justify-center text-sm md:text-base tracking-wide">
+                        Simulasi Notif Chat WA
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 w-full lg:sticky lg:top-28">
+                <div class="bg-white border border-border-subtle rounded-xl minimal-shadow h-fit overflow-hidden">
+                    <div class="p-5 border-b border-borderColor bg-surface-container-low">
+                        <h2 class="text-base md:text-lg font-bold text-primary">Petunjuk Pembayaran</h2>
+                    </div>
+                    
+                    <div class="flex justify-between border-b border-borderColor px-4 bg-white">
+                        <button class="flex-1 py-4 text-center text-xs md:text-sm border-b-2 border-transparent transition-all tab-active focus:outline-none" id="tab-atm" onclick="switchTab('atm')">ATM</button>
+                        <button class="flex-1 py-4 text-center text-xs md:text-sm border-b-2 border-transparent transition-all text-textMuted font-medium focus:outline-none" id="tab-mbanking" onclick="switchTab('mbanking')">m-Banking</button>
+                        <button class="flex-1 py-4 text-center text-xs md:text-sm border-b-2 border-transparent transition-all text-textMuted font-medium focus:outline-none" id="tab-internet" onclick="switchTab('internet')">Internet</button>
+                    </div>
+                    
+                    <div class="p-6 md:p-8 space-y-5 min-h-[260px]">
+                        <div class="space-y-4 text-xs md:text-sm text-textDark font-medium" id="content-atm">
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">1</span>
+                                <p class="leading-relaxed">Masukkan Kartu ATM BCA &amp; PIN Anda.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">2</span>
+                                <p class="leading-relaxed">Pilih menu <span class="font-bold text-primary">Transaksi Lainnya</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">3</span>
+                                <p class="leading-relaxed">Pilih menu <span class="font-bold text-primary">Transfer</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">4</span>
+                                <p class="leading-relaxed">Pilih menu <span class="font-bold text-primary">Ke Rekening BCA Virtual Account</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">5</span>
+                                <p class="leading-relaxed">Masukkan Nomor Virtual Account <span class="font-bold text-primary tracking-wide">8000 8123 4567 8901</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">6</span>
+                                <p class="leading-relaxed">Periksa detail pembayaran lalu tekan <span class="font-bold text-primary">Ya/Setuju</span>.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="hidden space-y-4 text-xs md:text-sm text-textDark font-medium animate-fadeIn" id="content-mbanking">
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">1</span>
+                                <p class="leading-relaxed">Buka aplikasi <span class="font-bold text-primary">m-BCA</span> dan masukkan kode akses Anda.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">2</span>
+                                <p class="leading-relaxed">Pilih menu <span class="font-bold text-primary">m-Transfer</span> lalu klik <span class="font-bold text-primary">BCA Virtual Account</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">3</span>
+                                <p class="leading-relaxed">Input Nomor Virtual Account <span class="font-bold text-primary">8000 8123 4567 8901</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">4</span>
+                                <p class="leading-relaxed">Periksa total nominal tagihan dan konfirmasi dengan PIN m-BCA Anda.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="hidden space-y-4 text-xs md:text-sm text-textDark font-medium animate-fadeIn" id="content-internet">
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">1</span>
+                                <p class="leading-relaxed">Login ke halaman resmi <span class="font-bold text-primary">KlikBCA</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">2</span>
+                                <p class="leading-relaxed">Pilih menu <span class="font-bold text-primary">Transfer Dana</span>, kemudian pilih <span class="font-bold text-primary">Transfer ke BCA Virtual Account</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">3</span>
+                                <p class="leading-relaxed">Masukkan nomor VA <span class="font-bold text-primary">8000 8123 4567 8901</span>.</p>
+                            </div>
+                            <div class="flex gap-3 items-start">
+                                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-primary text-white text-[11px] flex items-center justify-center font-bold mt-0.5">4</span>
+                                <p class="leading-relaxed">Validasi transaksi menggunakan token KeyBCA Anda hingga selesai.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 bg-bgLight border-t border-borderColor rounded-b-xl">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
+                            <p class="text-[11px] md:text-xs text-textMuted font-medium leading-relaxed">Simpan selalu bukti transfer transaksi Anda. Sistem kami melakukan verifikasi otomatis dalam waktu kurang dari 10 menit setelah dana diterima.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>
+        // Fungsi Simulasi Pengecekan Status Pembayaran Berhasil
+        function checkPaymentStatus() {
+            const heading = document.getElementById('status-heading');
+            const icon = document.getElementById('status-icon');
+            const desc = document.getElementById('status-desc');
+            const iconContainer = document.getElementById('icon-container');
+            const countdownCard = document.getElementById('countdown-card');
+
+            // 1. Ubah Teks Heading & Deskripsi Utama
+            heading.innerText = "Pembayaran Berhasil!";
+            desc.innerText = "Terima kasih! Pembayaran Anda telah kami terima dan berhasil diverifikasi secara otomatis. Pesanan Anda akan segera dibuat dan diproses ke tahap pengiriman.";
+            
+            // 2. Ubah Teks Icon Material ke Bentuk Centang Sukses
+            icon.innerText = "check_circle";
+            
+            // 3. Ubah Warna Background & Text Icon Menjadi Hijau Sukses (Tailwind Utility Classes)
+            iconContainer.classList.remove('bg-orange-100');
+            iconContainer.classList.add('bg-green-100');
+            
+            icon.classList.remove('text-secondary');
+            icon.classList.add('text-green-600');
+
+            // 4. Sembunyikan Card Hitung Mundur (Karena Pembayaran Sudah Selesai)
+            if (countdownCard) {
+                countdownCard.classList.add('hidden');
+            }
+
+            // Berikan notifikasi pop-up opsional sebagai feedback tambahan bagi user
+            alert('Status Diperbarui: Pembayaran Berhasil Terverifikasi!');
+        }
+
+        // Logika Perpindahan Tab Petunjuk Pembayaran
+        function switchTab(tab) {
+            const tabs = ['atm', 'mbanking', 'internet'];
+            tabs.forEach(t => {
+                const tabEl = document.getElementById(`tab-${t}`);
+                const contentEl = document.getElementById(`content-${t}`);
+                
+                if (t === tab) {
+                    tabEl.classList.add('tab-active');
+                    tabEl.classList.remove('text-textMuted', 'font-medium');
+                    contentEl.classList.remove('hidden');
+                } else {
+                    tabEl.classList.remove('tab-active');
+                    tabEl.classList.add('text-textMuted', 'font-medium');
+                    contentEl.classList.add('hidden');
+                }
+            });
+        }
+
+        // Logika Hitung Mundur Waktu (Timer)
+        let time = 600; // Total durasi awal: 10 menit (dalam detik)
+        const countdownEl = document.getElementById('countdown');
+
+        function updateCountdown() {
+            // Berhenti hitung mundur jika halaman sudah sukses diubah via fungsi tombol
+            if (document.getElementById('status-heading').innerText === "Pembayaran Berhasil!") return;
+
+            const minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            if (countdownEl) {
+                countdownEl.innerHTML = `${minutes < 10 ? '0' + minutes : minutes}:${seconds}`;
+            }
+            if (time > 0) time--;
+        }
+        
+        // Perbarui setiap 1 detik
+        setInterval(updateCountdown, 1000);
+
+        // Fungsi Salin Teks ke Clipboard
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Berhasil disalin ke papan klip');
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Checkout | Melody Furniture</title>
+    
+    <!-- Google Fonts & Icons (Disamakan dengan detail_produk.html) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Token Warna Navigasi & Footer Utama
+                        primary: '#1A458B',   
+                        secondary: '#E14D2A', 
+                        bgLight: '#F8F9FA',
+                        textDark: '#212529',
+                        textMuted: '#6C757D',
+                        borderColor: '#E9ECEF',
+
+                        // Token Warna Internal Khusus Area Konten Utama
+                        "surface-tint": "#465e8e",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "inverse-primary": "#aec7fd",
+                        "brand-blue-dark": "#0A1E3D",
+                        "tertiary-fixed": "#ffdcc6",
+                        "tertiary-container": "#4b2200",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "on-secondary-container": "#591d00",
+                        "surface-dim": "#ccdbf4",
+                        "surface-container-high": "#dde9ff",
+                        "on-tertiary-fixed": "#301400",
+                        "primary-fixed-dim": "#aec7fd",
+                        "secondary-container": "#fd6c22",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-background": "#0d1c2f",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#0d1c2f",
+                        "surface-container-highest": "#d5e3fd",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#360f00",
+                        "outline-variant": "#c4c6d0",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdbcd",
+                        "bg-alt": "#F8FAFC",
+                        "on-tertiary-container": "#c5875a",
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "bg-main": "#FFFFFF",
+                        "tertiary": "#2c1100",
+                        "primary-container": "#0f2c59",
+                        "on-primary-fixed": "#001a41",
+                        "secondary-fixed-dim": "#ffb597",
+                        "inverse-on-surface": "#ebf1ff",
+                        "surface-bright": "#f8f9ff",
+                        "background": "#f8f9ff",
+                        "on-surface-variant": "#44474f",
+                        "on-primary-container": "#7c94c8",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container": "#e6eeff",
+                        "outline": "#747780",
+                        "border-subtle": "#E2E8F0",
+                        "surface-variant": "#d5e3fd",
+                        "inverse-surface": "#233144",
+                        "primary-fixed": "#d8e2ff"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8f9ff; 
+        }
+        h1, h2, h3, h4, th { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .form-input-focus:focus {
+            outline: none;
+            border-color: #1A458B;
+            box-shadow: 0 0 0 2px rgba(26, 69, 139, 0.1);
+        }
+        .flat-shadow {
+            box-shadow: 0 4px 12px -2px rgba(15, 44, 89, 0.08);
+        }
+        .industrial-border {
+            border: 1px solid #E2E8F0;
+        }
+    </style>
+</head>
+<body class="bg-[#f8f9ff] text-on-surface antialiased">
+
+    <!-- TopNavBar (Disamakan dengan detail_produk.html) -->
+    <header id="mainHeader" class="bg-white border-b border-borderColor sticky top-0 z-50 shadow-sm">
+        <!-- Top Bar -->
+        <div class="hidden md:block bg-primary text-white text-xs py-2">
+            <div class="max-w-[1280px] mx-auto px-6 flex justify-between">
+                <div>Melody Furniture Resmi - Standar Internasional</div>
+                <div>Lacak Pesanan | Hubungi Kami | Pengiriman Seluruh Indonesia</div>
+            </div>
+        </div>
+        
+        <!-- Main Header Container -->
+        <div class="max-w-[1280px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
+            <!-- Logo -->
+            <a href="../index.html" class="shrink-0">
+                <img src="../assets/img/download.png" alt="logo" class="w-36 md:w-44 h-auto">
+            </a>
+            
+            <!-- Search bar DESKTOP -->
+            <div class="hidden md:flex flex-1 mx-12">
+                <input type="text" placeholder="Cari furnitur impian Anda di katalog..." class="w-full px-4 py-2 border-2 border-primary rounded-l focus:outline-none text-sm font-medium">
+                <button class="bg-primary text-white px-6 rounded-r hover:bg-opacity-90 transition text-sm font-semibold tracking-wide">Cari</button>
+            </div>
+
+            <!-- Area Navigasi Kanan (Keranjang & Profil) -->
+            <div class="flex items-center gap-4 shrink-0">
+                <a href="cart.html" class="relative p-2 text-textDark hover:text-primary transition-colors group" aria-label="Keranjang Belanja">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-secondary rounded-full transform translate-x-1 -translate-y-0.5 min-w-[18px]">
+                        2
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Konten Utama Checkout -->
+    <main class="max-w-[1280px] mx-auto px-4 md:px-6 py-12">
+        <!-- Breadcrumbs & Heading -->
+        <div class="mb-10">
+            <h1 class="text-2xl md:text-3xl font-bold text-primary tracking-tight mb-2">Secure Checkout</h1>
+            <div class="flex items-center gap-2 text-textMuted text-xs md:text-sm font-medium">
+                <span>Keranjang</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                <span class="text-primary font-bold">Pengiriman & Pembayaran</span>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                <span>Konfirmasi</span>
+            </div>
+        </div>
+
+        <!-- Layout Grid Utama -->
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+            <!-- Kolom Kiri: Formulir Alamat, Pengiriman, & Pembayaran (65%) -->
+            <div class="w-full lg:w-[65%] space-y-6">
+                
+                <!-- Section 1: Alamat Pengiriman -->
+                <section class="bg-white industrial-border p-6 md:p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-6 border-b border-borderColor pb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined font-semibold">local_shipping</span>
+                        </div>
+                        <h2 class="text-lg md:text-xl font-bold text-textDark">Alamat Pengiriman</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-xs md:text-sm font-semibold text-textMuted">Nama Lengkap</label>
+                            <input class="w-full h-11 px-4 bg-bg-alt border border-border-subtle rounded-lg text-sm font-medium text-textDark form-input-focus transition-all placeholder:text-textMuted/50" placeholder="e.g. Erik Sorenson" type="text"/>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-xs md:text-sm font-semibold text-textMuted">Nomor Telepon</label>
+                            <input class="w-full h-11 px-4 bg-bg-alt border border-border-subtle rounded-lg text-sm font-medium text-textDark form-input-focus transition-all placeholder:text-textMuted/50" placeholder="+62 812 3456 7890" type="tel"/>
+                        </div>
+                        <div class="space-y-1.5 md:col-span-2">
+                            <label class="block text-xs md:text-sm font-semibold text-textMuted">E-mail</label>
+                            <input class="w-full h-11 px-4 bg-bg-alt border border-border-subtle rounded-lg text-sm font-medium text-textDark form-input-focus transition-all placeholder:text-textMuted/50" placeholder="asdasd@gmail.com" type="email"/>
+                        </div>
+                        <div class="space-y-1.5 md:col-span-2">
+                            <label class="block text-xs md:text-sm font-semibold text-textMuted">Kota / Kabupaten</label>
+                            <input class="w-full h-11 px-4 bg-bg-alt border border-border-subtle rounded-lg text-sm font-medium text-textDark form-input-focus transition-all placeholder:text-textMuted/50" placeholder="Pilih atau masukkan nama kota" type="text"/>
+                        </div>
+                        <div class="space-y-1.5 md:col-span-2">
+                            <label class="block text-xs md:text-sm font-semibold text-textMuted">Alamat Lengkap Detail</label>
+                            <textarea class="w-full p-4 bg-bg-alt border border-border-subtle rounded-lg text-sm font-medium text-textDark form-input-focus transition-all resize-none placeholder:text-textMuted/50" placeholder="Nama jalan, nomor rumah, nomor gedung, lantai/blok" rows="3"></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Opsi Pengiriman -->
+                <section class="bg-white industrial-border p-6 md:p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-6 border-b border-borderColor pb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined font-semibold">inventory_2</span>
+                        </div>
+                        <h2 class="text-lg md:text-xl font-bold text-textDark">Metode Pengiriman</h2>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label class="relative flex items-center p-4 border-2 border-primary rounded-xl cursor-pointer bg-primary/5 transition-all">
+                            <input checked="" class="w-5 h-5 text-primary border-border-subtle focus:ring-primary cursor-pointer" name="shipping" type="radio" value="expedition"/>
+                            <div class="ml-4 flex flex-1 justify-between items-center gap-2">
+                                <div>
+                                    <p class="text-sm md:text-base font-bold text-primary">Ekspedisi Kargo (Layanan Utama)</p>
+                                    <p class="text-xs md:text-sm text-textMuted font-medium">Estimasi tiba dalam 3-5 hari kerja</p>
+                                </div>
+                                <span class="text-sm md:text-base font-bold text-primary">Rp 150.000</span>
+                            </div>
+                        </label>
+                        <label class="relative flex items-center p-4 border border-border-subtle rounded-xl cursor-pointer hover:border-primary transition-all">
+                            <input class="w-5 h-5 text-primary border-border-subtle focus:ring-primary cursor-pointer" name="shipping" type="radio" value="pickup"/>
+                            <div class="ml-4 flex flex-1 justify-between items-center gap-2">
+                                <div>
+                                    <p class="text-sm md:text-base font-bold text-textDark">Ambil Sendiri (Local Pickup)</p>
+                                    <p class="text-xs md:text-sm text-textMuted font-medium">Ambil langsung di flagship store terdekat</p>
+                                </div>
+                                <span class="text-sm md:text-base font-bold text-secondary">Gratis</span>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Section 3: Metode Pembayaran -->
+                <section class="bg-white industrial-border p-6 md:p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-6 border-b border-borderColor pb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined font-semibold">payments</span>
+                        </div>
+                        <h2 class="text-lg md:text-xl font-bold text-textDark">Metode Pembayaran</h2>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <button class="flex flex-col items-center justify-center p-5 border-2 border-primary bg-primary/5 rounded-xl transition-all group">
+                            <span class="material-symbols-outlined text-primary text-[32px] mb-2 group-hover:scale-105 transition-transform">account_balance</span>
+                            <span class="text-xs md:text-sm font-bold text-primary">Virtual Account</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-5 border border-border-subtle rounded-xl hover:border-primary transition-all group">
+                            <span class="material-symbols-outlined text-textMuted text-[32px] mb-2 group-hover:scale-105 transition-transform">account_balance_wallet</span>
+                            <span class="text-xs md:text-sm font-semibold text-textDark">E-Wallet</span>
+                        </button>
+                        <button class="flex flex-col items-center justify-center p-5 border border-border-subtle rounded-xl hover:border-primary transition-all group">
+                            <span class="material-symbols-outlined text-textMuted text-[32px] mb-2 group-hover:scale-105 transition-transform">qr_code_2</span>
+                            <span class="text-xs md:text-sm font-semibold text-textDark">QRIS</span>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-bgLight border border-borderColor rounded-xl flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
+                        <p class="text-xs md:text-sm font-medium text-textMuted leading-relaxed">Transaksi Anda dienkripsi dengan sistem keamanan SSL standar industri tingkat tinggi. Kami menjamin kerahasiaan data perbankan Anda secara aman.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Kolom Kanan: Ringkasan Pesanan (35%) -->
+            <div class="w-full lg:w-[35%] lg:sticky lg:top-28">
+                <div class="bg-white industrial-border rounded-xl overflow-hidden flat-shadow">
+                    <div class="p-5 bg-surface-container-low border-b border-border-subtle">
+                        <h3 class="text-base md:text-lg font-bold text-primary">Ringkasan Pesanan</h3>
+                    </div>
+                    
+                    <div class="p-6 space-y-5">
+                        <!-- Informasi Detail Item -->
+                        <div class="flex gap-4 items-start">
+                            <div class="w-20 h-20 bg-bg-alt rounded-lg overflow-hidden flex-shrink-0 border border-border-subtle">
+                                <img alt="Nordic Oak Dining Chair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg"/>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-bold text-textDark text-sm md:text-base leading-snug truncate">Nordic Oak Dining Chair</h4>
+                                <p class="text-xs md:text-sm text-textMuted font-medium mt-1">Varian: Natural Wood / Qty: 2</p>
+                                <p class="text-secondary font-bold text-sm md:text-base mt-1.5">Rp 2.400.000</p>
+                            </div>
+                        </div>
+                        
+                        <hr class="border-border-subtle"/>
+                        
+                        <!-- Rincian Biaya Finansial -->
+                        <div class="space-y-2.5 text-xs md:text-sm font-medium text-textMuted">
+                            <div class="flex justify-between items-center">
+                                <span>Subtotal Produk</span>
+                                <span class="text-textDark font-semibold">Rp 2.400.000</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Ongkos Kirim (Kargo)</span>
+                                <span class="text-textDark font-semibold">Rp 150.000</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Pajak (PPN 11%)</span>
+                                <span class="text-textDark font-semibold">Rp 264.000</span>
+                            </div>
+                        </div>
+                        
+                        <hr class="border-border-subtle"/>
+                        
+                        <!-- Akumulasi Total Akhir -->
+                        <div class="flex justify-between items-center py-1">
+                            <span class="font-bold text-textDark text-sm md:text-base">Total Keseluruhan</span>
+                            <span class="font-extrabold text-secondary text-lg md:text-xl">Rp 2.814.000</span>
+                        </div>
+                        
+                        <!-- Tombol CTA Utama Submit Checkout -->
+                        <a href="payment.html" class="w-full h-12 md:h-14 bg-secondary text-white hover:bg-opacity-95 rounded-xl flex items-center justify-center gap-3 transition-all active:scale-[0.99] mt-4 shadow-md font-bold text-sm md:text-base tracking-wide uppercase">
+                            <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">lock</span>
+                            Buat Pesanan Sekarang
+                        </a>
+                        
+                        <p class="text-center text-[11px] md:text-[12px] font-medium text-textMuted leading-normal mt-4">
+                            Dengan mengeklik tombol di atas, Anda telah menyetujui seluruh <a class="underline text-primary hover:text-opacity-80" href="#">Syarat & Ketentuan</a> serta <a class="underline text-primary hover:text-opacity-80" href="#">Kebijakan Privasi</a> dari Melody Furniture.
+                        </p>
+                    </div>
+                    
+                    <!-- Trust Seals / Lencana Kredibilitas Keamanan -->
+                    <div class="bg-bgLight p-4 flex justify-center gap-6 border-t border-borderColor text-textMuted/60">
+                        <span class="material-symbols-outlined text-[24px]" title="Terverifikasi Aman">verified_user</span>
+                        <span class="material-symbols-outlined text-[24px]" title="Keamanan SSL">security</span>
+                        <span class="material-symbols-outlined text-[24px]" title="Pembayaran Terenkripsi">credit_card</span>
+                        <span class="material-symbols-outlined text-[24px]" title="Garansi Kualitas Resmi">workspace_premium</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Disamakan dengan detail_produk.html) -->
+    <footer class="bg-white border-t-4 border-primary pt-10 pb-5 mt-12 text-sm text-[#4a4a4a]">
+        <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Layanan Pelanggan</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Bantuan & Kontak</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Metode Pembayaran</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Lacak Pengiriman</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Tentang Melody</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Tentang Kami</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Sertifikasi Pabrik</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Metode Pembayaran</h4>
+                <div class="flex flex-wrap gap-2.5 mt-2.5">
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/american.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bca.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bni.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/cimb-niaga.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/gopay.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/jcb.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/kredivo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mandiri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mastercard.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/ovo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/permata.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/visa.webp" alt=""></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Lokasi & Kontak</h4>
+                <p class="text-xs text-textMuted mb-2.5">
+                    <strong>PT. Melody Furniture Indonesia</strong><br>
+                    Jl. Industri Raya No. 12, Kawasan Industri, Jakarta, Indonesia.
+                </p>
+                <div class="w-full h-32 bg-tertiary-container rounded-lg overflow-hidden relative group cursor-pointer border border-tertiary-fixed/10">
+                    <img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" data-alt="A highly stylized, minimalist map showing the location of Jakarta in a premium, dark-mode aesthetic. The map uses subtle, monochromatic tones (deep charcoals and muted greys) with a single, elegant warm-oak colored pin marking the showroom location. The style is abstract and sophisticated, fitting a high-end brand footer." data-location="Jakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOBXzFJ42OrYBBgsqZJdhgFFZSz4n0kaM01t6Ug3agOXWBVnJ-oZ3TXSz351AXQJ7Lx0t6ZmqxvqMJq2M9ZgKIlUWPAv8VjHk1gOHo4-GnkuWaFUGeCVY8En4ibUcCp-U73g-lx9xwNduXAYFAz0toqCyKU-XWv__ok19B1q1KqlmjHCPXBaq1RhGqDPtz1LAhfUy-wTdGCCC5FLRLvsS2Mpau_g499qHCS-36mRePnhahYZgj-lsYgwAPTHO58KVnHAu7oTUUAIg"/>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="font-label-sm text-label-sm text-tertiary-fixed bg-tertiary/80 backdrop-blur-sm px-3 py-1 rounded-full group-hover:bg-warm-oak transition-colors">Lihat Peta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-borderColor pt-5 text-center text-textMuted text-xs">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <p>&copy; 2026 Melody Furniture. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-['Inter']">
+        <!-- Kotak Chat Panel -->
+        <div id="chatWindow" class="hidden w-[330px] sm:w-[360px] h-[480px] bg-[#F8F9FA] rounded-2xl shadow-2xl border border-borderColor flex flex-col overflow-hidden mb-4 transition-all duration-300 transform translate-y-4 opacity-0">
+            
+            <!-- Header Chat (Sesuai Desain Ungu/Biru Admin Yukti) -->
+            <div class="bg-primary text-white p-4 flex items-center justify-between shadow-sm relative">
+                <div class="flex items-center space-x-3">
+                    <!-- Avatar dengan Checkmark & Status Hijau -->
+                    <div class="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10 shrink-0">
+                        <span class="material-symbols-outlined text-white !text-2xl">account_circle</span>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#4E46E5] rounded-full"></span>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <span class="font-bold text-sm tracking-wide">Admin Melody Furniture</span>
+                            <span class="material-symbols-outlined !text-xs text-blue-200" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                        <p class="text-[11px] text-white/80 font-light">Online & Siap Membantu</p>
+                    </div>
+                </div>
+                <!-- Tombol X di Header -->
+                <button id="closeChatHeader" class="text-white/70 hover:text-white transition focus:outline-none">
+                    <span class="material-symbols-outlined !text-xl">close</span>
+                </button>
+            </div>
+
+            <!-- Area Isi Chat / Pesan -->
+            <div id="chatBody" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col text-xs sm:text-sm">
+                <!-- Bubble Default Pertama (Sesuai Gambar Masukan) -->
+                <div class="flex flex-col items-start max-w-[85%] space-y-1 shrink-0">
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-textDark border border-borderColor/60 leading-relaxed">
+                        Halo! 👋 Ada yang bisa kami bantu? Silakan pilih salah satu opsi di bawah ini untuk respon kilat dari sistem kami.
+                    </div>
+                    <span class="text-[10px] text-textMuted ml-1">Baru saja</span>
+                </div>
+
+                <!-- Wadah Tempat Pesan Dinamis Akan Ditambahkan -->
+                <div id="dynamicMessages" class="space-y-3 flex flex-col"></div>
+
+                <!-- Indikator Sedang Mengetik (Hidden secara default) -->
+                <div id="typingIndicator" class="hidden flex flex-col items-start max-w-[85%] space-y-1">
+                    <div class="bg-white px-3 py-2 rounded-2xl rounded-tl-none shadow-sm text-textMuted border border-borderColor/60 flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                    </div>
+                </div>
+
+                <!-- 5 Pilihan Template Pertanyaan -->
+                <div id="chatTemplates" class="space-y-1.5 pt-2 shrink-0">
+                    <p class="text-[11px] font-semibold text-textMuted uppercase tracking-wider mb-1">Pilih Pertanyaan:</p>
+                    <button onclick="triggerTemplateChat(1, '📦 Apakah kursi Nordic Oak ready stok?', 'Tentu saja! Kursi Nordic Oak Chair saat ini berstatus ready siap kirim dari gudang kami. Silakan klik tombol \'Beli Sekarang\' untuk langsung memesan sebelum kehabisan kuota diskon bulanan!')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        📦 Apakah kursi Nordic Oak ready stok?
+                    </button>
+                    <button onclick="triggerTemplateChat(2, '🚚 Berapa ongkos kirim ke kota saya?', 'Untuk wilayah Malang Kota, pengiriman gratis atau bisa ambil langsung di showroom kami. Di luar itu, kami bekerja sama dengan kargo terpercaya untuk memastikan tarif termurah yang akan dihitung otomatis saat pengisian checkout.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🚚 Berapa ongkos kirim ke kota saya?
+                    </button>
+                    <button onclick="triggerTemplateChat(3, '🛡️ Apakah ada jaminan garansi produk?', 'Setiap pembelian produk premium di Melody Furniture dilengkapi garansi konstruksi & rangka kayu selama 1 tahun penuh. Kepuasan serta rasa aman Anda adalah prioritas utama kami.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🛡️ Apakah ada jaminan garansi produk?
+                    </button>
+                    <button onclick="triggerTemplateChat(4, '🔧 Bagaimana sistem perakitan kursinya?', 'Sangat mudah! Kursi ini dikirim dengan modul semi-knockdown yang presisi. Di dalam paket sudah tersedia kunci L dan buku panduan lengkap. Anda juga bisa menonton video panduan praktis yang disematkan di halaman produk ini.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🔧 Bagaimana sistem perakitan kursinya?
+                    </button>
+                    <button onclick="triggerTemplateChat(5, '🎨 Bisa kustomisasi warna kain atau kayu?', 'Untuk koleksi mass-production seperti ini, warna kayu oak natural dan stainless steel adalah standar paten terbaik kami. Namun jika Anda membutuhkan kuantitas proyek besar (min. 10 pcs), opsi kustomisasi warna khusus dapat dibuka.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🎨 Bisa kustomisasi warna kain atau kayu?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Chat / Input Lapisan Bawah (Sesuai image_210ad4.png) -->
+            <!-- <div class="bg-white p-3 border-t border-borderColor flex items-center space-x-2">
+                <input id="chatInput" type="text" placeholder="Ketik pesan disini..." class="flex-1 bg-gray-100 text-xs sm:text-sm px-4 py-2.5 rounded-full focus:outline-none text-textDark border border-transparent focus:border-gray-300">
+                <button id="sendChatBtn" class="w-9 h-9 rounded-full bg-gray-100 text-textMuted hover:bg-[#4E46E5] hover:text-white transition flex items-center justify-center shrink-0 focus:outline-none">
+                    <span class="material-symbols-outlined !text-lg">send</span>
+                </button>
+            </div> -->
+        </div>
+
+        <!-- Tombol Utama Balon Mengambang (Sesuai Bulatan Gelap Berisi Silang/Pesan di Kanan Bawah) -->
+        <button id="chatToggleBtn" class="w-14 h-14 bg-[#2C3E50] text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-opacity-95 transition transform hover:scale-105 active:scale-95 focus:outline-none" aria-label="Buka Obrolan">
+            <span id="chatToggleIcon" class="material-symbols-outlined !text-2xl">chat</span>
+        </button>
+    </div>
+
+    <!-- Interaksi Pilihan Pengiriman & Pembayaran -->
+    <script>
+        // Interaktivitas Pilihan Pembayaran
+        const paymentButtons = document.querySelectorAll('button[class*="border"]');
+        paymentButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                paymentButtons.forEach(b => {
+                    b.classList.remove('border-primary', 'bg-primary/5');
+                    b.classList.add('border-border-subtle');
+                    const spanIcon = b.querySelector('span:first-child');
+                    const spanText = b.querySelector('span:last-child');
+                    if(spanIcon && spanText) {
+                        spanIcon.classList.replace('text-primary', 'text-textMuted');
+                        spanText.classList.replace('font-bold', 'font-medium');
+                        spanText.classList.replace('text-primary', 'text-textDark');
+                    }
+                });
+                btn.classList.add('border-primary', 'bg-primary/5');
+                btn.classList.remove('border-border-subtle');
+                const activeIcon = btn.querySelector('span:first-child');
+                const activeText = btn.querySelector('span:last-child');
+                if(activeIcon && activeText) {
+                    activeIcon.classList.replace('text-textMuted', 'text-primary');
+                    activeText.classList.replace('font-medium', 'font-bold');
+                    activeText.classList.replace('text-textDark', 'text-primary');
+                }
+            });
+        });
+
+        // Interaktivitas Metode Pengiriman
+        const shippingInputs = document.querySelectorAll('input[name="shipping"]');
+        shippingInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                shippingInputs.forEach(i => {
+                    const label = i.closest('label');
+                    label.classList.remove('border-primary', 'bg-primary/5', 'border-2');
+                    label.classList.add('border-border-subtle', 'border');
+                    const titleText = label.querySelector('p:first-child');
+                    if(titleText) titleText.classList.remove('text-primary');
+                });
+                const label = input.closest('label');
+                label.classList.add('border-primary', 'bg-primary/5', 'border-2');
+                label.classList.remove('border-border-subtle', 'border');
+                const activeTitle = label.querySelector('p:first-child');
+                if(activeTitle) activeTitle.classList.add('text-primary');
+            });
+        });
+
+        // ==========================================
+        // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
+        // ==========================================
+        const chatWindow = document.getElementById('chatWindow');
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const chatToggleIcon = document.getElementById('chatToggleIcon');
+        const closeChatHeader = document.getElementById('closeChatHeader');
+        const chatBody = document.getElementById('chatBody');
+        const dynamicMessages = document.getElementById('dynamicMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatTemplates = document.getElementById('chatTemplates');
+
+        // Toggle Buka/Tutup Jendela Chat
+        function toggleChatPanel() {
+            const isHidden = chatWindow.classList.contains('hidden');
+            if (isHidden) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWindow.classList.replace('opacity-0', 'opacity-100');
+                    chatWindow.classList.replace('translate-y-4', 'translate-y-0');
+                }, 10);
+                chatToggleIcon.innerText = 'close'; // Ubah balon menjadi icon silang (X) sesuai mockup
+            } else {
+                chatWindow.classList.replace('opacity-100', 'opacity-0');
+                chatWindow.classList.replace('translate-y-0', 'translate-y-4');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+                chatToggleIcon.innerText = 'chat'; // Kembalikan ke icon chat biasa
+            }
+        }
+
+        chatToggleBtn.addEventListener('click', toggleChatPanel);
+        closeChatHeader.addEventListener('click', toggleChatPanel);
+
+        // Fungsi Memproses Template Klik Otomatis
+        function triggerTemplateChat(id, userQuestion, systemAnswer) {
+            // 1. Tambah Pesan User ke Layar Obrolan
+            appendMessage(userQuestion, 'user');
+            
+            // Sembunyikan daftar template pilihan sementara agar obrolan rapi
+            chatTemplates.classList.add('hidden');
+
+            // 2. Munculkan Animasi Mengetik Sistem
+            showTyping(true);
+            scrollToBottom();
+
+            // 3. Keluarkan Jawaban Sistem Setelah Delay 1 Detik
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage(systemAnswer, 'system');
+                
+                // Tampilkan kembali daftar template di bagian paling bawah
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                
+                scrollToBottom();
+            }, 1000);
+        }
+
+        // Fungsi Memasukkan Bubble Chat baru ke DOM
+        function appendMessage(text, sender) {
+            const msgWrapper = document.createElement('div');
+            msgWrapper.className = `flex flex-col space-y-1 max-w-[85%] ${sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`;
+
+            const bubble = document.createElement('div');
+            if (sender === 'user') {
+                bubble.className = "bg-[#4E46E5] text-white p-3 rounded-2xl rounded-tr-none shadow-sm leading-relaxed";
+            } else {
+                bubble.className = "bg-white text-textDark p-3 rounded-2xl rounded-tl-none shadow-sm border border-borderColor/60 leading-relaxed";
+            }
+            bubble.innerText = text;
+
+            const timestamp = document.createElement('span');
+            timestamp.className = "text-[10px] text-textMuted px-1";
+            timestamp.innerText = "Baru saja";
+
+            msgWrapper.appendChild(bubble);
+            msgWrapper.appendChild(timestamp);
+            dynamicMessages.appendChild(msgWrapper);
+            
+            scrollToBottom();
+        }
+
+        // Kontrol Indikator Mengetik
+        function showTyping(visible) {
+            if (visible) {
+                typingIndicator.classList.remove('hidden');
+                // Selalu pindahkan posisi mengetik ke paling bawah sebelum muncul
+                chatBody.appendChild(typingIndicator);
+            } else {
+                typingIndicator.classList.add('hidden');
+            }
+        }
+
+        // Otomatis Gulir Chat Ke Bawah
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Fitur Pelengkap: Izinkan User Mengirim Pesan Manual Lewat Input Lapisan Bawah
+        function handleManualSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            chatTemplates.classList.add('hidden');
+
+            showTyping(true);
+            scrollToBottom();
+
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage("Terima kasih telah menghubungi kami! Pesan Anda telah kami simpan dalam antrean sistem. Admin fisik kami akan memvalidasi pesan Anda segera.", 'system');
+                
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                scrollToBottom();
+            }, 1200);
+        }
+
+        sendChatBtn.addEventListener('click', handleManualSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleManualSend();
+        });
+    </script>
+</body>
+</html>

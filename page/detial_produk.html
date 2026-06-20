@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nordic Oak Chair | Melody Furniture</title>
+    
+    <!-- Menyisipkan Tailwind CSS melalui CDN resmi -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A458B',   /* Biru Utama */
+                        secondary: '#E14D2A', /* Oranye/Merah Aksen */
+                        bgLight: '#F8F9FA',
+                        textDark: '#212529',
+                        textMuted: '#6C757D',
+                        borderColor: '#E9ECEF',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Menggunakan max-height 0 dan padding 0 saat tertutup agar benar-benar rapat */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .accordion-item.active .chevron-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-bgLight text-textDark antialiased leading-relaxed font-['Inter']">
+
+    <!-- Header & Top Bar -->
+    <header class="bg-white border-b border-borderColor sticky top-0 z-40 shadow-sm">
+        <!-- Top Bar (Desktop Only) -->
+        <div class="hidden md:block bg-primary text-white text-xs py-2">
+            <div class="max-w-[1200px] mx-auto px-4 flex justify-between">
+                <div>Melody Furniture Resmi - Standar Internasional</div>
+                <div>Lacak Pesanan | Hubungi Kami | Pengiriman Seluruh Indonesia</div>
+            </div>
+        </div>
+        
+        <!-- Main Header Container -->
+        <div class="max-w-[1200px] mx-auto px-4 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-4">
+            <!-- Logo -->
+            <a href="../index.html" class="shrink-0">
+                <img src="../assets/img/download.png" alt="logo" class="w-28 sm:w-36 md:w-44 h-auto">
+            </a>
+            
+            <!-- Search bar hanya muncul di desktop (md ke atas) -->
+            <div class="hidden md:flex flex-1 mx-8">
+                <input type="text" placeholder="Cari furnitur impian Anda (misal: Meja Belajar, Rak TV, Lemari)..." class="w-full px-4 py-2 border-2 border-primary rounded-l focus:outline-none text-base">
+                <button class="bg-primary text-white px-5 rounded-r hover:bg-opacity-90 transition font-medium">Cari</button>
+            </div>
+
+            <!-- Area Navigasi Kanan (Keranjang & Profil) -->
+            <div class="flex items-center gap-4 shrink-0">
+                <!-- IKON KERANJANG GLOBAL -->
+                <a href="cart.html" class="relative p-2 text-textDark hover:text-primary transition-colors group" aria-label="Keranjang Belanja">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span id="cartBadge" class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-secondary rounded-full transform translate-x-1 -translate-y-0.5 min-w-[18px]">
+                        3
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Detail Layout -->
+    <main class="max-w-[1200px] mx-auto px-4 py-8 md:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+            
+            <!-- Left Column: Gallery -->
+            <div class="space-y-4 md:space-y-6">
+                <div id="mainImageContainer" class="bg-white rounded-lg overflow-hidden aspect-square flex items-center justify-center border border-borderColor group shadow-sm cursor-zoom-in">
+                    <img id="mainProductImage" alt="Nordic Oak Chair Main" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" />
+                </div>
+                <div class="grid grid-cols-4 gap-2 md:gap-4">
+                    <div class="cursor-pointer bg-white rounded border-2 border-primary overflow-hidden aspect-square transition-all hover:opacity-80">
+                        <img class="w-full h-full object-cover thumbnail" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" alt="Thumb 1" />
+                    </div>
+                    <div class="cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                        <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I" alt="Thumb 2" />
+                    </div>
+                    <div class="cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                        <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0" alt="Thumb 3" />
+                    </div>
+                    <div class="cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                        <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw" alt="Thumb 4" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Product Info -->
+            <div class="lg:sticky lg:top-28 self-start space-y-6 md:space-y-8">
+                <div class="space-y-3 md:space-y-4">
+                    <nav class="flex text-xs md:text-sm text-textMuted space-x-2">
+                        <a class="hover:text-primary transition-colors" href="../index.html">Home</a>
+                        <span>/</span>
+                        <a class="hover:text-primary transition-colors" href="#">Living Room</a>
+                        <span>/</span>
+                        <span class="text-primary font-medium">Nordic Oak Chair</span>
+                    </nav>
+                    <h1 class="font-['Plus_Jakarta_Sans'] font-bold text-xl md:text-3xl text-textDark">
+                        Nordic Oak Chair
+                    </h1>
+                    <div class="flex items-baseline space-x-3 md:space-x-4">
+                        <p class="text-lg md:text-2xl font-bold text-secondary">
+                            Rp 1.250.000
+                        </p>
+                        <span class="text-xs md:text-sm text-textMuted line-through">Rp 1.800.000</span>
+                        <span class="bg-[#FFECE8] text-secondary px-2 py-0.5 rounded text-[10px] md:text-xs font-bold">SALE</span>
+                    </div>
+                    <p class="text-xs md:text-sm text-textMuted leading-relaxed max-w-lg">
+                        A study in minimalist engineering. The Nordic Oak Chair balances the warmth of natural solid wood with the industrial precision of brushed steel. Perfect for modern dining spaces or professional studios.
+                    </p>
+                </div>
+
+                <!-- Product Actions -->
+                <div class="flex flex-col space-y-3">
+                    <div class="flex space-x-4">
+                        <button class="flex-1 bg-secondary text-white text-sm md:text-base font-bold py-3.5 md:py-4 rounded hover:bg-opacity-90 active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                            <span>Masukkan Keranjang</span>
+                        </button>
+                    </div>
+                    <a href="checkout.html" class="w-full border-2 border-primary text-primary text-sm md:text-base font-bold py-3.5 md:py-4 rounded hover:bg-primary hover:text-white active:scale-[0.99] transition-all text-center">
+                        Beli Sekarang
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=VIDEO_ID_DISINI" target="_blank" rel="noopener noreferrer" class="w-full border border-borderColor bg-white text-textDark text-xs md:text-sm font-medium py-3 rounded hover:bg-gray-50 hover:text-primary active:scale-[0.99] transition-all flex items-center justify-center space-x-2 shadow-sm">
+                        <span class="material-symbols-outlined text-[#FF0000]">play_circle</span>
+                        <span>Lihat Video Tutorial Pemasangan (YouTube)</span>
+                    </a>
+                </div>
+
+                <!-- Details Accordion -->
+                <div class="border-t border-borderColor pt-6 space-y-4">
+                    <!-- Specifications -->
+                    <div class="accordion-item border border-borderColor rounded overflow-hidden active bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                            <span class="text-sm md:text-base font-bold text-textDark flex items-center space-x-3">
+                                <span class="material-symbols-outlined text-primary">straighten</span>
+                                <span>Spesifikasi Produk</span>
+                            </span>
+                            <span class="material-symbols-outlined text-textMuted transition-transform duration-300 chevron-icon">expand_more</span>
+                        </button>
+                        <div class="accordion-content px-4 bg-white text-xs md:text-sm">
+                            <div class="space-y-3 pt-2 pb-2">
+                                <div class="flex justify-between border-b border-borderColor pb-2">
+                                    <span class="text-textMuted">Dimensi</span>
+                                    <span class="font-medium">45 x 50 x 85 cm</span>
+                                </div>
+                                <div class="flex justify-between border-b border-borderColor pb-2">
+                                    <span class="text-textMuted">Tinggi Dudukan</span>
+                                    <span class="font-medium">45 cm</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-textMuted">Kapasitas Beban</span>
+                                    <span class="font-medium">120 kg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Material Details -->
+                    <div class="accordion-item border border-borderColor rounded overflow-hidden bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                            <span class="text-sm md:text-base font-bold text-textDark flex items-center space-x-3">
+                                <span class="material-symbols-outlined text-primary">inventory_2</span>
+                                <span>Detail Material</span>
+                            </span>
+                            <span class="material-symbols-outlined text-textMuted transition-transform duration-300 chevron-icon">expand_more</span>
+                        </button>
+                        <div class="accordion-content px-4 bg-white text-xs md:text-sm">
+                            <div class="pt-2 pb-2">
+                                <ul class="space-y-2 text-textMuted">
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-secondary mt-1">•</span>
+                                        <span>Rangka Solid European Oak dengan serat kayu alami premium.</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-secondary mt-1">•</span>
+                                        <span>Aksen sandaran belakang Brushed 304 Stainless Steel untuk ketahanan industrial.</span>
+                                    </li>
+                                    <li class="flex items-start space-x-2">
+                                        <span class="text-secondary mt-1">•</span>
+                                        <span>Lapisan pelindung matte clear coat, tahan air dan noda.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Info -->
+                    <div class="accordion-item border border-borderColor rounded overflow-hidden bg-white shadow-sm">
+                        <button class="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors" onclick="toggleAccordion(this)">
+                            <span class="text-sm md:text-base font-bold text-textDark flex items-center space-x-3">
+                                <span class="material-symbols-outlined text-primary">local_shipping</span>
+                                <span>Informasi Pengiriman</span>
+                            </span>
+                            <span class="material-symbols-outlined text-textMuted transition-transform duration-300 chevron-icon">expand_more</span>
+                        </button>
+                        <div class="accordion-content px-4 bg-white text-xs md:text-sm">
+                            <div class="grid grid-cols-2 gap-4 pt-2 pb-2">
+                                <div class="p-3 border border-borderColor rounded bg-bgLight">
+                                    <p class="font-bold text-primary text-xs md:text-sm">Ambil di Tempat</p>
+                                    <p class="text-xs text-textMuted mt-1">Showroom Malang (Gratis)</p>
+                                </div>
+                                <div class="p-3 border border-borderColor rounded bg-bgLight">
+                                    <p class="font-bold text-primary text-xs md:text-sm">Pengiriman Kargo</p>
+                                    <p class="text-xs text-textMuted mt-1">Seluruh Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Section (Card Grid Style) -->
+        <section class="mt-16 md:mt-24">
+            <div class="flex justify-between items-center mb-6 bg-white p-3.5 border-b-2 border-primary rounded-t shadow-sm">
+                <div class="text-sm md:text-lg font-bold text-primary uppercase tracking-wide">Produk Rekomendasi</div>
+                <a href="#" class="text-secondary no-underline text-xs md:text-sm font-medium hover:opacity-85 transition">Lihat Koleksi →</a>
+            </div>
+            
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
+                <!-- Card 1 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpsSdy3EaWcDITRObXH_cxhBUk_TvGRASxpuzJO44Exjn64GQsgpKa79-A2Dd4K346TH_tOo3Qh5d9OiXZBemMyBnDMSJL7lBmP6FtM37z1qKKt12grUXWlva_vpexKXfuzt4k77EsKTPracQqVgjLKNyqWbz-vw8Kn_P-OfVN2h_-ukGVWB01g3vW4yHBLloHLWImF8SlmkOVBK5HSYiE-w9Kqb_d6DtI3Lispph7P5Nb1ZRkFRjR5dpECYHGWuTJDo44AKasvAM" alt="Oakland Table">
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Oakland Solid Oak Dining Table Industrial Steel</h3>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 4.500.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Populer</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 4.9 | Terjual 30+</span>
+                            <span>Kota Jkt</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8dvOGbTxsrsugxscNDSb-OCsqXXEgqmYKNprLCTjNCLszmQi0Jq1I22nEwQpWAxrfI23luWi_mC6lSbdysApFoOy6Fg72YVajMh64fwPK7TWquEjZc6UXxw_I3pDFKxExka0Qrj9ZdZUNnBjgyLUlfkSX8fT-X1Gug_Snw_clKHaDt0f85zBrt5GjCcxrHzRbpKdkJ8-4xn66JqqUSebtnTshP-qeMmYq7VTQizy99KVB4zmQDpFN2AmoKOPSxnkdNpGvbFvLzQI" alt="Pendant Lamp">
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Industrial Brushed Metal Pendant Studio Lamp</h3>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 650.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Aksen</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 4.8 | Terjual 100+</span>
+                            <span>Kota Jkt</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRYNqoAGAPRCTLmXSnydSt4cHRTNHpJ7KsBgcEo7Tklc4gcxOTnQ4nbwA_BzyUuYuuvcH_uRt6vzb_2s8MGLz2BzdAq84Cxodcy_gNqJcnFhRo6erXiQbdmwwL1beun_MzlTZUd8otMXYjO3vQwdQKBlzx0Lz0fmuxYtTATnmWZTqyw440da4e7ndRyFQaZDlCQpKq3oGe15or0J6DgJwR9cInMG4NA1w-VIkNcEuyPPp-dW74aeLwhm9slvfxs9XpCLaYwvfra9U" alt="Grey Rug">
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Scandi Woven Textured Grey Wool Area Rug</h3>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.100.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Baru</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 5.0 | Terjual 15+</span>
+                            <span>Kota Jkt</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcJjEfxYJeN2E61GQlu9SJ18Kwu6IIw9VXxtK3Lecy8cSzFaEvgjPQg0QA2ihzvt-MpU96Vc6GDabZWwT3MCo0kn6UA898VdvaTe8LMhslId9Tmuj3hpMIt2yHkc1GT0o9sXflNUF6DV8rWkaGTSgmIDXaG0O44Wha7vfMvwijCbvsdpBiKu67j3Fi9fCMmpX8DYkbOonaPbKlXyCS7U2J054LKOBmW8f7i4taO-FnVQNpCZIacK5a5sxTfcsSRMXk5fBGMghwwlM" alt="Studio Shelf">
+                    </div>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Nordic Studio Shelf Oak Wood Black Steel Frame</h3>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 2.100.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Premium</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 4.9 | Terjual 40+</span>
+                            <span>Kota Jkt</span>
+                        </div>
+                    </div>
+                </a>
+            </a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t-4 border-primary pt-10 pb-5 mt-12 text-sm text-[#4a4a4a]">
+        <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Layanan Pelanggan</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Bantuan & Kontak</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Metode Pembayaran</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Lacak Pengiriman</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Tentang Melody</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Tentang Kami</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Sertifikasi Pabrik</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Metode Pembayaran</h4>
+                <div class="flex flex-wrap gap-2.5 mt-2.5">
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/american.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bca.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bni.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/cimb-niaga.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/gopay.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/jcb.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/kredivo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mandiri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mastercard.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/ovo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/permata.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/visa.webp" alt=""></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Lokasi & Kontak</h4>
+                <p class="text-xs text-textMuted mb-2.5">
+                    <strong>PT. Melody Furniture Indonesia</strong><br>
+                    Jl. Industri Raya No. 12, Kawasan Industri, Jakarta, Indonesia.
+                </p>
+                <div class="w-full h-32 bg-tertiary-container rounded-lg overflow-hidden relative group cursor-pointer border border-tertiary-fixed/10">
+                    <img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" data-alt="A highly stylized, minimalist map showing the location of Jakarta in a premium, dark-mode aesthetic. The map uses subtle, monochromatic tones (deep charcoals and muted greys) with a single, elegant warm-oak colored pin marking the showroom location. The style is abstract and sophisticated, fitting a high-end brand footer." data-location="Jakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOBXzFJ42OrYBBgsqZJdhgFFZSz4n0kaM01t6Ug3agOXWBVnJ-oZ3TXSz351AXQJ7Lx0t6ZmqxvqMJq2M9ZgKIlUWPAv8VjHk1gOHo4-GnkuWaFUGeCVY8En4ibUcCp-U73g-lx9xwNduXAYFAz0toqCyKU-XWv__ok19B1q1KqlmjHCPXBaq1RhGqDPtz1LAhfUy-wTdGCCC5FLRLvsS2Mpau_g499qHCS-36mRePnhahYZgj-lsYgwAPTHO58KVnHAu7oTUUAIg"/>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="font-label-sm text-label-sm text-tertiary-fixed bg-tertiary/80 backdrop-blur-sm px-3 py-1 rounded-full group-hover:bg-warm-oak transition-colors">Lihat Peta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-borderColor pt-5 text-center text-textMuted text-xs">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <p>© 2026 Melody Furniture. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- REVISI: Elemen HTML untuk Modal Mode Fokus (Lightbox) -->
+    <div id="imageLightbox" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <button id="closeLightbox" class="absolute top-4 right-4 text-white hover:text-secondary transition-colors bg-black/40 hover:bg-black/60 p-2 rounded-full flex items-center justify-center z-50 focus:outline-none" aria-label="Tutup Mode Fokus">
+            <span class="material-symbols-outlined !text-3xl md:!text-4xl">close</span>
+        </button>
+        <div class="max-w-4xl max-h-[85vh] w-full h-full flex items-center justify-center select-none">
+            <img id="lightboxImage" src="" alt="Mode Fokus Produk" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+        </div>
+    </div>
+
+    <!-- REVISI BARU: Floating Chat Widget Berdasarkan Mockup image_210ad4.png -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-['Inter']">
+        <!-- Kotak Chat Panel -->
+        <div id="chatWindow" class="hidden w-[330px] sm:w-[360px] h-[480px] bg-[#F8F9FA] rounded-2xl shadow-2xl border border-borderColor flex flex-col overflow-hidden mb-4 transition-all duration-300 transform translate-y-4 opacity-0">
+            
+            <!-- Header Chat (Sesuai Desain Ungu/Biru Admin Yukti) -->
+            <div class="bg-primary text-white p-4 flex items-center justify-between shadow-sm relative">
+                <div class="flex items-center space-x-3">
+                    <!-- Avatar dengan Checkmark & Status Hijau -->
+                    <div class="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10 shrink-0">
+                        <span class="material-symbols-outlined text-white !text-2xl">account_circle</span>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#4E46E5] rounded-full"></span>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <span class="font-bold text-sm tracking-wide">Admin Melody Furniture</span>
+                            <span class="material-symbols-outlined !text-xs text-blue-200" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                        <p class="text-[11px] text-white/80 font-light">Online & Siap Membantu</p>
+                    </div>
+                </div>
+                <!-- Tombol X di Header -->
+                <button id="closeChatHeader" class="text-white/70 hover:text-white transition focus:outline-none">
+                    <span class="material-symbols-outlined !text-xl">close</span>
+                </button>
+            </div>
+
+            <!-- Area Isi Chat / Pesan -->
+            <div id="chatBody" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col text-xs sm:text-sm">
+                <!-- Bubble Default Pertama (Sesuai Gambar Masukan) -->
+                <div class="flex flex-col items-start max-w-[85%] space-y-1 shrink-0">
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-textDark border border-borderColor/60 leading-relaxed">
+                        Halo! 👋 Ada yang bisa kami bantu? Silakan pilih salah satu opsi di bawah ini untuk respon kilat dari sistem kami.
+                    </div>
+                    <span class="text-[10px] text-textMuted ml-1">Baru saja</span>
+                </div>
+
+                <!-- Wadah Tempat Pesan Dinamis Akan Ditambahkan -->
+                <div id="dynamicMessages" class="space-y-3 flex flex-col"></div>
+
+                <!-- Indikator Sedang Mengetik (Hidden secara default) -->
+                <div id="typingIndicator" class="hidden flex flex-col items-start max-w-[85%] space-y-1">
+                    <div class="bg-white px-3 py-2 rounded-2xl rounded-tl-none shadow-sm text-textMuted border border-borderColor/60 flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                    </div>
+                </div>
+
+                <!-- 5 Pilihan Template Pertanyaan -->
+                <div id="chatTemplates" class="space-y-1.5 pt-2 shrink-0">
+                    <p class="text-[11px] font-semibold text-textMuted uppercase tracking-wider mb-1">Pilih Pertanyaan:</p>
+                    <button onclick="triggerTemplateChat(1, '📦 Apakah kursi Nordic Oak ready stok?', 'Tentu saja! Kursi Nordic Oak Chair saat ini berstatus ready siap kirim dari gudang kami. Silakan klik tombol \'Beli Sekarang\' untuk langsung memesan sebelum kehabisan kuota diskon bulanan!')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        📦 Apakah kursi Nordic Oak ready stok?
+                    </button>
+                    <button onclick="triggerTemplateChat(2, '🚚 Berapa ongkos kirim ke kota saya?', 'Untuk wilayah Malang Kota, pengiriman gratis atau bisa ambil langsung di showroom kami. Di luar itu, kami bekerja sama dengan kargo terpercaya untuk memastikan tarif termurah yang akan dihitung otomatis saat pengisian checkout.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🚚 Berapa ongkos kirim ke kota saya?
+                    </button>
+                    <button onclick="triggerTemplateChat(3, '🛡️ Apakah ada jaminan garansi produk?', 'Setiap pembelian produk premium di Melody Furniture dilengkapi garansi konstruksi & rangka kayu selama 1 tahun penuh. Kepuasan serta rasa aman Anda adalah prioritas utama kami.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🛡️ Apakah ada jaminan garansi produk?
+                    </button>
+                    <button onclick="triggerTemplateChat(4, '🔧 Bagaimana sistem perakitan kursinya?', 'Sangat mudah! Kursi ini dikirim dengan modul semi-knockdown yang presisi. Di dalam paket sudah tersedia kunci L dan buku panduan lengkap. Anda juga bisa menonton video panduan praktis yang disematkan di halaman produk ini.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🔧 Bagaimana sistem perakitan kursinya?
+                    </button>
+                    <button onclick="triggerTemplateChat(5, '🎨 Bisa kustomisasi warna kain atau kayu?', 'Untuk koleksi mass-production seperti ini, warna kayu oak natural dan stainless steel adalah standar paten terbaik kami. Namun jika Anda membutuhkan kuantitas proyek besar (min. 10 pcs), opsi kustomisasi warna khusus dapat dibuka.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🎨 Bisa kustomisasi warna kain atau kayu?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Chat / Input Lapisan Bawah (Sesuai image_210ad4.png) -->
+            <!-- <div class="bg-white p-3 border-t border-borderColor flex items-center space-x-2">
+                <input id="chatInput" type="text" placeholder="Ketik pesan disini..." class="flex-1 bg-gray-100 text-xs sm:text-sm px-4 py-2.5 rounded-full focus:outline-none text-textDark border border-transparent focus:border-gray-300">
+                <button id="sendChatBtn" class="w-9 h-9 rounded-full bg-gray-100 text-textMuted hover:bg-[#4E46E5] hover:text-white transition flex items-center justify-center shrink-0 focus:outline-none">
+                    <span class="material-symbols-outlined !text-lg">send</span>
+                </button>
+            </div> -->
+        </div>
+
+        <!-- Tombol Utama Balon Mengambang (Sesuai Bulatan Gelap Berisi Silang/Pesan di Kanan Bawah) -->
+        <button id="chatToggleBtn" class="w-14 h-14 bg-[#2C3E50] text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-opacity-95 transition transform hover:scale-105 active:scale-95 focus:outline-none" aria-label="Buka Obrolan">
+            <span id="chatToggleIcon" class="material-symbols-outlined !text-2xl">chat</span>
+        </button>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Logika Accordion Independen
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            item.classList.toggle("active");
+        }
+
+        // Efek mikro-interaksi tombol umum
+        document.querySelectorAll("button").forEach((btn) => {
+            btn.addEventListener("mousedown", () => btn.classList.add("scale-[0.98]"));
+            btn.addEventListener("mouseup", () => btn.classList.remove("scale-[0.98]"));
+            btn.addEventListener("mouseleave", () => btn.classList.remove("scale-[0.98]"));
+        });
+
+        // Logika Interaksi Mode Fokus (Lightbox) Gambar Utama
+        const mainImageContainer = document.getElementById('mainImageContainer');
+        const mainProductImage = document.getElementById('mainProductImage');
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const closeLightbox = document.getElementById('closeLightbox');
+
+        mainImageContainer.addEventListener('click', () => {
+            lightboxImage.src = mainProductImage.src;
+            imageLightbox.classList.remove('hidden');
+            setTimeout(() => {
+                imageLightbox.classList.add('opacity-100');
+                lightboxImage.classList.remove('scale-95');
+                lightboxImage.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeFocusMode() {
+            imageLightbox.classList.remove('opacity-100');
+            lightboxImage.classList.remove('scale-100');
+            lightboxImage.classList.add('scale-95');
+            setTimeout(() => {
+                imageLightbox.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        closeLightbox.addEventListener('click', closeFocusMode);
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox || e.target.parentElement === imageLightbox) {
+                closeFocusMode();
+            }
+        });
+
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        thumbnails.forEach(thumb => {
+            thumb.parentElement.addEventListener('click', () => {
+                mainProductImage.src = thumb.src;
+                thumbnails.forEach(t => t.parentElement.classList.replace('border-primary', 'border-transparent'));
+                thumb.parentElement.classList.replace('border-transparent', 'border-primary');
+            });
+        });
+
+        // ==========================================
+        // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
+        // ==========================================
+        const chatWindow = document.getElementById('chatWindow');
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const chatToggleIcon = document.getElementById('chatToggleIcon');
+        const closeChatHeader = document.getElementById('closeChatHeader');
+        const chatBody = document.getElementById('chatBody');
+        const dynamicMessages = document.getElementById('dynamicMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatTemplates = document.getElementById('chatTemplates');
+
+        // Toggle Buka/Tutup Jendela Chat
+        function toggleChatPanel() {
+            const isHidden = chatWindow.classList.contains('hidden');
+            if (isHidden) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWindow.classList.replace('opacity-0', 'opacity-100');
+                    chatWindow.classList.replace('translate-y-4', 'translate-y-0');
+                }, 10);
+                chatToggleIcon.innerText = 'close'; // Ubah balon menjadi icon silang (X) sesuai mockup
+            } else {
+                chatWindow.classList.replace('opacity-100', 'opacity-0');
+                chatWindow.classList.replace('translate-y-0', 'translate-y-4');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+                chatToggleIcon.innerText = 'chat'; // Kembalikan ke icon chat biasa
+            }
+        }
+
+        chatToggleBtn.addEventListener('click', toggleChatPanel);
+        closeChatHeader.addEventListener('click', toggleChatPanel);
+
+        // Fungsi Memproses Template Klik Otomatis
+        function triggerTemplateChat(id, userQuestion, systemAnswer) {
+            // 1. Tambah Pesan User ke Layar Obrolan
+            appendMessage(userQuestion, 'user');
+            
+            // Sembunyikan daftar template pilihan sementara agar obrolan rapi
+            chatTemplates.classList.add('hidden');
+
+            // 2. Munculkan Animasi Mengetik Sistem
+            showTyping(true);
+            scrollToBottom();
+
+            // 3. Keluarkan Jawaban Sistem Setelah Delay 1 Detik
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage(systemAnswer, 'system');
+                
+                // Tampilkan kembali daftar template di bagian paling bawah
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                
+                scrollToBottom();
+            }, 1000);
+        }
+
+        // Fungsi Memasukkan Bubble Chat baru ke DOM
+        function appendMessage(text, sender) {
+            const msgWrapper = document.createElement('div');
+            msgWrapper.className = `flex flex-col space-y-1 max-w-[85%] ${sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`;
+
+            const bubble = document.createElement('div');
+            if (sender === 'user') {
+                bubble.className = "bg-[#4E46E5] text-white p-3 rounded-2xl rounded-tr-none shadow-sm leading-relaxed";
+            } else {
+                bubble.className = "bg-white text-textDark p-3 rounded-2xl rounded-tl-none shadow-sm border border-borderColor/60 leading-relaxed";
+            }
+            bubble.innerText = text;
+
+            const timestamp = document.createElement('span');
+            timestamp.className = "text-[10px] text-textMuted px-1";
+            timestamp.innerText = "Baru saja";
+
+            msgWrapper.appendChild(bubble);
+            msgWrapper.appendChild(timestamp);
+            dynamicMessages.appendChild(msgWrapper);
+            
+            scrollToBottom();
+        }
+
+        // Kontrol Indikator Mengetik
+        function showTyping(visible) {
+            if (visible) {
+                typingIndicator.classList.remove('hidden');
+                // Selalu pindahkan posisi mengetik ke paling bawah sebelum muncul
+                chatBody.appendChild(typingIndicator);
+            } else {
+                typingIndicator.classList.add('hidden');
+            }
+        }
+
+        // Otomatis Gulir Chat Ke Bawah
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Fitur Pelengkap: Izinkan User Mengirim Pesan Manual Lewat Input Lapisan Bawah
+        function handleManualSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            chatTemplates.classList.add('hidden');
+
+            showTyping(true);
+            scrollToBottom();
+
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage("Terima kasih telah menghubungi kami! Pesan Anda telah kami simpan dalam antrean sistem. Admin fisik kami akan memvalidasi pesan Anda segera.", 'system');
+                
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                scrollToBottom();
+            }, 1200);
+        }
+
+        sendChatBtn.addEventListener('click', handleManualSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleManualSend();
+        });
+    </script>
+</body>
+</html>

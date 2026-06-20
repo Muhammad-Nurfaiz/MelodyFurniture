@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Order Tracking | Melody Furniture</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // Token Warna Navigasi & Footer Utama (Sesuai detail_produk.html)
+                        primary: '#1A458B',   
+                        secondary: '#E14D2A', 
+                        bgLight: '#F8F9FA',
+                        textDark: '#212529',
+                        textMuted: '#6C757D',
+                        borderColor: '#E9ECEF',
+
+                        // Token Warna Internal Halaman Utama Konten
+                        "surface-dim": "#ccdbf4",
+                        "surface-tint": "#465e8e",
+                        "on-primary": "#ffffff",
+                        "brand-blue-dark": "#0A1E3D",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-tertiary-fixed": "#301400",
+                        "on-secondary-container": "#591d00",
+                        "outline": "#747780",
+                        "border-subtle": "#E2E8F0",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-fixed": "#ffdcc6",
+                        "surface-bright": "#f8f9ff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#4b2200",
+                        "primary-container": "#0f2c59",
+                        "surface-container-high": "#dde9ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#233144",
+                        "on-primary-fixed": "#001a41",
+                        "inverse-primary": "#aec7fd",
+                        "secondary-container": "#fd6c22",
+                        "primary-fixed-dim": "#aec7fd",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#ffdbcd",
+                        "on-surface": "#0d1c2f",
+                        "background": "#f8f9ff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-tertiary-container": "#c5875a",
+                        "tertiary": "#2c1100",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c4c6d0",
+                        "on-background": "#0d1c2f",
+                        "bg-main": "#FFFFFF",
+                        "bg-alt": "#F8FAFC",
+                        "surface-variant": "#d5e3fd",
+                        "secondary-fixed-dim": "#ffb597",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface-variant": "#44474f",
+                        "on-secondary-fixed": "#360f00",
+                        "on-primary-container": "#7c94c8",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "surface-container": "#e6eeff",
+                        "surface": "#f8f9ff",
+                        "surface-container-highest": "#d5e3fd",
+                        "on-secondary": "#ffffff"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #F8FAFC; 
+        }
+        h1, h2, h3, h4 { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .tracking-timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            bottom: -24px;
+            width: 2px;
+            background-color: #E2E8F0;
+        }
+        .tracking-timeline-item.active:not(:last-child)::after {
+            background: linear-gradient(to bottom, #1A458B, #E2E8F0);
+        }
+        .minimal-shadow {
+            box-shadow: 0 4px 12px -2px rgba(15, 44, 89, 0.08);
+        }
+    </style>
+</head>
+<body class="text-on-background antialiased min-h-screen flex flex-col">
+
+    <header id="mainHeader" class="bg-white border-b border-borderColor sticky top-0 z-50 shadow-sm">
+        <div class="hidden md:block bg-primary text-white text-xs py-2">
+            <div class="max-w-[1280px] mx-auto px-6 flex justify-between">
+                <div>Melody Furniture Resmi - Standar Internasional</div>
+                <div>Lacak Pesanan | Hubungi Kami | Pengiriman Seluruh Indonesia</div>
+            </div>
+        </div>
+        
+        <div class="max-w-[1280px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
+            <a href="../index.html" class="shrink-0">
+                <img src="../assets/img/download.png" alt="logo" class="w-36 md:w-44 h-auto">
+            </a>
+            
+            <div class="hidden md:flex flex-1 mx-12">
+                <input type="text" placeholder="Cari furnitur impian Anda di katalog..." class="w-full px-4 py-2 border-2 border-primary rounded-l focus:outline-none text-sm font-medium">
+                <button class="bg-primary text-white px-6 rounded-r hover:bg-opacity-90 transition text-sm font-semibold tracking-wide">Cari</button>
+            </div>
+
+            <div class="flex items-center gap-4 shrink-0">
+                <a href="cart.html" class="relative p-2 text-textDark hover:text-primary transition-colors group" aria-label="Keranjang Belanja">
+                    <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold leading-none text-white bg-secondary rounded-full transform translate-x-1 -translate-y-0.5 min-w-[18px]">
+                        2
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12 px-4 md:px-6 max-w-[1280px] mx-auto w-full">
+        <div class="w-full">
+            
+            <div class="bg-white border border-border-subtle rounded-xl p-6 md:p-8 mb-6 minimal-shadow">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-primary tracking-tight mb-2">Track Your Order</h1>
+                        <p class="text-xs md:text-sm font-medium text-on-surface-variant flex items-center gap-2">
+                            Order ID: <span class="text-primary font-bold">#ORD-2024-8892</span>
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3 md:justify-end">
+                        <span class="bg-secondary-container text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide">
+                            On the way
+                        </span>
+                        <p class="text-xs md:text-sm font-medium text-on-surface-variant">Estimated Delivery: <span class="font-bold text-primary">Oct 24, 2024</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <div class="lg:col-span-8 bg-white border border-border-subtle rounded-xl p-6 md:p-8 minimal-shadow">
+                    <div class="mb-10 p-5 md:p-6 bg-surface-container-low rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <p class="text-xs font-semibold text-on-surface-variant mb-0.5">Airway Bill Number (AWB)</p>
+                            <p class="text-lg md:text-xl font-bold text-primary-container tracking-wide">SCP-8839-2011</p>
+                        </div>
+                        <button class="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-lg text-xs md:text-sm font-bold hover:bg-opacity-90 transition shadow-sm shrink-0" onclick="copyAWB(event)">
+                            <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                            Copy AWB
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-12 pl-2">
+                        <div class="relative flex gap-6 tracking-timeline-item active">
+                            <div class="z-10 w-10 h-10 rounded-full bg-primary-container text-white flex items-center justify-center shadow-md shrink-0">
+                                <span class="material-symbols-outlined text-xl">local_shipping</span>
+                            </div>
+                            <div class="flex-grow pb-2">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                    <h3 class="text-base md:text-lg font-bold text-primary">Shipped</h3>
+                                    <span class="text-xs font-medium text-on-surface-variant">Oct 21, 14:30</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-on-surface-variant font-medium mt-1 leading-relaxed">Package is in transit. Currently at Distribution Center, Tangerang.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex gap-6 tracking-timeline-item">
+                            <div class="z-10 w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center border border-border-subtle bg-white shrink-0">
+                                <span class="material-symbols-outlined text-xl">package_2</span>
+                            </div>
+                            <div class="flex-grow pb-2">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                    <h3 class="text-base md:text-lg font-bold text-on-surface-variant">Packed & Ready</h3>
+                                    <span class="text-xs font-medium text-on-surface-variant">Oct 20, 09:15</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-on-surface-variant font-medium mt-1 leading-relaxed">Order has been packed and is waiting for courier pickup.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex gap-6 tracking-timeline-item">
+                            <div class="z-10 w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center border border-border-subtle bg-white shrink-0">
+                                <span class="material-symbols-outlined text-xl">inventory</span>
+                            </div>
+                            <div class="flex-grow pb-2">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                    <h3 class="text-base md:text-lg font-bold text-on-surface-variant">Order Processed</h3>
+                                    <span class="text-xs font-medium text-on-surface-variant">Oct 19, 11:45</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-on-surface-variant font-medium mt-1 leading-relaxed">We have received your order and are preparing the items.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative flex gap-6 tracking-timeline-item">
+                            <div class="z-10 w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center border border-border-subtle bg-white shrink-0">
+                                <span class="material-symbols-outlined text-xl">check_circle</span>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                                    <h3 class="text-base md:text-lg font-bold text-on-surface-variant">Payment Confirmed</h3>
+                                    <span class="text-xs font-medium text-on-surface-variant">Oct 19, 11:30</span>
+                                </div>
+                                <p class="text-xs md:text-sm text-on-surface-variant font-medium mt-1 leading-relaxed">Payment successfully verified via Credit Card.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <aside class="lg:col-span-4 space-y-6 w-full">
+                    <div class="bg-white border border-border-subtle rounded-xl overflow-hidden minimal-shadow">
+                        <div class="p-6">
+                            <h2 class="text-base md:text-lg font-bold text-primary mb-6">Order Summary</h2>
+                            <div class="flex gap-4 mb-6 pb-6 border-b border-border-subtle items-center">
+                                <img alt="Nordic Oak Chair" class="w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg bg-surface-container-low border border-border-subtle shrink-0" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg"/>
+                                <div class="flex flex-col justify-center">
+                                    <h4 class="text-sm md:text-base font-bold text-primary mb-0.5">Nordic Oak Chair</h4>
+                                    <p class="text-xs font-medium text-on-surface-variant">Natural Ash / Wool Blend</p>
+                                    <p class="text-xs font-bold text-on-surface-variant mt-1">Qty: 1</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-xs md:text-sm font-medium">
+                                <div class="flex justify-between">
+                                    <span class="text-on-surface-variant">Subtotal</span>
+                                    <span class="font-bold text-primary">Rp 1.250.000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-on-surface-variant">Shipping</span>
+                                    <span class="font-bold text-primary">Free</span>
+                                </div>
+                                <div class="flex justify-between pt-3 border-t border-border-subtle items-center">
+                                    <span class="font-bold text-primary text-sm md:text-base">Total Paid</span>
+                                    <span class="text-lg md:text-xl font-bold text-secondary">Rp 1.250.000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-primary-container text-white rounded-xl p-6 md:p-8 relative overflow-hidden shadow-sm">
+                        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+                        <h2 class="text-base md:text-lg font-bold mb-2">Need Help?</h2>
+                        <p class="text-xs md:text-sm text-white/70 mb-6 font-medium leading-relaxed">If you have any questions regarding your delivery, our team is here for you.</p>
+                        <div class="space-y-3 relative z-10">
+                            <a class="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/20 transition rounded-lg group text-xs md:text-sm font-bold" href="#">
+                                <span class="material-symbols-outlined text-white text-xl">support_agent</span>
+                                <span>Customer Support</span>
+                                <span class="material-symbols-outlined ml-auto text-[18px] opacity-0 group-hover:opacity-100 transition">arrow_forward</span>
+                            </a>
+                            <a class="flex items-center gap-3 p-4 bg-white/10 hover:bg-white/20 transition rounded-lg group text-xs md:text-sm font-bold" href="#">
+                                <span class="material-symbols-outlined text-white text-xl">help</span>
+                                <span>FAQs & Shipping Policy</span>
+                                <span class="material-symbols-outlined ml-auto text-[18px] opacity-0 group-hover:opacity-100 transition">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t-4 border-primary pt-10 pb-5 mt-12 text-sm text-[#4a4a4a]">
+        <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Layanan Pelanggan</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Bantuan & Kontak</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Metode Pembayaran</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Lacak Pengiriman</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Tentang Melody</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Tentang Kami</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Sertifikasi Pabrik</a></li>
+                    <li><a href="#" class="text-textMuted hover:text-secondary transition">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Metode Pembayaran</h4>
+                <div class="flex flex-wrap gap-2.5 mt-2.5">
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/american.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bca.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bni.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/bri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/cimb-niaga.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/gopay.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/jcb.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/kredivo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mandiri.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/mastercard.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/ovo.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/permata.webp" alt=""></div>
+                    <div class="w-[60px] h-[30px] bg-[#F0F0F0] rounded flex items-center justify-center text-[9px] font-bold text-[#999]"><img src="../assets/img/visa.webp" alt=""></div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-textDark font-bold uppercase mb-4 text-xs tracking-wider">Lokasi & Kontak</h4>
+                <p class="text-xs text-textMuted mb-2.5">
+                    <strong>PT. Melody Furniture Indonesia</strong><br>
+                    Jl. Industri Raya No. 12, Kawasan Industri, Jakarta, Indonesia.
+                </p>
+                <div class="w-full h-32 bg-tertiary-container rounded-lg overflow-hidden relative group cursor-pointer border border-tertiary-fixed/10">
+                    <img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-300" data-alt="A highly stylized, minimalist map showing the location of Jakarta in a premium, dark-mode aesthetic. The map uses subtle, monochromatic tones (deep charcoals and muted greys) with a single, elegant warm-oak colored pin marking the showroom location. The style is abstract and sophisticated, fitting a high-end brand footer." data-location="Jakarta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOBXzFJ42OrYBBgsqZJdhgFFZSz4n0kaM01t6Ug3agOXWBVnJ-oZ3TXSz351AXQJ7Lx0t6ZmqxvqMJq2M9ZgKIlUWPAv8VjHk1gOHo4-GnkuWaFUGeCVY8En4ibUcCp-U73g-lx9xwNduXAYFAz0toqCyKU-XWv__ok19B1q1KqlmjHCPXBaq1RhGqDPtz1LAhfUy-wTdGCCC5FLRLvsS2Mpau_g499qHCS-36mRePnhahYZgj-lsYgwAPTHO58KVnHAu7oTUUAIg"/>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="font-label-sm text-label-sm text-tertiary-fixed bg-tertiary/80 backdrop-blur-sm px-3 py-1 rounded-full group-hover:bg-warm-oak transition-colors">Lihat Peta</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-borderColor pt-5 text-center text-textMuted text-xs">
+            <div class="max-w-[1200px] mx-auto px-4">
+                <p>&copy; 2026 Melody Furniture. Seluruh Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-['Inter']">
+        <!-- Kotak Chat Panel -->
+        <div id="chatWindow" class="hidden w-[330px] sm:w-[360px] h-[480px] bg-[#F8F9FA] rounded-2xl shadow-2xl border border-borderColor flex flex-col overflow-hidden mb-4 transition-all duration-300 transform translate-y-4 opacity-0">
+            
+            <!-- Header Chat (Sesuai Desain Ungu/Biru Admin Yukti) -->
+            <div class="bg-primary text-white p-4 flex items-center justify-between shadow-sm relative">
+                <div class="flex items-center space-x-3">
+                    <!-- Avatar dengan Checkmark & Status Hijau -->
+                    <div class="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/10 shrink-0">
+                        <span class="material-symbols-outlined text-white !text-2xl">account_circle</span>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-[#4E46E5] rounded-full"></span>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-1">
+                            <span class="font-bold text-sm tracking-wide">Admin Melody Furniture</span>
+                            <span class="material-symbols-outlined !text-xs text-blue-200" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        </div>
+                        <p class="text-[11px] text-white/80 font-light">Online & Siap Membantu</p>
+                    </div>
+                </div>
+                <!-- Tombol X di Header -->
+                <button id="closeChatHeader" class="text-white/70 hover:text-white transition focus:outline-none">
+                    <span class="material-symbols-outlined !text-xl">close</span>
+                </button>
+            </div>
+
+            <!-- Area Isi Chat / Pesan -->
+            <div id="chatBody" class="flex-1 p-4 overflow-y-auto space-y-3 flex flex-col text-xs sm:text-sm">
+                <!-- Bubble Default Pertama (Sesuai Gambar Masukan) -->
+                <div class="flex flex-col items-start max-w-[85%] space-y-1 shrink-0">
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm text-textDark border border-borderColor/60 leading-relaxed">
+                        Halo! 👋 Ada yang bisa kami bantu? Silakan pilih salah satu opsi di bawah ini untuk respon kilat dari sistem kami.
+                    </div>
+                    <span class="text-[10px] text-textMuted ml-1">Baru saja</span>
+                </div>
+
+                <!-- Wadah Tempat Pesan Dinamis Akan Ditambahkan -->
+                <div id="dynamicMessages" class="space-y-3 flex flex-col"></div>
+
+                <!-- Indikator Sedang Mengetik (Hidden secara default) -->
+                <div id="typingIndicator" class="hidden flex flex-col items-start max-w-[85%] space-y-1">
+                    <div class="bg-white px-3 py-2 rounded-2xl rounded-tl-none shadow-sm text-textMuted border border-borderColor/60 flex items-center space-x-1">
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 0ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 150ms"></span>
+                        <span class="w-1.5 h-1.5 bg-textMuted/60 rounded-full animate-bounce" style="animation-delay: 300ms"></span>
+                    </div>
+                </div>
+
+                <!-- 5 Pilihan Template Pertanyaan -->
+                <div id="chatTemplates" class="space-y-1.5 pt-2 shrink-0">
+                    <p class="text-[11px] font-semibold text-textMuted uppercase tracking-wider mb-1">Pilih Pertanyaan:</p>
+                    <button onclick="triggerTemplateChat(1, '📦 Apakah kursi Nordic Oak ready stok?', 'Tentu saja! Kursi Nordic Oak Chair saat ini berstatus ready siap kirim dari gudang kami. Silakan klik tombol \'Beli Sekarang\' untuk langsung memesan sebelum kehabisan kuota diskon bulanan!')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        📦 Apakah kursi Nordic Oak ready stok?
+                    </button>
+                    <button onclick="triggerTemplateChat(2, '🚚 Berapa ongkos kirim ke kota saya?', 'Untuk wilayah Malang Kota, pengiriman gratis atau bisa ambil langsung di showroom kami. Di luar itu, kami bekerja sama dengan kargo terpercaya untuk memastikan tarif termurah yang akan dihitung otomatis saat pengisian checkout.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🚚 Berapa ongkos kirim ke kota saya?
+                    </button>
+                    <button onclick="triggerTemplateChat(3, '🛡️ Apakah ada jaminan garansi produk?', 'Setiap pembelian produk premium di Melody Furniture dilengkapi garansi konstruksi & rangka kayu selama 1 tahun penuh. Kepuasan serta rasa aman Anda adalah prioritas utama kami.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🛡️ Apakah ada jaminan garansi produk?
+                    </button>
+                    <button onclick="triggerTemplateChat(4, '🔧 Bagaimana sistem perakitan kursinya?', 'Sangat mudah! Kursi ini dikirim dengan modul semi-knockdown yang presisi. Di dalam paket sudah tersedia kunci L dan buku panduan lengkap. Anda juga bisa menonton video panduan praktis yang disematkan di halaman produk ini.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🔧 Bagaimana sistem perakitan kursinya?
+                    </button>
+                    <button onclick="triggerTemplateChat(5, '🎨 Bisa kustomisasi warna kain atau kayu?', 'Untuk koleksi mass-production seperti ini, warna kayu oak natural dan stainless steel adalah standar paten terbaik kami. Namun jika Anda membutuhkan kuantitas proyek besar (min. 10 pcs), opsi kustomisasi warna khusus dapat dibuka.')" class="w-full text-left bg-white border border-borderColor hover:border-primary hover:text-primary px-3 py-2 rounded-xl text-[11px] sm:text-xs font-medium shadow-sm transition active:scale-[0.99]">
+                        🎨 Bisa kustomisasi warna kain atau kayu?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer Chat / Input Lapisan Bawah (Sesuai image_210ad4.png) -->
+            <!-- <div class="bg-white p-3 border-t border-borderColor flex items-center space-x-2">
+                <input id="chatInput" type="text" placeholder="Ketik pesan disini..." class="flex-1 bg-gray-100 text-xs sm:text-sm px-4 py-2.5 rounded-full focus:outline-none text-textDark border border-transparent focus:border-gray-300">
+                <button id="sendChatBtn" class="w-9 h-9 rounded-full bg-gray-100 text-textMuted hover:bg-[#4E46E5] hover:text-white transition flex items-center justify-center shrink-0 focus:outline-none">
+                    <span class="material-symbols-outlined !text-lg">send</span>
+                </button>
+            </div> -->
+        </div>
+
+        <!-- Tombol Utama Balon Mengambang (Sesuai Bulatan Gelap Berisi Silang/Pesan di Kanan Bawah) -->
+        <button id="chatToggleBtn" class="w-14 h-14 bg-[#2C3E50] text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-opacity-95 transition transform hover:scale-105 active:scale-95 focus:outline-none" aria-label="Buka Obrolan">
+            <span id="chatToggleIcon" class="material-symbols-outlined !text-2xl">chat</span>
+        </button>
+    </div>
+
+    <script>
+        function copyAWB(event) {
+            const awbText = "SCP-8839-2011";
+            navigator.clipboard.writeText(awbText).then(() => {
+                const btn = event.currentTarget;
+                const originalContent = btn.innerHTML;
+                
+                // Mengubah UI tombol sementara waktu setelah disalin
+                btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Copied!';
+                btn.classList.add('bg-secondary-container');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.classList.remove('bg-secondary-container');
+                }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin nomor resi AWB: ', err);
+            });
+        }
+
+        // ==========================================
+        // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
+        // ==========================================
+        const chatWindow = document.getElementById('chatWindow');
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const chatToggleIcon = document.getElementById('chatToggleIcon');
+        const closeChatHeader = document.getElementById('closeChatHeader');
+        const chatBody = document.getElementById('chatBody');
+        const dynamicMessages = document.getElementById('dynamicMessages');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        const chatTemplates = document.getElementById('chatTemplates');
+
+        // Toggle Buka/Tutup Jendela Chat
+        function toggleChatPanel() {
+            const isHidden = chatWindow.classList.contains('hidden');
+            if (isHidden) {
+                chatWindow.classList.remove('hidden');
+                setTimeout(() => {
+                    chatWindow.classList.replace('opacity-0', 'opacity-100');
+                    chatWindow.classList.replace('translate-y-4', 'translate-y-0');
+                }, 10);
+                chatToggleIcon.innerText = 'close'; // Ubah balon menjadi icon silang (X) sesuai mockup
+            } else {
+                chatWindow.classList.replace('opacity-100', 'opacity-0');
+                chatWindow.classList.replace('translate-y-0', 'translate-y-4');
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+                chatToggleIcon.innerText = 'chat'; // Kembalikan ke icon chat biasa
+            }
+        }
+
+        chatToggleBtn.addEventListener('click', toggleChatPanel);
+        closeChatHeader.addEventListener('click', toggleChatPanel);
+
+        // Fungsi Memproses Template Klik Otomatis
+        function triggerTemplateChat(id, userQuestion, systemAnswer) {
+            // 1. Tambah Pesan User ke Layar Obrolan
+            appendMessage(userQuestion, 'user');
+            
+            // Sembunyikan daftar template pilihan sementara agar obrolan rapi
+            chatTemplates.classList.add('hidden');
+
+            // 2. Munculkan Animasi Mengetik Sistem
+            showTyping(true);
+            scrollToBottom();
+
+            // 3. Keluarkan Jawaban Sistem Setelah Delay 1 Detik
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage(systemAnswer, 'system');
+                
+                // Tampilkan kembali daftar template di bagian paling bawah
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                
+                scrollToBottom();
+            }, 1000);
+        }
+
+        // Fungsi Memasukkan Bubble Chat baru ke DOM
+        function appendMessage(text, sender) {
+            const msgWrapper = document.createElement('div');
+            msgWrapper.className = `flex flex-col space-y-1 max-w-[85%] ${sender === 'user' ? 'self-end items-end' : 'self-start items-start'}`;
+
+            const bubble = document.createElement('div');
+            if (sender === 'user') {
+                bubble.className = "bg-[#4E46E5] text-white p-3 rounded-2xl rounded-tr-none shadow-sm leading-relaxed";
+            } else {
+                bubble.className = "bg-white text-textDark p-3 rounded-2xl rounded-tl-none shadow-sm border border-borderColor/60 leading-relaxed";
+            }
+            bubble.innerText = text;
+
+            const timestamp = document.createElement('span');
+            timestamp.className = "text-[10px] text-textMuted px-1";
+            timestamp.innerText = "Baru saja";
+
+            msgWrapper.appendChild(bubble);
+            msgWrapper.appendChild(timestamp);
+            dynamicMessages.appendChild(msgWrapper);
+            
+            scrollToBottom();
+        }
+
+        // Kontrol Indikator Mengetik
+        function showTyping(visible) {
+            if (visible) {
+                typingIndicator.classList.remove('hidden');
+                // Selalu pindahkan posisi mengetik ke paling bawah sebelum muncul
+                chatBody.appendChild(typingIndicator);
+            } else {
+                typingIndicator.classList.add('hidden');
+            }
+        }
+
+        // Otomatis Gulir Chat Ke Bawah
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Fitur Pelengkap: Izinkan User Mengirim Pesan Manual Lewat Input Lapisan Bawah
+        function handleManualSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            chatTemplates.classList.add('hidden');
+
+            showTyping(true);
+            scrollToBottom();
+
+            setTimeout(() => {
+                showTyping(false);
+                appendMessage("Terima kasih telah menghubungi kami! Pesan Anda telah kami simpan dalam antrean sistem. Admin fisik kami akan memvalidasi pesan Anda segera.", 'system');
+                
+                chatBody.appendChild(chatTemplates);
+                chatTemplates.classList.remove('hidden');
+                scrollToBottom();
+            }, 1200);
+        }
+
+        sendChatBtn.addEventListener('click', handleManualSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleManualSend();
+        });
+    </script>
+</body>
+</html>

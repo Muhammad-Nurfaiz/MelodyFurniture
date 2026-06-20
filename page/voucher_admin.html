@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Manajemen Voucher & Promo - Melody Furniture Admin</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+    
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS dengan Plugins dan Token Warna Utama -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#591d00",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-fixed": "#360f00",
+                        "surface-bright": "#f8f9ff",
+                        "primary-container": "#0f2c59",
+                        "surface-container": "#e6eeff",
+                        "secondary-fixed": "#ffdbcd",
+                        "on-primary-fixed-variant": "#2d4674",
+                        "error": "#ba1a1a",
+                        "bg-alt": "#F8FAFC",
+                        "on-surface-variant": "#44474f",
+                        "tertiary": "#2c1100",
+                        "surface-variant": "#d5e3fd",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#fdb787",
+                        "on-background": "#0d1c2f",
+                        "primary-fixed": "#d8e2ff",
+                        "outline": "#747780",
+                        "surface-container-highest": "#d5e3fd",
+                        "outline-variant": "#c4c6d0",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#6a3b15",
+                        "on-primary-fixed": "#001a41",
+                        "on-tertiary-container": "#c5875a",
+                        "surface-tint": "#465e8e",
+                        "background": "#f8f9ff",
+                        "primary": "#00173b",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#7d2d00",
+                        "inverse-on-surface": "#ebf1ff",
+                        "secondary-container": "#fd6c22",
+                        "on-primary-container": "#7c94c8",
+                        "on-surface": "#0d1c2f",
+                        "inverse-primary": "#aec7fd",
+                        "on-tertiary-fixed": "#301400",
+                        "bg-main": "#FFFFFF",
+                        "brand-blue-dark": "#0A1E3D",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#dde9ff",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "primary-fixed-dim": "#aec7fd",
+                        "secondary": "#a43d00",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb597",
+                        "tertiary-fixed": "#ffdcc6",
+                        "inverse-surface": "#233144",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#ccdbf4",
+                        "border-subtle": "#E2E8F0",
+                        "tertiary-container": "#4b2200"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Inter"],
+                        "Plus-Jakarta": ["Plus Jakarta Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .font-plus-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+
+<body class="bg-bg-alt font-inter text-on-surface antialiased overflow-x-hidden flex min-h-screen" data-page="voucher" data-title="Voucher & Promo">
+
+    <!-- Pembungkus Utama Konten Halaman -->
+    <div id="main-wrapper" class="flex-1 flex flex-col min-h-screen md:ml-64 w-full transition-all duration-300">
+        
+        <!-- Main Content Canvas -->
+        <main class="flex-1 mt-16 p-4 sm:p-6 lg:p-8 bg-bg-alt overflow-y-auto">
+            <div class="max-w-[1280px] mx-auto space-y-6">
+                
+                <!-- Section 1: Header Title -->
+                <div class="space-y-1 mt-2">
+                    <h1 class="font-Plus-Jakarta text-xl sm:text-2xl lg:text-3xl font-bold text-primary tracking-tight">Manajemen Voucher & Promo</h1>
+                    <p class="text-xs sm:text-sm text-on-surface-variant max-w-2xl">Atur kode diskon, kelola kuota potongan harga, dan pantau efektivitas kampanye promo akhir tahun.</p>
+                </div>
+
+                <!-- REVISI Section 2: Summary Metrics (Grid Konsisten & Anti-Overflow) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    
+                    <!-- Metric 1: Voucher Aktif -->
+                    <div class="bg-bg-main border border-border-subtle rounded-xl p-5 hover:shadow-sm transition-all duration-200 flex flex-col justify-between min-h-[120px] w-full">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block truncate">Voucher Aktif</span>
+                            <div class="p-2 bg-surface-container-low rounded-lg text-primary-container shrink-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">loyalty</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 mt-4">
+                            <h3 class="text-2xl sm:text-3xl font-bold font-Plus-Jakarta text-primary-container leading-none">24</h3>
+                            <p class="text-xs font-semibold text-[#10B981] flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span class="material-symbols-outlined text-sm">trending_up</span> <span>+2 bln lalu</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Metric 2: Total Klaim Voucher -->
+                    <div class="bg-bg-main border border-border-subtle rounded-xl p-5 hover:shadow-sm transition-all duration-200 flex flex-col justify-between min-h-[120px] w-full">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block truncate">Total Klaim Voucher</span>
+                            <div class="p-2 bg-surface-container-low rounded-lg text-primary-container shrink-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">touch_app</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 mt-4">
+                            <h3 class="text-2xl sm:text-3xl font-bold font-Plus-Jakarta text-primary-container leading-none">1,245</h3>
+                            <p class="text-xs font-semibold text-[#10B981] flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span class="material-symbols-outlined text-sm">trending_up</span> <span>+15%</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Metric 3: Total Potongan -->
+                    <div class="bg-bg-main border border-border-subtle rounded-xl p-5 hover:shadow-sm transition-all duration-200 flex flex-col justify-between min-h-[120px] w-full">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block truncate">Total Potongan</span>
+                            <div class="p-2 bg-surface-container-low rounded-lg text-primary-container shrink-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">payments</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 mt-4">
+                            <h3 class="text-2xl sm:text-3xl font-bold font-Plus-Jakarta text-primary-container leading-none">Rp 45.2M</h3>
+                            <p class="text-xs font-semibold text-[#10B981] flex items-center gap-1 whitespace-nowrap leading-none">
+                                <span class="material-symbols-outlined text-sm">check_circle</span> <span>Sesuai target</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Metric 4: Sisa Kuota Anggaran -->
+                    <div class="bg-bg-main border border-border-subtle rounded-xl p-5 hover:shadow-sm transition-all duration-200 flex flex-col justify-between min-h-[120px] w-full">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider block truncate">Sisa Kuota Anggaran</span>
+                            <div class="p-2 bg-[#FFF7ED] rounded-lg text-secondary-container shrink-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1 mt-4">
+                            <h3 class="text-2xl sm:text-3xl font-bold font-Plus-Jakarta text-secondary-container leading-none">Rp 154.8M</h3>
+                            <p class="text-xs font-medium text-on-surface-variant whitespace-nowrap leading-none">Dari Rp 200M</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Section 3: Action Bar Controls -->
+                <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 bg-white p-4 rounded-xl border border-border-subtle shadow-sm">
+                    <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto flex-1">
+                        <div class="relative w-full sm:w-72 md:w-80 lg:w-96">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
+                            <input class="w-full pl-10 pr-4 py-2 bg-bg-alt border border-border-subtle rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors placeholder:text-outline" placeholder="Cari kode voucher atau nama promo..." type="text"/>
+                        </div>
+                        <div class="relative w-full sm:w-48">
+                            <select class="w-full pl-4 pr-10 py-2 bg-bg-alt border border-border-subtle rounded-lg text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none cursor-pointer">
+                                <option value="">Semua Status</option>
+                                <option value="aktif">Aktif</option>
+                                <option value="habis">Kuota Habis</option>
+                                <option value="nonaktif">Nonaktif</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-xl">keyboard_arrow_down</span>
+                        </div>
+                    </div>
+                    <button class="w-full md:w-auto bg-secondary-container hover:bg-secondary-container/90 text-white text-xs sm:text-sm font-semibold px-5 h-10 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-95 whitespace-nowrap">
+                        <span class="material-symbols-outlined text-lg">add</span>
+                        <span>Buat Voucher Baru</span>
+                    </button>
+                </div>
+
+                <!-- Section 4: Data Table Card Layout -->
+                <div class="bg-white rounded-xl border border-border-subtle shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[800px]">
+                            <thead>
+                                <tr class="bg-bg-alt border-b border-border-subtle">
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Kode Voucher</th>
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Nama Promo</th>
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Tipe &amp; Nilai</th>
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Min. Beli</th>
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Kuota</th>
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Status</th>
+                                    <th class="py-3.5 px-6 text-xs font-bold text-on-surface-variant uppercase tracking-wider text-right">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border-subtle">
+                                <tr class="hover:bg-bg-alt/40 transition-colors duration-150">
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded bg-surface-container-low text-primary-container font-mono text-xs font-semibold border border-surface-container-high">
+                                            MELODYAKHIRTAHUN
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-sm font-medium text-on-surface">Promo Desain Akhir Tahun 2026</td>
+                                    <td class="py-4 px-6 text-sm text-on-surface-variant">Persentase (10%)</td>
+                                    <td class="py-4 px-6 text-sm font-semibold text-on-surface">Rp 1.000.000</td>
+                                    <td class="py-4 px-6 text-sm text-on-surface-variant">145/200</td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#DEF7EC] text-[#03543F] border border-[#31C48D]">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#057A55] mr-1.5"></span>
+                                            Aktif
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="flex items-center justify-end gap-3 text-sm font-medium">
+                                            <a class="text-primary-container hover:text-secondary-container hover:underline" href="#">Detail</a>
+                                            <a class="text-primary-container hover:text-secondary-container hover:underline" href="#">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-bg-alt/40 transition-colors duration-150">
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded bg-surface-container-low text-primary-container font-mono text-xs font-semibold border border-surface-container-high">
+                                            MEJABARU50K
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-sm font-medium text-on-surface">Potongan Meja Belajar</td>
+                                    <td class="py-4 px-6 text-sm text-on-surface-variant">Nominal (Rp 50.000)</td>
+                                    <td class="py-4 px-6 text-sm font-semibold text-on-surface">Rp 500.000</td>
+                                    <td class="py-4 px-6 text-sm text-on-surface-variant">50/50 <span class="text-error font-medium text-xs ml-1">(Habis)</span></td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#FDE8E8] text-[#9B1C1C] border border-[#F8B4B4]">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#C81E1E] mr-1.5"></span>
+                                            Kuota Habis
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="flex items-center justify-end gap-3 text-sm font-medium">
+                                            <a class="text-primary-container hover:text-secondary-container hover:underline" href="#">Detail</a>
+                                            <a class="text-primary-container hover:text-secondary-container hover:underline" href="#">Edit</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-bg-alt/40 transition-colors duration-150 opacity-75">
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded bg-surface-container-low text-primary-container/60 font-mono text-xs font-semibold border border-surface-container-high">
+                                            NOVEMBERSALE
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-sm font-medium text-on-surface-variant line-through">Promo Flash Sale November</td>
+                                    <td class="py-4 px-6 text-sm text-on-surface-variant">Persentase (20%)</td>
+                                    <td class="py-4 px-6 text-sm font-semibold text-on-surface-variant">Rp 2.500.000</td>
+                                    <td class="py-4 px-6 text-sm text-on-surface-variant">200/200</td>
+                                    <td class="py-4 px-6">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#F3F4F6] text-[#374151] border border-[#D1D5DB]">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-[#6B7280] mr-1.5"></span>
+                                            Nonaktif
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-6 text-right">
+                                        <div class="flex items-center justify-end gap-3 text-sm font-medium">
+                                            <a class="text-primary-container hover:text-secondary-container hover:underline" href="#">Detail</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination Control -->
+                    <div class="border-t border-border-subtle bg-bg-main px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <span class="text-xs sm:text-sm text-on-surface-variant font-medium">Menampilkan 1-3 dari 24 voucher</span>
+                        <div class="flex items-center gap-1.5">
+                            <button class="p-1.5 rounded border border-border-subtle text-outline hover:bg-bg-alt disabled:opacity-40 transition-colors" disabled="">
+                                <span class="material-symbols-outlined text-lg block">chevron_left</span>
+                            </button>
+                            <button class="px-3 py-1 rounded text-xs sm:text-sm bg-surface-container-low text-primary-container font-semibold border border-primary-container/10">1</button>
+                            <button class="px-3 py-1 rounded text-xs sm:text-sm border border-border-subtle text-on-surface-variant hover:bg-bg-alt transition-colors font-medium">2</button>
+                            <button class="px-3 py-1 rounded text-xs sm:text-sm border border-border-subtle text-on-surface-variant hover:bg-bg-alt transition-colors font-medium">3</button>
+                            <button class="p-1.5 rounded border border-border-subtle text-on-surface-variant hover:bg-bg-alt transition-colors">
+                                <span class="material-symbols-outlined text-lg block">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+        
+    </div>
+
+    <script src="../assets/script.js"></script>
+</body>
+</html>
