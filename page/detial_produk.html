@@ -97,7 +97,7 @@
             <!-- Left Column: Gallery -->
             <div class="space-y-4 md:space-y-6">
                 <div id="heroMediaContainer"
-                    class="bg-white rounded-lg overflow-hidden aspect-square border border-borderColor group shadow-sm cursor-pointer">
+                    class="relative bg-white rounded-lg overflow-hidden aspect-square border border-borderColor group shadow-sm cursor-pointer">
 
                     <!-- Hero Video -->
                     <video
@@ -117,8 +117,36 @@
                         class="hidden w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         src=""
                         alt="">
+
+                    <!-- Chevron Left -->
+                    <button id="heroPrev"
+                    class="absolute left-4 top-1/2 -translate-y-1/2
+                    w-10 h-10 rounded-full
+                    bg-white/80 hover:bg-white
+                    shadow-lg flex items-center justify-center
+                    transition z-20">
+
+                        <span class="material-symbols-outlined">
+                            chevron_left
+                        </span>
+
+                    </button>
+
+                    <!-- Chevron Right -->
+                    <button id="heroNext"
+                    class="absolute right-4 top-1/2 -translate-y-1/2
+                    w-10 h-10 rounded-full
+                    bg-white/80 hover:bg-white
+                    shadow-lg flex items-center justify-center
+                    transition z-20">
+
+                        <span class="material-symbols-outlined">
+                            chevron_right
+                        </span>
+
+                    </button>
                 </div>
-                <div class="grid grid-cols-4 gap-2 md:gap-4">
+                <div class="grid grid-cols-5 gap-2 md:gap-4">
                     <div class="media-thumb cursor-pointer bg-white rounded border-2 border-primary overflow-hidden aspect-square"
                         data-type="video">
 
@@ -347,7 +375,7 @@
                         </div>
                     </div>
                 </a>
-            </a>
+
         </section>
     </main>
 
@@ -608,7 +636,10 @@
         function closeVideoLightboxFn(){
 
             lightboxVideo.pause();
+            heroVideo.currentTime =
+                lightboxVideo.currentTime;
 
+                heroVideo.play();
             videoLightbox.classList.remove("opacity-100");
             videoLightbox.classList.add("opacity-0");
 
@@ -643,26 +674,53 @@
 
         const heroVideo = document.getElementById("heroVideo");
         const heroImage = document.getElementById("heroImage");
-
         const thumbs = document.querySelectorAll(".media-thumb");
+        function updateHero(index){
 
+            currentIndex = index;
+
+            thumbs.forEach((thumb,i)=>{
+
+                thumb.classList.remove("border-primary");
+                thumb.classList.remove("opacity-100");
+
+                thumb.classList.add("border-transparent");
+                thumb.classList.add("opacity-60");
+
+                if(i===index){
+
+                    thumb.classList.add("border-primary");
+                    thumb.classList.remove("border-transparent");
+                    thumb.classList.remove("opacity-60");
+
+                }
+
+            });
+
+            const thumb = thumbs[index];
+
+            if(thumb.dataset.type==="video"){
+
+                showVideo();
+
+            }else{
+
+                showImage(
+                    thumb.querySelector("img").src
+                );
+
+            }
+
+        }
         let currentType = "video";
-        let currentHeroThumb = document.querySelector('.media-thumb[data-type="video"]');
+        let currentIndex = 0;
 
        function showVideo(){
-
             currentType="video";
-
             heroImage.classList.add("hidden");
-
             heroVideo.classList.remove("hidden");
-
-            heroVideo.currentTime=0;
-
             heroVideo.autoplay=true;
-
             heroVideo.play().catch(()=>{});
-
         }
 
         function showImage(src){
@@ -670,8 +728,6 @@
             currentType="image";
 
             heroVideo.pause();
-
-            heroVideo.currentTime=0;
 
             heroVideo.autoplay=false;
 
@@ -683,107 +739,64 @@
 
         }
 
-
-        function swapThumbnail(clickedThumb){
-
-            if(clickedThumb === currentHeroThumb) return;
-
-            // clone thumbnail hero lama
-            const oldHero = currentHeroThumb.cloneNode(true);
-
-            // clone thumbnail yang diklik
-            const newHero = clickedThumb.cloneNode(true);
-
-            // tukar posisi
-            clickedThumb.replaceWith(oldHero);
-            currentHeroThumb.replaceWith(newHero);
-
-            // update seluruh event thumbnail
-            initializeThumbnails();
-
-            // hero sekarang
-            currentHeroThumb = document.querySelectorAll(".media-thumb")[
-                [...document.querySelectorAll(".media-thumb")].indexOf(newHero)
-            ];
-
-        }
-
         showVideo();
 
         function initializeThumbnails(){
 
             document.querySelectorAll(".media-thumb").forEach((thumb)=>{
+                thumbs.forEach((thumb,index)=>{
 
-                thumb.onclick = ()=>{
+                    thumb.addEventListener("click",()=>{
 
-                    document.querySelectorAll(".media-thumb").forEach(t=>{
-
-                        t.classList.remove("border-primary");
-                        t.classList.remove("opacity-100");
-
-                        t.classList.add("border-transparent");
-                        t.classList.add("opacity-60");
+                        updateHero(index);
 
                     });
 
-                    thumb.classList.remove("border-transparent");
-                    thumb.classList.remove("opacity-60");
-
-                    thumb.classList.add("border-primary");
-
-                    if(thumb.dataset.type==="video"){
-
-                        showVideo();
-
-                    }else{
-
-                        showImage(
-                            thumb.querySelector("img").src
-                        );
-
-                    }
-
-                    swapThumbnail(thumb);
-
-                };
-
+                });
             });
 
         }
 
         initializeThumbnails();
+        function activateThumbnail(index){
 
-            thumb.addEventListener("click",()=>{
+            const thumbs = document.querySelectorAll(".media-thumb");
 
-                thumbs.forEach(t=>{
+            thumbs[index].click();
 
-                    t.classList.remove("border-primary");
-                    t.classList.add("border-transparent");
+        }
 
-                    t.classList.add("opacity-60");
+        heroNext.addEventListener("click",(e)=>{
 
-                });
+            e.stopPropagation();
 
-                thumb.classList.remove("border-transparent");
-                thumb.classList.remove("opacity-60");
+            currentIndex++;
 
-                thumb.classList.add("border-primary");
+            if(currentIndex>=thumbs.length){
 
-                const type = thumb.dataset.type;
+                currentIndex=0;
 
-                if(type==="video"){
+            }
 
-                    showVideo();
+            updateHero(currentIndex);
 
-                }else{
+        });
 
-                    const img = thumb.querySelector("img");
+        heroPrev.addEventListener("click",(e)=>{
 
-                    showImage(img.src);
+            e.stopPropagation();
 
-                }
+            currentIndex--;
 
-            });
+            if(currentIndex<0){
+
+                currentIndex=thumbs.length-1;
+
+            }
+
+            updateHero(currentIndex);
+
+        });
 
         // ==========================================
         // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
