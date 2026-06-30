@@ -96,20 +96,47 @@
             
             <!-- Left Column: Gallery -->
             <div class="space-y-4 md:space-y-6">
-                <div id="mainImageContainer" class="bg-white rounded-lg overflow-hidden aspect-square flex items-center justify-center border border-borderColor group shadow-sm cursor-zoom-in">
-                    <img id="mainProductImage" alt="Nordic Oak Chair Main" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" />
+                <div id="heroMediaContainer"
+                    class="bg-white rounded-lg overflow-hidden aspect-square border border-borderColor group shadow-sm cursor-pointer">
+
+                    <!-- Hero Video -->
+                    <video
+                        id="heroVideo"
+                        class="hidden w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                    >
+                        <source src="../assets/img/ass.mp4" type="video/mp4">
+                    </video>
+
+                    <!-- Hero Image -->
+                    <img
+                        id="heroImage"
+                        class="hidden w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        src=""
+                        alt="">
                 </div>
                 <div class="grid grid-cols-4 gap-2 md:gap-4">
-                    <div class="cursor-pointer bg-white rounded border-2 border-primary overflow-hidden aspect-square transition-all hover:opacity-80">
+                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-primary overflow-hidden aspect-square"
+                        data-type="video">
+
+                        <video class="w-full h-full object-cover pointer-events-none" muted preload="metadata">
+                            <source src="../assets/img/ass.mp4" type="video/mp4">
+                        </video>
+
+                    </div>
+                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
                         <img class="w-full h-full object-cover thumbnail" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" alt="Thumb 1" />
                     </div>
-                    <div class="cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
                         <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I" alt="Thumb 2" />
                     </div>
-                    <div class="cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
                         <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0" alt="Thumb 3" />
                     </div>
-                    <div class="cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
                         <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw" alt="Thumb 4" />
                     </div>
                 </div>
@@ -392,6 +419,31 @@
         </div>
     </div>
 
+    <div id="videoLightbox"
+        class="fixed inset-0 z-50 hidden bg-black/90
+        flex items-center justify-center
+        opacity-0 transition-opacity duration-300">
+
+        <button id="closeVideoLightbox"
+            class="absolute top-5 right-5 text-white z-50">
+
+            <span class="material-symbols-outlined !text-4xl">
+                close
+            </span>
+
+        </button>
+
+        <video
+            id="lightboxVideo"
+            class="max-w-[90vw] max-h-[90vh] rounded-lg"
+            controls
+            playsinline
+        >
+            <source src="../assets/img/ass.mp4" type="video/mp4">
+        </video>
+
+    </div>
+
     <!-- REVISI BARU: Floating Chat Widget Berdasarkan Mockup image_210ad4.png -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-['Inter']">
         <!-- Kotak Chat Panel -->
@@ -493,22 +545,55 @@
         });
 
         // Logika Interaksi Mode Fokus (Lightbox) Gambar Utama
-        const mainImageContainer = document.getElementById('mainImageContainer');
-        const mainProductImage = document.getElementById('mainProductImage');
         const imageLightbox = document.getElementById('imageLightbox');
         const lightboxImage = document.getElementById('lightboxImage');
         const closeLightbox = document.getElementById('closeLightbox');
 
-        mainImageContainer.addEventListener('click', () => {
-            lightboxImage.src = mainProductImage.src;
-            imageLightbox.classList.remove('hidden');
-            setTimeout(() => {
-                imageLightbox.classList.add('opacity-100');
-                lightboxImage.classList.remove('scale-95');
-                lightboxImage.classList.add('scale-100');
-            }, 10);
-            document.body.style.overflow = 'hidden';
-        });
+        const videoLightbox = document.getElementById("videoLightbox");
+        const lightboxVideo = document.getElementById("lightboxVideo");
+
+        const closeVideoLightbox =
+        document.getElementById("closeVideoLightbox");
+
+
+        const heroMediaContainer = document.getElementById("heroMediaContainer");
+
+            heroMediaContainer.addEventListener("click",()=>{
+
+                if(currentType==="video"){
+
+                    lightboxVideo.currentTime = heroVideo.currentTime;
+
+                    videoLightbox.classList.remove("hidden");
+
+                    setTimeout(()=>{
+
+                        videoLightbox.classList.remove("opacity-0");
+                        videoLightbox.classList.add("opacity-100");
+
+                    },10);
+
+                    lightboxVideo.play().catch(()=>{});
+
+                }else{
+
+                    lightboxImage.src = heroImage.src;
+
+                    imageLightbox.classList.remove("hidden");
+
+                    setTimeout(()=>{
+
+                        imageLightbox.classList.add("opacity-100");
+                        lightboxImage.classList.remove("scale-95");
+                        lightboxImage.classList.add("scale-100");
+
+                    },10);
+
+                }
+
+                document.body.style.overflow="hidden";
+
+            });
 
         function closeFocusMode() {
             imageLightbox.classList.remove('opacity-100');
@@ -520,6 +605,35 @@
             document.body.style.overflow = '';
         }
 
+        function closeVideoLightboxFn(){
+
+            lightboxVideo.pause();
+
+            videoLightbox.classList.remove("opacity-100");
+            videoLightbox.classList.add("opacity-0");
+
+            setTimeout(()=>{
+
+                videoLightbox.classList.add("hidden");
+
+            },300);
+
+            document.body.style.overflow="";
+
+        }
+
+        closeVideoLightbox.addEventListener("click",closeVideoLightboxFn);
+
+        videoLightbox.addEventListener("click",(e)=>{
+
+            if(e.target===videoLightbox){
+
+                closeVideoLightboxFn();
+
+            }
+
+        });
+
         closeLightbox.addEventListener('click', closeFocusMode);
         imageLightbox.addEventListener('click', (e) => {
             if (e.target === imageLightbox || e.target.parentElement === imageLightbox) {
@@ -527,14 +641,149 @@
             }
         });
 
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        thumbnails.forEach(thumb => {
-            thumb.parentElement.addEventListener('click', () => {
-                mainProductImage.src = thumb.src;
-                thumbnails.forEach(t => t.parentElement.classList.replace('border-primary', 'border-transparent'));
-                thumb.parentElement.classList.replace('border-transparent', 'border-primary');
+        const heroVideo = document.getElementById("heroVideo");
+        const heroImage = document.getElementById("heroImage");
+
+        const thumbs = document.querySelectorAll(".media-thumb");
+
+        let currentType = "video";
+        let currentHeroThumb = document.querySelector('.media-thumb[data-type="video"]');
+
+       function showVideo(){
+
+            currentType="video";
+
+            heroImage.classList.add("hidden");
+
+            heroVideo.classList.remove("hidden");
+
+            heroVideo.currentTime=0;
+
+            heroVideo.autoplay=true;
+
+            heroVideo.play().catch(()=>{});
+
+        }
+
+        function showImage(src){
+
+            currentType="image";
+
+            heroVideo.pause();
+
+            heroVideo.currentTime=0;
+
+            heroVideo.autoplay=false;
+
+            heroVideo.classList.add("hidden");
+
+            heroImage.src=src;
+
+            heroImage.classList.remove("hidden");
+
+        }
+
+
+        function swapThumbnail(clickedThumb){
+
+            if(clickedThumb === currentHeroThumb) return;
+
+            // clone thumbnail hero lama
+            const oldHero = currentHeroThumb.cloneNode(true);
+
+            // clone thumbnail yang diklik
+            const newHero = clickedThumb.cloneNode(true);
+
+            // tukar posisi
+            clickedThumb.replaceWith(oldHero);
+            currentHeroThumb.replaceWith(newHero);
+
+            // update seluruh event thumbnail
+            initializeThumbnails();
+
+            // hero sekarang
+            currentHeroThumb = document.querySelectorAll(".media-thumb")[
+                [...document.querySelectorAll(".media-thumb")].indexOf(newHero)
+            ];
+
+        }
+
+        showVideo();
+
+        function initializeThumbnails(){
+
+            document.querySelectorAll(".media-thumb").forEach((thumb)=>{
+
+                thumb.onclick = ()=>{
+
+                    document.querySelectorAll(".media-thumb").forEach(t=>{
+
+                        t.classList.remove("border-primary");
+                        t.classList.remove("opacity-100");
+
+                        t.classList.add("border-transparent");
+                        t.classList.add("opacity-60");
+
+                    });
+
+                    thumb.classList.remove("border-transparent");
+                    thumb.classList.remove("opacity-60");
+
+                    thumb.classList.add("border-primary");
+
+                    if(thumb.dataset.type==="video"){
+
+                        showVideo();
+
+                    }else{
+
+                        showImage(
+                            thumb.querySelector("img").src
+                        );
+
+                    }
+
+                    swapThumbnail(thumb);
+
+                };
+
             });
-        });
+
+        }
+
+        initializeThumbnails();
+
+            thumb.addEventListener("click",()=>{
+
+                thumbs.forEach(t=>{
+
+                    t.classList.remove("border-primary");
+                    t.classList.add("border-transparent");
+
+                    t.classList.add("opacity-60");
+
+                });
+
+                thumb.classList.remove("border-transparent");
+                thumb.classList.remove("opacity-60");
+
+                thumb.classList.add("border-primary");
+
+                const type = thumb.dataset.type;
+
+                if(type==="video"){
+
+                    showVideo();
+
+                }else{
+
+                    const img = thumb.querySelector("img");
+
+                    showImage(img.src);
+
+                }
+
+            });
 
         // ==========================================
         // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
