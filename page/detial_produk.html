@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nordic Oak Chair | Melody Furniture</title>
+    <title>Ryuki TV Stand | Melody Furniture</title>
     
     <!-- Menyisipkan Tailwind CSS melalui CDN resmi -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -58,10 +58,7 @@
             width:100%;
             height:100%;
             touch-action:pan-y;
-            cursor:grab;
-        }
-        #heroViewport.dragging{
-            cursor:grabbing;
+            
         }
 
         #heroTrack{
@@ -85,15 +82,38 @@
 
         .hero-slide img,
         .hero-slide video{
-
             width:100%;
             height:100%;
             object-fit:cover;
-
             user-select:none;
             -webkit-user-drag:none;
             pointer-events:none;
-
+        }
+        /* Desktop */
+        @media (min-width:1025px){
+            #heroViewport,
+            #heroTrack,
+            .hero-slide,
+            .hero-slide img,
+            .hero-slide video{
+                cursor: default !important;
+            }
+        }
+        /* Mobile & Tablet */
+        @media (max-width:1024px){
+            #heroViewport,
+            #heroTrack{
+                cursor: grab;
+            }
+            #heroViewport:active,
+            #heroTrack:active{
+                cursor: grabbing;
+            }
+        }
+        @media (min-width:1025px){
+            #heroMediaContainer{
+                cursor: zoom-in;
+            }
         }
     </style>
 </head>
@@ -111,9 +131,27 @@
         
         <!-- Main Header Container -->
         <div class="max-w-[1200px] mx-auto px-4 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-4">
+            <button
+            id="btnOpenFilterNavbar"
+            class="md:hidden bg-white rounded p-2 flex items-center justify-center text-textDark hover:bg-gray-50 focus:outline-none shrink-0"
+            aria-label="Buka Filter"
+            >
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24">
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+            </button>
             <!-- Logo -->
             <a href="../index.html" class="shrink-0">
-                <img src="../assets/img/download.png" alt="logo" class="w-28 sm:w-36 md:w-44 h-auto">
+                <img src="../assets/img/LOGO MELODY BARU.png" alt="logo" class="w-[160px] sm:w-36 md:w-[190px] h-auto">
             </a>
             
             <!-- Search bar hanya muncul di desktop (md ke atas) -->
@@ -140,7 +178,38 @@
     <!-- Main Detail Layout -->
     <main class="max-w-[1200px] mx-auto px-4 py-8 md:py-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-            
+            <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
+
+            <aside id="mobileFilterDrawer" class="fixed inset-y-0 left-0 w-[280px] bg-white p-5 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-borderColor overflow-y-auto md:hidden">
+                <div class="flex justify-between items-center mb-6 pb-2 border-b border-borderColor">
+                    <span class="font-bold text-primary">Filter & Kategori</span>
+                    <button id="btnCloseFilter" class="text-textMuted hover:text-textDark text-xl font-bold">&times;</button>
+                </div>
+
+                <div class="mb-4">
+                    <button class="btn-reset-filter w-full py-1.5 border border-dashed border-secondary text-secondary hover:bg-secondary hover:text-white rounded text-xs font-semibold transition">
+                        Semua Produk (Reset)
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <div class="text-xs font-bold uppercase tracking-wider text-textMuted mb-3 pl-2">Kategori Produk</div>
+                    <ul class="flex flex-col gap-1">
+                        <li><button data-filter="meja" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Meja Kerja</button></li>
+                        <li><button data-filter="lemari" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Lemari Buffet</button></li>
+                        <li><button data-filter="nakas" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Nakas Minimalis</button></li>
+                        <li><button data-filter="tv" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Meja & Rak TV</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-textMuted mb-3 pl-2">Program Spesial</div>
+                    <ul class="flex flex-col gap-1">
+                        <li><button data-program="bestseller" class="program-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Best Seller</button></li>
+                        <li><button data-program="promo" class="program-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Promo Terbatas</button></li>
+                    </ul>
+                </div>
+            </aside>
             <!-- Left Column: Gallery -->
             <div class="space-y-4 md:space-y-6">
                 <div id="heroMediaContainer"
@@ -168,7 +237,7 @@
                                     playsinline>
 
                                     <source
-                                        src="../assets/img/ass.mp4"
+                                        src="https://down-ws-id.vod.susercontent.com/api/v4/11110105/mms/id-11110105-6jt76-liv5i1rx3cv253.16003251711950497.mp4"
                                         type="video/mp4">
 
                                 </video>
@@ -182,7 +251,7 @@
 
                                 <img
                                     class="hero-image w-full h-full object-cover"
-                                    src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg">
+                                    src="https://down-id.img.susercontent.com/file/id-11134207-8224v-mg3dq7xthuz203.webp">
 
                             </div>
 
@@ -193,7 +262,7 @@
 
                                 <img
                                     class="hero-image w-full h-full object-cover"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I">
+                                    src="https://down-id.img.susercontent.com/file/id-11134207-8224z-mg3dq7wdemtob2.webp">
 
                             </div>
 
@@ -204,7 +273,7 @@
 
                                 <img
                                     class="hero-image w-full h-full object-cover"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0">
+                                    src="https://down-id.img.susercontent.com/file/id-11134207-82250-mg3dq7xtf1u626.webp">
 
                             </div>
 
@@ -215,7 +284,7 @@
 
                                 <img
                                     class="hero-image w-full h-full object-cover"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw">
+                                    src="https://down-id.img.susercontent.com/file/id-11134207-8224y-mg3dq7wymrrjfc.webp">
 
                             </div>
 
@@ -257,21 +326,21 @@
                             data-type="video">
 
                             <video class="w-full h-full object-cover pointer-events-none" muted preload="metadata">
-                                <source src="../assets/img/ass.mp4" type="video/mp4">
+                                <source src="https://down-ws-id.vod.susercontent.com/api/v4/11110105/mms/id-11110105-6jt76-liv5i1rx3cv253.16003251711950497.mp4" type="video/mp4">
                             </video>
 
                         </div>
                         <div data-index="2" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                            <img class="w-full h-full object-cover thumbnail" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" alt="Thumb 1" />
+                            <img class="w-full h-full object-cover thumbnail" src="https://down-id.img.susercontent.com/file/id-11134207-8224v-mg3dq7xthuz203.webp" alt="Thumb 1" />
                         </div>
                         <div data-index="3" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                            <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I" alt="Thumb 2" />
+                            <img class="w-full h-full object-cover thumbnail" src="https://down-id.img.susercontent.com/file/id-11134207-8224z-mg3dq7wdemtob2.webp" alt="Thumb 2" />
                         </div>
                         <div data-index="4" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                            <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0" alt="Thumb 3" />
+                            <img class="w-full h-full object-cover thumbnail" src="https://down-id.img.susercontent.com/file/id-11134207-82250-mg3dq7xtf1u626.webp" alt="Thumb 3" />
                         </div>
                         <div data-index="5" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                            <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw" alt="Thumb 4" />
+                            <img class="w-full h-full object-cover thumbnail" src="https://down-id.img.susercontent.com/file/id-11134207-8224y-mg3dq7wymrrjfc.webp" alt="Thumb 4" />
                         </div>
                 </div>
             </div>
@@ -282,22 +351,22 @@
                     <nav class="flex text-xs md:text-sm text-textMuted space-x-2">
                         <a class="hover:text-primary transition-colors" href="../index.html">Home</a>
                         <span>/</span>
-                        <a class="hover:text-primary transition-colors" href="#">Living Room</a>
+                        <a class="hover:text-primary transition-colors" href="#">Meja TV</a>
                         <span>/</span>
-                        <span class="text-primary font-medium">Nordic Oak Chair</span>
+                        <span class="text-primary font-medium">Buffet TV</span>
                     </nav>
                     <h1 class="font-['Plus_Jakarta_Sans'] font-bold text-xl md:text-3xl text-textDark">
-                        Nordic Oak Chair
+                        Meja TV RYUKI TV STAND RIVIERA Rustic Walnut
                     </h1>
                     <div class="flex items-baseline space-x-3 md:space-x-4">
                         <p class="text-lg md:text-2xl font-bold text-secondary">
-                            Rp 1.250.000
+                            Rp 1.091.000
                         </p>
-                        <span class="text-xs md:text-sm text-textMuted line-through">Rp 1.800.000</span>
+                        <span class="text-xs md:text-sm text-textMuted line-through">Rp 1.515.000</span>
                         <span class="bg-[#FFECE8] text-secondary px-2 py-0.5 rounded text-[10px] md:text-xs font-bold">SALE</span>
                     </div>
                     <p class="text-xs md:text-sm text-textMuted leading-relaxed max-w-lg">
-                        A study in minimalist engineering. The Nordic Oak Chair balances the warmth of natural solid wood with the industrial precision of brushed steel. Perfect for modern dining spaces or professional studios.
+                        Ryuki TV Stand adalah Meja TV. Dilengkapi dengan 2 lemari penyimpanan sliding dan 2 tempat kosong yang secara fungsi dapat digunakan untuk menyimpan barang keperluan anda, di desain minimalis dan soft looking, cocok di ruangan kekinian anda. Tersedia dalam jumlah terbatas.
                     </p>
                 </div>
 
@@ -333,15 +402,11 @@
                             <div class="space-y-3 pt-2 pb-2">
                                 <div class="flex justify-between border-b border-borderColor pb-2">
                                     <span class="text-textMuted">Dimensi</span>
-                                    <span class="font-medium">45 x 50 x 85 cm</span>
-                                </div>
-                                <div class="flex justify-between border-b border-borderColor pb-2">
-                                    <span class="text-textMuted">Tinggi Dudukan</span>
-                                    <span class="font-medium">45 cm</span>
+                                    <span class="font-medium">159 x 39.6 x 48 cm</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-textMuted">Kapasitas Beban</span>
-                                    <span class="font-medium">120 kg</span>
+                                    <span class="font-medium">34.5 kg</span>
                                 </div>
                             </div>
                         </div>
@@ -361,15 +426,15 @@
                                 <ul class="space-y-2 text-textMuted">
                                     <li class="flex items-start space-x-2">
                                         <span class="text-secondary mt-1">•</span>
-                                        <span>Rangka Solid European Oak dengan serat kayu alami premium.</span>
+                                        <span>Warna: Riviera - Rustic walnut</span>
                                     </li>
                                     <li class="flex items-start space-x-2">
                                         <span class="text-secondary mt-1">•</span>
-                                        <span>Aksen sandaran belakang Brushed 304 Stainless Steel untuk ketahanan industrial.</span>
+                                        <span>Finishing: Paper</span>
                                     </li>
                                     <li class="flex items-start space-x-2">
                                         <span class="text-secondary mt-1">•</span>
-                                        <span>Lapisan pelindung matte clear coat, tahan air dan noda.</span>
+                                        <span>Semua produk kami bersertifikat dunia: ISO Sertified 9001-2015, FSC, Indonesian Legal Wood</span>
                                     </li>
                                 </ul>
                             </div>
@@ -386,14 +451,9 @@
                             <span class="material-symbols-outlined text-textMuted transition-transform duration-300 chevron-icon">expand_more</span>
                         </button>
                         <div class="accordion-content px-4 bg-white text-xs md:text-sm">
-                            <div class="grid grid-cols-2 gap-4 pt-2 pb-2">
+                            <div class="grid grid-cols-1 gap-4 pt-2 pb-2">
                                 <div class="p-3 border border-borderColor rounded bg-bgLight">
-                                    <p class="font-bold text-primary text-xs md:text-sm">Ambil di Tempat</p>
-                                    <p class="text-xs text-textMuted mt-1">Showroom Malang (Gratis)</p>
-                                </div>
-                                <div class="p-3 border border-borderColor rounded bg-bgLight">
-                                    <p class="font-bold text-primary text-xs md:text-sm">Pengiriman Kargo</p>
-                                    <p class="text-xs text-textMuted mt-1">Seluruh Indonesia</p>
+                                    <p class="text-xs text-textMuted mt-1">PENGIRIMAN KE JAWA DAN DENPASAR MOHON PILIH ONGKOS KIRIM 0 RUPIAH! GRATIS ONGKIR!!</p>
                                 </div>
                             </div>
                         </div>
@@ -413,12 +473,13 @@
                 <!-- Card 1 -->
                 <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
                     <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
-                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpsSdy3EaWcDITRObXH_cxhBUk_TvGRASxpuzJO44Exjn64GQsgpKa79-A2Dd4K346TH_tOo3Qh5d9OiXZBemMyBnDMSJL7lBmP6FtM37z1qKKt12grUXWlva_vpexKXfuzt4k77EsKTPracQqVgjLKNyqWbz-vw8Kn_P-OfVN2h_-ukGVWB01g3vW4yHBLloHLWImF8SlmkOVBK5HSYiE-w9Kqb_d6DtI3Lispph7P5Nb1ZRkFRjR5dpECYHGWuTJDo44AKasvAM" alt="Oakland Table">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/LdjLHL4h9lVwiIcLdmikNHu05JUCtRTC6OKxLtxrPbg.webp" alt="Oakland Table">
                     </div>
                     <div class="p-3">
-                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Oakland Solid Oak Dining Table Industrial Steel</h3>
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Lemari Serbaguna Lemari Sideboard RYUKI SIDEBOARD RIVIERA EICHI</h3>
+                        <div class="text-gray-500 line-through">Rp 3.416.000</div>
                         <div class="flex items-center justify-between mt-1.5">
-                            <span class="text-secondary text-sm md:text-base font-bold">Rp 4.500.000</span>
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.685.000</span>
                             <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Populer</span>
                         </div>
                         <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
@@ -431,12 +492,13 @@
                 <!-- Card 2 -->
                 <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
                     <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
-                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8dvOGbTxsrsugxscNDSb-OCsqXXEgqmYKNprLCTjNCLszmQi0Jq1I22nEwQpWAxrfI23luWi_mC6lSbdysApFoOy6Fg72YVajMh64fwPK7TWquEjZc6UXxw_I3pDFKxExka0Qrj9ZdZUNnBjgyLUlfkSX8fT-X1Gug_Snw_clKHaDt0f85zBrt5GjCcxrHzRbpKdkJ8-4xn66JqqUSebtnTshP-qeMmYq7VTQizy99KVB4zmQDpFN2AmoKOPSxnkdNpGvbFvLzQI" alt="Pendant Lamp">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/LdXyUmiudNzvhQcLdXNysAaxX2TnQ1TTuondpTDGJ38w.webp" alt="Pendant Lamp">
                     </div>
                     <div class="p-3">
-                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Industrial Brushed Metal Pendant Studio Lamp</h3>
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Meja Sudut Meja Kerja Meja Komputer Meja Belajar - Stuva Desk - Sonroma Oak White Glosssy</h3>
+                        <div class="text-gray-500 line-through">Rp 3.058.000</div>
                         <div class="flex items-center justify-between mt-1.5">
-                            <span class="text-secondary text-sm md:text-base font-bold">Rp 650.000</span>
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.421.000</span>
                             <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Aksen</span>
                         </div>
                         <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
@@ -449,12 +511,13 @@
                 <!-- Card 3 -->
                 <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
                     <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
-                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRYNqoAGAPRCTLmXSnydSt4cHRTNHpJ7KsBgcEo7Tklc4gcxOTnQ4nbwA_BzyUuYuuvcH_uRt6vzb_2s8MGLz2BzdAq84Cxodcy_gNqJcnFhRo6erXiQbdmwwL1beun_MzlTZUd8otMXYjO3vQwdQKBlzx0Lz0fmuxYtTATnmWZTqyw440da4e7ndRyFQaZDlCQpKq3oGe15or0J6DgJwR9cInMG4NA1w-VIkNcEuyPPp-dW74aeLwhm9slvfxs9XpCLaYwvfra9U" alt="Grey Rug">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/Ldjp9MqfzHkNXmLdXtOCTqjUqzfrKQpAxtrrX5FQFQ.webp" alt="Grey Rug">
                     </div>
                     <div class="p-3">
-                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Scandi Woven Textured Grey Wool Area Rug</h3>
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Meja Kerja Meja Belajar LIBRE 122 RIVIERA - WHITE</h3>
+                        <div class="text-gray-500 line-through">Rp 1.714.000</div>
                         <div class="flex items-center justify-between mt-1.5">
-                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.100.000</span>
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.137.000</span>
                             <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Baru</span>
                         </div>
                         <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
@@ -467,12 +530,13 @@
                 <!-- Card 4 -->
                 <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
                     <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
-                        <img class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcJjEfxYJeN2E61GQlu9SJ18Kwu6IIw9VXxtK3Lecy8cSzFaEvgjPQg0QA2ihzvt-MpU96Vc6GDabZWwT3MCo0kn6UA898VdvaTe8LMhslId9Tmuj3hpMIt2yHkc1GT0o9sXflNUF6DV8rWkaGTSgmIDXaG0O44Wha7vfMvwijCbvsdpBiKu67j3Fi9fCMmpX8DYkbOonaPbKlXyCS7U2J054LKOBmW8f7i4taO-FnVQNpCZIacK5a5sxTfcsSRMXk5fBGMghwwlM" alt="Studio Shelf">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://cf.shopee.co.id/file/sg-11134201-7rbm3-lo6cri7mkt5x77" alt="Studio Shelf">
                     </div>
                     <div class="p-3">
-                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Nordic Studio Shelf Oak Wood Black Steel Frame</h3>
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Laci Nakas Minimalis 40171 CETR 47 WHITE-GREY</h3>
+                        <div class="text-gray-500 line-through">Rp 988.000</div>
                         <div class="flex items-center justify-between mt-1.5">
-                            <span class="text-secondary text-sm md:text-base font-bold">Rp 2.100.000</span>
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 540.000</span>
                             <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Premium</span>
                         </div>
                         <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
@@ -573,7 +637,7 @@
             controls
             playsinline
         >
-            <source src="../assets/img/ass.mp4" type="video/mp4">
+            <source src="https://down-ws-id.vod.susercontent.com/api/v4/11110105/mms/id-11110105-6jt76-liv5i1rx3cv253.16003251711950497.mp4" type="video/mp4">
         </video>
 
     </div>
@@ -664,6 +728,52 @@
     </div>
 
     <!-- JavaScript Logic -->
+     <script>
+         const btnOpenFilterNavbar = document.getElementById("btnOpenFilterNavbar");
+        const btnOpenFilterSearch = document.getElementById("btnOpenFilterSearch");
+        const btnCloseFilter = document.getElementById("btnCloseFilter");
+
+        const mobileFilterDrawer = document.getElementById("mobileFilterDrawer");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        const sidebarLinks = document.querySelectorAll(".sidebar-link");
+        
+        function openSidebar() {
+            mobileFilterDrawer.classList.remove("-translate-x-full");
+
+            sidebarOverlay.classList.remove("hidden");
+
+            requestAnimationFrame(() => {
+                sidebarOverlay.classList.remove("opacity-0");
+            });
+
+            document.body.classList.add("overflow-hidden");
+        }
+
+        function closeSidebar() {
+            mobileFilterDrawer.classList.add("-translate-x-full");
+
+            sidebarOverlay.classList.add("opacity-0");
+
+            setTimeout(() => {
+                sidebarOverlay.classList.add("hidden");
+            }, 300);
+
+            document.body.classList.remove("overflow-hidden");
+        }
+
+        btnOpenFilterNavbar?.addEventListener("click", openSidebar);
+        btnOpenFilterSearch?.addEventListener("click", openSidebar);
+        btnCloseFilter?.addEventListener("click", closeSidebar);
+        sidebarOverlay?.addEventListener("click", closeSidebar);
+        sidebarLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth < 768) {
+                    closeSidebar();
+                }
+            });
+        });
+     </script>
     <script>
         // Logika Accordion Independen
         function toggleAccordion(button) {
@@ -865,34 +975,28 @@
         let startX=0;
         let currentX=0;
         let dragging=false;
+        // const enableSwipe = window.matchMedia("(max-width: 1024px)").matches;
+        const isTouchDevice =
+    window.matchMedia("(pointer: coarse)").matches;
+        if (isTouchDevice) {
+            viewport.addEventListener("pointerdown",(e)=>{
+                dragging=true;
+                startX=e.clientX;
+                currentX=e.clientX;
+                viewport.setPointerCapture(e.pointerId);
+                track.style.transition="none";
+            });
+            viewport.addEventListener("pointermove",(e)=>{
+                if(!dragging) return;
+                currentX=e.clientX;
+                const dx=currentX-startX;
+                const width=viewport.offsetWidth;
+                track.style.transform=
+                `translateX(${-currentIndex*width+dx}px)`;
+            });
+        }
 
-        viewport.addEventListener("pointerdown",(e)=>{
-
-            dragging=true;
-
-            startX=e.clientX;
-            currentX=e.clientX;
-
-            viewport.setPointerCapture(e.pointerId);
-
-            track.style.transition="none";
-
-        });
-
-        viewport.addEventListener("pointermove",(e)=>{
-
-            if(!dragging) return;
-
-            currentX=e.clientX;
-
-            const dx=currentX-startX;
-
-            const width=viewport.offsetWidth;
-
-            track.style.transform=
-            `translateX(${-currentIndex*width+dx}px)`;
-
-        });
+        
 
         function endDrag(){
 
