@@ -48,6 +48,53 @@
         .accordion-item.active .chevron-icon {
             transform: rotate(180deg);
         }
+        #heroMediaContainer{
+            touch-action: pan-y;
+            user-select:none;
+            -webkit-user-select:none;
+        }
+        #heroViewport{
+            overflow:hidden;
+            width:100%;
+            height:100%;
+            touch-action:pan-y;
+            cursor:grab;
+        }
+        #heroViewport.dragging{
+            cursor:grabbing;
+        }
+
+        #heroTrack{
+            transform:translate3d(0,0,0);
+            display:flex;
+            width:100%;
+            height:100%;
+            will-change:transform;
+            backface-visibility:hidden;
+        }
+        #heroTrack.dragging{
+            transition:none;
+        }
+
+        .hero-slide{
+            flex:0 0 100%;
+            width:100%;
+            height:100%;
+            flex-shrink:0;
+        }
+
+        .hero-slide img,
+        .hero-slide video{
+
+            width:100%;
+            height:100%;
+            object-fit:cover;
+
+            user-select:none;
+            -webkit-user-drag:none;
+            pointer-events:none;
+
+        }
     </style>
 </head>
 <body class="bg-bgLight text-textDark antialiased leading-relaxed font-['Inter']">
@@ -97,34 +144,92 @@
             <!-- Left Column: Gallery -->
             <div class="space-y-4 md:space-y-6">
                 <div id="heroMediaContainer"
-                    class="relative bg-white rounded-lg overflow-hidden aspect-square border border-borderColor group shadow-sm cursor-pointer">
+                    class="relative bg-white rounded-lg overflow-hidden aspect-square border border-borderColor shadow-sm">
 
-                    <!-- Hero Video -->
-                    <video
-                        id="heroVideo"
-                        class="hidden w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                    >
-                        <source src="../assets/img/ass.mp4" type="video/mp4">
-                    </video>
+                    <!-- Viewport -->
+                    <div id="heroViewport"
+                        class="w-full h-full overflow-hidden touch-pan-y">
 
-                    <!-- Hero Image -->
-                    <img
-                        id="heroImage"
-                        class="hidden w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        src=""
-                        alt="">
+                        <!-- Track -->
+                        <div id="heroTrack"
+                            class="flex h-full will-change-transform">
+
+                            <!-- Slide 0 : Video -->
+                            <div
+                                data-index="0"
+                                class="hero-slide w-full h-full shrink-0 flex items-center justify-center">
+
+                                <video
+                                    id="heroVideo"
+                                    class="w-full h-full object-cover"
+                                    autoplay
+                                    muted
+                                    loop
+                                    playsinline>
+
+                                    <source
+                                        src="../assets/img/ass.mp4"
+                                        type="video/mp4">
+
+                                </video>
+
+                            </div>
+
+                            <!-- Slide 1 -->
+                            <div
+                                data-index="1"
+                                class="hero-slide w-full h-full shrink-0">
+
+                                <img
+                                    class="hero-image w-full h-full object-cover"
+                                    src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg">
+
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div
+                                data-index="2"
+                                class="hero-slide w-full h-full shrink-0">
+
+                                <img
+                                    class="hero-image w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I">
+
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div
+                                data-index="3"
+                                class="hero-slide w-full h-full shrink-0">
+
+                                <img
+                                    class="hero-image w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0">
+
+                            </div>
+
+                            <!-- Slide 4 -->
+                            <div
+                                data-index="4"
+                                class="hero-slide w-full h-full shrink-0">
+
+                                <img
+                                    class="hero-image w-full h-full object-cover"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw">
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <!-- Chevron Left -->
-                    <button id="heroPrev"
-                    class="absolute left-4 top-1/2 -translate-y-1/2
-                    w-10 h-10 rounded-full
-                    bg-white/80 hover:bg-white
-                    shadow-lg flex items-center justify-center
-                    transition z-20">
+                    <button
+                        id="heroPrev"
+                        class="absolute left-4 top-1/2 -translate-y-1/2
+                        w-10 h-10 rounded-full
+                        bg-white/80 hover:bg-white
+                        shadow-lg flex items-center justify-center z-30">
 
                         <span class="material-symbols-outlined">
                             chevron_left
@@ -133,40 +238,41 @@
                     </button>
 
                     <!-- Chevron Right -->
-                    <button id="heroNext"
-                    class="absolute right-4 top-1/2 -translate-y-1/2
-                    w-10 h-10 rounded-full
-                    bg-white/80 hover:bg-white
-                    shadow-lg flex items-center justify-center
-                    transition z-20">
+                    <button
+                        id="heroNext"
+                        class="absolute right-4 top-1/2 -translate-y-1/2
+                        w-10 h-10 rounded-full
+                        bg-white/80 hover:bg-white
+                        shadow-lg flex items-center justify-center z-30">
 
                         <span class="material-symbols-outlined">
                             chevron_right
                         </span>
 
                     </button>
+
                 </div>
                 <div class="grid grid-cols-5 gap-2 md:gap-4">
-                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-primary overflow-hidden aspect-square"
-                        data-type="video">
+                        <div data-index="1" class="media-thumb cursor-pointer bg-white rounded border-2 border-primary overflow-hidden aspect-square"
+                            data-type="video">
 
-                        <video class="w-full h-full object-cover pointer-events-none" muted preload="metadata">
-                            <source src="../assets/img/ass.mp4" type="video/mp4">
-                        </video>
+                            <video class="w-full h-full object-cover pointer-events-none" muted preload="metadata">
+                                <source src="../assets/img/ass.mp4" type="video/mp4">
+                            </video>
 
-                    </div>
-                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                        <img class="w-full h-full object-cover thumbnail" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" alt="Thumb 1" />
-                    </div>
-                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                        <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I" alt="Thumb 2" />
-                    </div>
-                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                        <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0" alt="Thumb 3" />
-                    </div>
-                    <div class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
-                        <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw" alt="Thumb 4" />
-                    </div>
+                        </div>
+                        <div data-index="2" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                            <img class="w-full h-full object-cover thumbnail" src="https://i.pinimg.com/736x/a0/98/43/a0984398ba783a3e8d658508420d71ed.jpg" alt="Thumb 1" />
+                        </div>
+                        <div data-index="3" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                            <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGHQIGXdccOsQdy5QtMF6CPia4dofRJRxp5oliLJqltl9uSbfwcNUIYovgUWQLlag0GzDexWTAiZvi04yKXfhL3k3a8a0YApOjFtrtYMYmjAMLmfj17RJcRPeiYvL1QxxZHJ2-lxkFznfUfdBq4iznn7NdwlrV1RctcSjIiE9w8ZxLwOMMg6REIj8jtCeO2u2SklWOgtB6CMekojowevg-CuGxIQntlD9gELPtmMKLRfdwfBmavXn6JKS47yvYESThz-MMfRw_e-I" alt="Thumb 2" />
+                        </div>
+                        <div data-index="4" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                            <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG_9BWQw7_-dbBOb_R_JJj-OHbQT8c1qysjri_3qJFy9pOPVc3H9C23VOVOab83xDCbH07V-2EtZ3dWL8Z2W61ZT8QMcKHzJ7YmVCjX9krarfJZqeK52Ju1D5KXpulFMRC6qV8eX_-41I6MFKskYL9ZZf9QOkEnBDVF2CLJcS9szKkA7s6l2ui49CO_N3CRkYplOTTSr2h4Csl2quPY7wACMM4I4-l3S5JUYv1uNHEJcvVQ0d_G9ZIqfj3FKGWL3ieZRUsuHqS-g0" alt="Thumb 3" />
+                        </div>
+                        <div data-index="5" class="media-thumb cursor-pointer bg-white rounded border-2 border-transparent overflow-hidden aspect-square opacity-60 hover:opacity-100 transition-all">
+                            <img class="w-full h-full object-cover thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAErjQdxxGu_WuiOh_cHbGSrJLzmGvqepLWC7sIdT7okZSwgPEce_StbbaR49-elwpYzYEJFULzazbRUBUS7by2tCv3g_ylqyr-bq0zK3H05D-NNRKZX9st_i7wgAIIT6k28oLkOghIBk8BKtAOwhP4f0E5LeW6fzkmXqmlp1KEcdt-9x6eXZMPOvzJdUP4iHJ7aiKWnrXlIQ6fnJ7tmJvfSXqgL_bXFQUDGS_PjlP0IFEepMKFw-RmG80hzoxH8DXstDRTz2j1mw" alt="Thumb 4" />
+                        </div>
                 </div>
             </div>
 
@@ -672,132 +778,209 @@
             }
         });
 
-        const heroVideo = document.getElementById("heroVideo");
-        const heroImage = document.getElementById("heroImage");
-        const thumbs = document.querySelectorAll(".media-thumb");
-        function updateHero(index){
+        /*=========================================
+        PREMIUM PRODUCT GALLERY
+        =========================================*/
 
-            currentIndex = index;
+        const viewport = document.getElementById("heroViewport");
+        const track = document.getElementById("heroTrack");
+        const slides = document.querySelectorAll(".hero-slide");
+        const thumbs = document.querySelectorAll(".media-thumb");
+
+        const heroPrev = document.getElementById("heroPrev");
+        const heroNext = document.getElementById("heroNext");
+
+        let currentIndex = 0;
+
+        function updateGallery(animate=true){
+
+            if(animate){
+                track.style.transition =
+                "transform .38s cubic-bezier(.22,.61,.36,1)";
+            }else{
+                track.style.transition="none";
+            }
+
+            track.style.transform =
+            `translateX(-${currentIndex*100}%)`;
 
             thumbs.forEach((thumb,i)=>{
 
-                thumb.classList.remove("border-primary");
-                thumb.classList.remove("opacity-100");
+                thumb.classList.toggle("border-primary",i===currentIndex);
+                thumb.classList.toggle("border-transparent",i!==currentIndex);
 
-                thumb.classList.add("border-transparent");
-                thumb.classList.add("opacity-60");
-
-                if(i===index){
-
-                    thumb.classList.add("border-primary");
-                    thumb.classList.remove("border-transparent");
-                    thumb.classList.remove("opacity-60");
-
-                }
+                thumb.classList.toggle("opacity-60",i!==currentIndex);
 
             });
 
-            const thumb = thumbs[index];
-
-            if(thumb.dataset.type==="video"){
-
-                showVideo();
-
-            }else{
-
-                showImage(
-                    thumb.querySelector("img").src
-                );
-
-            }
-
-        }
-        let currentType = "video";
-        let currentIndex = 0;
-
-       function showVideo(){
-            currentType="video";
-            heroImage.classList.add("hidden");
-            heroVideo.classList.remove("hidden");
-            heroVideo.autoplay=true;
-            heroVideo.play().catch(()=>{});
         }
 
-        function showImage(src){
+        function goTo(index){
 
-            currentType="image";
+            if(index<0) index=0;
+            if(index>=slides.length) index=slides.length-1;
 
-            heroVideo.pause();
+            currentIndex=index;
 
-            heroVideo.autoplay=false;
-
-            heroVideo.classList.add("hidden");
-
-            heroImage.src=src;
-
-            heroImage.classList.remove("hidden");
+            updateGallery();
 
         }
 
-        showVideo();
-
-        function initializeThumbnails(){
-
-            document.querySelectorAll(".media-thumb").forEach((thumb)=>{
-                thumbs.forEach((thumb,index)=>{
-
-                    thumb.addEventListener("click",()=>{
-
-                        updateHero(index);
-
-                    });
-
-                });
-            });
-
-        }
-
-        initializeThumbnails();
-        function activateThumbnail(index){
-
-            const thumbs = document.querySelectorAll(".media-thumb");
-
-            thumbs[index].click();
-
-        }
-
-        heroNext.addEventListener("click",(e)=>{
+        heroNext.onclick=(e)=>{
 
             e.stopPropagation();
 
-            currentIndex++;
+            goTo(currentIndex+1);
 
-            if(currentIndex>=thumbs.length){
+        };
 
-                currentIndex=0;
-
-            }
-
-            updateHero(currentIndex);
-
-        });
-
-        heroPrev.addEventListener("click",(e)=>{
+        heroPrev.onclick=(e)=>{
 
             e.stopPropagation();
 
-            currentIndex--;
+            goTo(currentIndex-1);
 
-            if(currentIndex<0){
+        };
 
-                currentIndex=thumbs.length-1;
+        thumbs.forEach((thumb,index)=>{
 
-            }
+            thumb.onclick=(e)=>{
 
-            updateHero(currentIndex);
+                e.stopPropagation();
+
+                goTo(index);
+
+            };
 
         });
 
+        updateGallery(false);
+
+
+
+        /*=========================================
+        PREMIUM DRAG
+        =========================================*/
+
+        let startX=0;
+        let currentX=0;
+        let dragging=false;
+
+        viewport.addEventListener("pointerdown",(e)=>{
+
+            dragging=true;
+
+            startX=e.clientX;
+            currentX=e.clientX;
+
+            viewport.setPointerCapture(e.pointerId);
+
+            track.style.transition="none";
+
+        });
+
+        viewport.addEventListener("pointermove",(e)=>{
+
+            if(!dragging) return;
+
+            currentX=e.clientX;
+
+            const dx=currentX-startX;
+
+            const width=viewport.offsetWidth;
+
+            track.style.transform=
+            `translateX(${-currentIndex*width+dx}px)`;
+
+        });
+
+        function endDrag(){
+
+            if(!dragging) return;
+
+            dragging=false;
+
+            const dx=currentX-startX;
+
+            track.style.transition=
+            "transform .38s cubic-bezier(.22,.61,.36,1)";
+
+            if(dx<-80){
+
+                currentIndex++;
+
+            }
+            else if(dx>80){
+
+                currentIndex--;
+
+            }
+
+            if(currentIndex<0) currentIndex=0;
+            if(currentIndex>slides.length-1)
+                currentIndex=slides.length-1;
+
+            updateGallery();
+
+        }
+
+        viewport.addEventListener("pointerup",endDrag);
+        viewport.addEventListener("pointercancel",endDrag);
+        viewport.addEventListener("pointerleave",endDrag);
+
+
+
+        /*=========================================
+        LIGHTBOX
+        =========================================*/
+
+        
+
+        heroMediaContainer.onclick=()=>{
+
+            const activeSlide=slides[currentIndex];
+
+            const img=activeSlide.querySelector("img");
+            const video=activeSlide.querySelector("video");
+
+            if(img){
+
+                lightboxImage.src=img.src;
+
+                imageLightbox.classList.remove("hidden");
+
+                setTimeout(()=>{
+
+                    imageLightbox.classList.remove("opacity-0");
+                    imageLightbox.classList.add("opacity-100");
+
+                    lightboxImage.classList.remove("scale-95");
+                    lightboxImage.classList.add("scale-100");
+
+                },10);
+
+            }
+
+            if(video){
+
+                lightboxVideo.currentTime=video.currentTime;
+
+                videoLightbox.classList.remove("hidden");
+
+                setTimeout(()=>{
+
+                    videoLightbox.classList.remove("opacity-0");
+                    videoLightbox.classList.add("opacity-100");
+
+                },10);
+
+                lightboxVideo.play();
+
+            }
+
+            document.body.style.overflow="hidden";
+
+        };
         // ==========================================
         // REVISI BARU: LOGIKA FLOATING CHET SYSTEM
         // ==========================================
