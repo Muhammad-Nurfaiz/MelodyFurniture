@@ -108,9 +108,27 @@
         
         <!-- Main Header Container -->
         <div class="max-w-[1200px] mx-auto px-4 py-3 md:py-4 flex items-center justify-between gap-3 md:gap-4">
+            <button
+            id="btnOpenFilterNavbar"
+            class="md:hidden bg-white rounded p-2 flex items-center justify-center text-textDark hover:bg-gray-50 focus:outline-none shrink-0"
+            aria-label="Buka Filter"
+            >
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24">
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+            </button>
             <!-- Logo -->
             <a href="../index.html" class="shrink-0">
-                <img src="../assets/img/download.png" alt="logo" class="w-28 sm:w-36 md:w-44 h-auto">
+                <img src="../assets/img/LOGO MELODY BARU.png" alt="logo" class="w-[160px] sm:w-36 md:w-[190px] h-auto">
             </a>
             
             <!-- Search bar hanya muncul di desktop (md ke atas) -->
@@ -136,6 +154,38 @@
 
     <!-- Konten Utama Keranjang Belanja -->
     <main class="max-w-[1280px] mx-auto px-6 py-12">
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
+
+            <aside id="mobileFilterDrawer" class="fixed inset-y-0 left-0 w-[280px] bg-white p-5 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-borderColor overflow-y-auto md:hidden">
+                <div class="flex justify-between items-center mb-6 pb-2 border-b border-borderColor">
+                    <span class="font-bold text-primary">Filter & Kategori</span>
+                    <button id="btnCloseFilter" class="text-textMuted hover:text-textDark text-xl font-bold">&times;</button>
+                </div>
+
+                <div class="mb-4">
+                    <button class="btn-reset-filter w-full py-1.5 border border-dashed border-secondary text-secondary hover:bg-secondary hover:text-white rounded text-xs font-semibold transition">
+                        Semua Produk (Reset)
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <div class="text-xs font-bold uppercase tracking-wider text-textMuted mb-3 pl-2">Kategori Produk</div>
+                    <ul class="flex flex-col gap-1">
+                        <li><button data-filter="meja" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Meja Kerja</button></li>
+                        <li><button data-filter="lemari" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Lemari Buffet</button></li>
+                        <li><button data-filter="nakas" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Nakas Minimalis</button></li>
+                        <li><button data-filter="tv" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Meja & Rak TV</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-textMuted mb-3 pl-2">Program Spesial</div>
+                    <ul class="flex flex-col gap-1">
+                        <li><button data-program="bestseller" class="program-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Best Seller</button></li>
+                        <li><button data-program="promo" class="program-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Promo Terbatas</button></li>
+                    </ul>
+                </div>
+            </aside>
         <!-- Judul Halaman (Menggunakan Font Display Semibold) -->
         <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-primary mb-8">Keranjang Belanja</h1>
         
@@ -161,14 +211,14 @@
                             <input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer transition-colors" type="checkbox"/>
                         </div>
                         <div class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 bg-surface-container-low rounded-lg overflow-hidden border border-border-subtle">
-                            <img alt="Scandinavian wooden chair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://i.pinimg.com/1200x/1a/97/45/1a9745cfbb35556da1c080e2ca7699b2.jpg"/>
+                            <img alt="Scandinavian wooden chair" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://cf.shopee.co.id/file/id-11134207-7r98o-ll1kfmblnd3s3b"/>
                         </div>
                         <div class="flex-grow flex flex-col md:flex-row justify-between gap-2">
                             <div class="space-y-1">
-                                <h3 class="text-base md:text-lg font-bold text-textDark leading-snug">Kursi Makan Oak Ljus</h3>
-                                <p class="text-xs md:text-sm text-textMuted font-medium">Warna: Natural Oak</p>
+                                <h3 class="text-base md:text-lg font-bold text-textDark leading-snug">Meja Tv Stand Yoffy TV 150</h3>
+                                <p class="text-xs md:text-sm text-textMuted font-medium">Warna: White Glossy</p>
                                 <div class="mt-2 md:hidden">
-                                    <p class="text-base font-bold text-secondary">Rp 1.250.000</p>
+                                    <p class="text-base font-bold text-secondary">Rp 720.000</p>
                                 </div>
                             </div>
                             <div class="flex flex-col items-end justify-between md:min-h-[128px] mt-2 md:mt-0">
@@ -193,14 +243,14 @@
                             <input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary cursor-pointer transition-colors" type="checkbox"/>
                         </div>
                         <div class="w-24 h-24 md:w-32 md:h-32 flex-shrink-0 bg-surface-container-low rounded-lg overflow-hidden border border-border-subtle">
-                            <img alt="Modern bookshelf" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://i.pinimg.com/736x/ac/6f/e2/ac6fe2ec59544aef7da3f499af1e0160.jpg"/>
+                            <img alt="Modern bookshelf" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/CacZfNYpym4eHOuCac6SSHVbxqvVjSLK80y1SEOYCJg.webp"/>
                         </div>
                         <div class="flex-grow flex flex-col md:flex-row justify-between gap-2">
                             <div class="space-y-1">
-                                <h3 class="text-base md:text-lg font-bold text-textDark leading-snug">Rak Buku Oak Nöjes</h3>
-                                <p class="text-xs md:text-sm text-textMuted font-medium">Warna: Natural Oak</p>
+                                <h3 class="text-base md:text-lg font-bold text-textDark leading-snug">Rak buku Serbaguna Pembatas Ruangan Zaid Bookcase</h3>
+                                <p class="text-xs md:text-sm text-textMuted font-medium">Warna: BLACK</p>
                                 <div class="mt-2 md:hidden">
-                                    <p class="text-base font-bold text-secondary">Rp 3.450.000</p>
+                                    <p class="text-base font-bold text-secondary">Rp 854.000</p>
                                 </div>
                             </div>
                             <div class="flex flex-col items-end justify-between md:min-h-[128px] mt-2 md:mt-0">
@@ -279,49 +329,81 @@
             </div>
             
             <div class="flex gap-gutter overflow-x-auto custom-scrollbar pb-6 snap-x snap-mandatory gap-5">
-                <!-- Produk Rekomendasi 1 -->
-                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
-                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
-                        <img alt="Industrial coffee table" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://i.pinimg.com/1200x/9d/65/64/9d656494b53c260e5d859f9549e4e0e2.jpg"/>
+                <!-- Card 1 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/LdjLHL4h9lVwiIcLdmikNHu05JUCtRTC6OKxLtxrPbg.webp" alt="Oakland Table">
                     </div>
-                    <div class="p-5">
-                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Meja Kopi Loft Industrial</h4>
-                        <p class="text-base font-extrabold text-secondary">Rp 2.100.000</p>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Lemari Serbaguna Lemari Sideboard RYUKI SIDEBOARD RIVIERA EICHI</h3>
+                        <div class="text-gray-500 line-through">Rp 3.416.000</div>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.685.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Populer</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 4.9 | Terjual 30+</span>
+                            <span>Kota Jkt</span>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Produk Rekomendasi 2 -->
-                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
-                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
-                        <img alt="Minimalist bedside table" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://i.pinimg.com/736x/05/5b/ac/055bac653602fa76fbf5113212bdf4e4.jpg"/>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/LdXyUmiudNzvhQcLdXNysAaxX2TnQ1TTuondpTDGJ38w.webp" alt="Pendant Lamp">
                     </div>
-                    <div class="p-5">
-                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Nakhas Minimalis Sömn</h4>
-                        <p class="text-base font-extrabold text-secondary">Rp 850.000</p>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Meja Sudut Meja Kerja Meja Komputer Meja Belajar - Stuva Desk - Sonroma Oak White Glosssy</h3>
+                        <div class="text-gray-500 line-through">Rp 3.058.000</div>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.421.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Aksen</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 4.8 | Terjual 100+</span>
+                            <span>Kota Jkt</span>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Produk Rekomendasi 3 -->
-                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
-                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
-                        <img class="w-full h-full object-cover transition-all group-hover:scale-105" alt="Lemari Buffet Skandinavia" src="https://i.pinimg.com/1200x/df/54/bf/df54bf3e9a69b92a50b53bf54799e88d.jpg"/>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://brdsg.com/img/600/bw5d48ohbw5elgecxb_3/Ldjp9MqfzHkNXmLdXtOCTqjUqzfrKQpAxtrrX5FQFQ.webp" alt="Grey Rug">
                     </div>
-                    <div class="p-5">
-                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Lemari Buffet Skandinavia</h4>
-                        <p class="text-base font-extrabold text-secondary">Rp 4.200.000</p>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Meja Kerja Meja Belajar LIBRE 122 RIVIERA - WHITE</h3>
+                        <div class="text-gray-500 line-through">Rp 1.714.000</div>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 1.137.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Baru</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 5.0 | Terjual 15+</span>
+                            <span>Kota Jkt</span>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Produk Rekomendasi 4 -->
-                <div class="min-w-[280px] w-[280px] group bg-white rounded-xl border border-border-subtle overflow-hidden hover:shadow-md transition-all snap-start">
-                    <div class="h-[280px] bg-surface-container-low overflow-hidden relative">
-                        <img alt="Minimalist chair" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="https://i.pinimg.com/736x/f9/c3/fa/f9c3fad7822d2e0fa83c93f9348ed3dd.jpg"/>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="detial_produk.html" class="flex-1 bg-white rounded overflow-hidden transition-all hover:-translate-y-0.5 hover:shadow-lg border border-transparent hover:border-secondary shadow-sm flex flex-col justify-between group">
+                    <div class="w-full pt-[100%] bg-[#FAFAFA] relative overflow-hidden">
+                        <img class="absolute inset-0 w-full h-full object-cover" src="https://cf.shopee.co.id/file/sg-11134201-7rbm3-lo6cri7mkt5x77" alt="Studio Shelf">
                     </div>
-                    <div class="p-5">
-                        <h4 class="text-sm md:text-base font-bold text-textDark mb-1 truncate">Kursi Kerja Aero</h4>
-                        <p class="text-base font-extrabold text-secondary">Rp 1.850.000</p>
+                    <div class="p-3">
+                        <h3 class="text-xs md:text-sm font-normal mb-2 text-textDark line-clamp-2 h-9 group-hover:text-primary transition-colors">Laci Nakas Minimalis 40171 CETR 47 WHITE-GREY</h3>
+                        <div class="text-gray-500 line-through">Rp 988.000</div>
+                        <div class="flex items-center justify-between mt-1.5">
+                            <span class="text-secondary text-sm md:text-base font-bold">Rp 540.000</span>
+                            <span class="bg-[#FFECE8] text-secondary text-[10px] md:text-xs px-1.5 py-0.5 rounded font-medium">Premium</span>
+                        </div>
+                        <div class="text-[10px] md:text-xs text-textMuted mt-2 pt-1.5 border-t border-[#F0F0F0] flex justify-between">
+                            <span>⭐ 4.9 | Terjual 40+</span>
+                            <span>Kota Jkt</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </section>
     </main>
@@ -469,6 +551,52 @@
     </div>
 
     <!-- Interaksi Kuantitas Barang -->
+    <script>
+         const btnOpenFilterNavbar = document.getElementById("btnOpenFilterNavbar");
+        const btnOpenFilterSearch = document.getElementById("btnOpenFilterSearch");
+        const btnCloseFilter = document.getElementById("btnCloseFilter");
+
+        const mobileFilterDrawer = document.getElementById("mobileFilterDrawer");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        const sidebarLinks = document.querySelectorAll(".sidebar-link");
+        
+        function openSidebar() {
+            mobileFilterDrawer.classList.remove("-translate-x-full");
+
+            sidebarOverlay.classList.remove("hidden");
+
+            requestAnimationFrame(() => {
+                sidebarOverlay.classList.remove("opacity-0");
+            });
+
+            document.body.classList.add("overflow-hidden");
+        }
+
+        function closeSidebar() {
+            mobileFilterDrawer.classList.add("-translate-x-full");
+
+            sidebarOverlay.classList.add("opacity-0");
+
+            setTimeout(() => {
+                sidebarOverlay.classList.add("hidden");
+            }, 300);
+
+            document.body.classList.remove("overflow-hidden");
+        }
+
+        btnOpenFilterNavbar?.addEventListener("click", openSidebar);
+        btnOpenFilterSearch?.addEventListener("click", openSidebar);
+        btnCloseFilter?.addEventListener("click", closeSidebar);
+        sidebarOverlay?.addEventListener("click", closeSidebar);
+        sidebarLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth < 768) {
+                    closeSidebar();
+                }
+            });
+        });
+     </script>
     <script>
         document.querySelectorAll('.flex.items-center.border-border-subtle button').forEach(button => {
             button.addEventListener('click', function() {
