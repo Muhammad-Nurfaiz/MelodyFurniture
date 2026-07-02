@@ -119,9 +119,27 @@
         
         <!-- Main Header Container -->
         <div class="max-w-[1280px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
+            <button
+            id="btnOpenFilterNavbar"
+            class="md:hidden bg-white rounded p-2 flex items-center justify-center text-textDark hover:bg-gray-50 focus:outline-none shrink-0"
+            aria-label="Buka Filter"
+            >
+            <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                viewBox="0 0 24 24">
+
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 6h18M3 12h18M3 18h18"/>
+            </svg>
+            </button>
             <!-- Logo -->
             <a href="../index.html" class="shrink-0">
-                <img src="../assets/img/download.png" alt="logo" class="w-36 md:w-44 h-auto">
+                <img src="../assets/img/LOGO MELODY BARU.png" alt="logo" class="w-[160px] sm:w-36 md:w-[190px] h-auto">
             </a>
             
             <!-- Search bar DESKTOP -->
@@ -146,6 +164,38 @@
 
     <!-- Konten Utama Checkout -->
     <main class="max-w-[1280px] mx-auto px-4 md:px-6 py-12">
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300 md:hidden"></div>
+
+            <aside id="mobileFilterDrawer" class="fixed inset-y-0 left-0 w-[280px] bg-white p-5 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out border-r border-borderColor overflow-y-auto md:hidden">
+                <div class="flex justify-between items-center mb-6 pb-2 border-b border-borderColor">
+                    <span class="font-bold text-primary">Filter & Kategori</span>
+                    <button id="btnCloseFilter" class="text-textMuted hover:text-textDark text-xl font-bold">&times;</button>
+                </div>
+
+                <div class="mb-4">
+                    <button class="btn-reset-filter w-full py-1.5 border border-dashed border-secondary text-secondary hover:bg-secondary hover:text-white rounded text-xs font-semibold transition">
+                        Semua Produk (Reset)
+                    </button>
+                </div>
+
+                <div class="mb-6">
+                    <div class="text-xs font-bold uppercase tracking-wider text-textMuted mb-3 pl-2">Kategori Produk</div>
+                    <ul class="flex flex-col gap-1">
+                        <li><button data-filter="meja" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Meja Kerja</button></li>
+                        <li><button data-filter="lemari" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Lemari Buffet</button></li>
+                        <li><button data-filter="nakas" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Nakas Minimalis</button></li>
+                        <li><button data-filter="tv" class="category-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Meja & Rak TV</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-textMuted mb-3 pl-2">Program Spesial</div>
+                    <ul class="flex flex-col gap-1">
+                        <li><button data-program="bestseller" class="program-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Best Seller</button></li>
+                        <li><button data-program="promo" class="program-btn sidebar-link w-full text-left flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-md text-gray-700 hover:text-primary hover:bg-[#F1F3F5] transition">Promo Terbatas</button></li>
+                    </ul>
+                </div>
+            </aside>
         <!-- Breadcrumbs & Heading -->
         <div class="mb-10">
             <h1 class="text-2xl md:text-3xl font-bold text-primary tracking-tight mb-2">Secure Checkout</h1>
@@ -472,6 +522,52 @@
     </div>
 
     <!-- Interaksi Pilihan Pengiriman & Pembayaran -->
+    <script>
+         const btnOpenFilterNavbar = document.getElementById("btnOpenFilterNavbar");
+        const btnOpenFilterSearch = document.getElementById("btnOpenFilterSearch");
+        const btnCloseFilter = document.getElementById("btnCloseFilter");
+
+        const mobileFilterDrawer = document.getElementById("mobileFilterDrawer");
+        const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+        const sidebarLinks = document.querySelectorAll(".sidebar-link");
+        
+        function openSidebar() {
+            mobileFilterDrawer.classList.remove("-translate-x-full");
+
+            sidebarOverlay.classList.remove("hidden");
+
+            requestAnimationFrame(() => {
+                sidebarOverlay.classList.remove("opacity-0");
+            });
+
+            document.body.classList.add("overflow-hidden");
+        }
+
+        function closeSidebar() {
+            mobileFilterDrawer.classList.add("-translate-x-full");
+
+            sidebarOverlay.classList.add("opacity-0");
+
+            setTimeout(() => {
+                sidebarOverlay.classList.add("hidden");
+            }, 300);
+
+            document.body.classList.remove("overflow-hidden");
+        }
+
+        btnOpenFilterNavbar?.addEventListener("click", openSidebar);
+        btnOpenFilterSearch?.addEventListener("click", openSidebar);
+        btnCloseFilter?.addEventListener("click", closeSidebar);
+        sidebarOverlay?.addEventListener("click", closeSidebar);
+        sidebarLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth < 768) {
+                    closeSidebar();
+                }
+            });
+        });
+     </script>
     <script>
         // Interaktivitas Pilihan Pembayaran
         const paymentButtons = document.querySelectorAll('button[class*="border"]');
